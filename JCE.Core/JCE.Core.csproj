@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -77,6 +78,23 @@
     <Compile Include="Dependency\ServicesBuilder.cs" />
     <Compile Include="Dependency\SingletonDependencyTypeFinder.cs" />
     <Compile Include="Dependency\TransientDependencyTypeFinder.cs" />
+    <Compile Include="Domains\Behavors\ILogicDeleteBehavor.cs" />
+    <Compile Include="Domains\ChangeValue.cs" />
+    <Compile Include="Domains\ChangeValueCollection.cs" />
+    <Compile Include="Domains\DomainBase.cs" />
+    <Compile Include="Domains\Entities\EntityBase.cs" />
+    <Compile Include="Domains\Entities\IAggregateRoot.cs" />
+    <Compile Include="Domains\IDomainObject.cs" />
+    <Compile Include="Domains\Entities\IEntity.cs" />
+    <Compile Include="Domains\ICompareChange.cs" />
+    <Compile Include="Domains\Repositories\IPager.cs" />
+    <Compile Include="Domains\Repositories\IPagerBase.cs" />
+    <Compile Include="Domains\Repositories\IQueryBase.cs" />
+    <Compile Include="Domains\Repositories\IRepository.cs" />
+    <Compile Include="Domains\Repositories\Pager.cs" />
+    <Compile Include="Domains\Repositories\PagerList.cs" />
+    <Compile Include="Domains\StateDescription.cs" />
+    <Compile Include="Domains\Uow\IUnitOfWork.cs" />
     <Compile Include="Initialize\FrameworkInitializer.cs" />
     <Compile Include="Initialize\IBasicLoggingInitializer.cs" />
     <Compile Include="Initialize\IFrameworkInitializer.cs" />
