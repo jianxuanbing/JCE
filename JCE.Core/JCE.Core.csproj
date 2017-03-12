@@ -43,6 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configs\BasicLoggingConfig.cs" />
+    <Compile Include="Configs\ConfigFile\Data\ContextCollection.cs" />
+    <Compile Include="Configs\ConfigFile\Data\ContextElement.cs" />
+    <Compile Include="Configs\ConfigFile\Data\CreateDatabaseInitializerElement.cs" />
+    <Compile Include="Configs\ConfigFile\Data\DataElement.cs" />
+    <Compile Include="Configs\ConfigFile\Data\DbContextInitializerElement.cs" />
     <Compile Include="Configs\ConfigFile\JceFrameworkSection.cs" />
     <Compile Include="Configs\ConfigFile\Logging\BasicLoggingElement.cs" />
     <Compile Include="Configs\ConfigFile\Logging\DataLoggingElement.cs" />
@@ -50,7 +55,11 @@
     <Compile Include="Configs\ConfigFile\Logging\LoggingAdapterElement.cs" />
     <Compile Include="Configs\ConfigFile\Logging\LoggingElement.cs" />
     <Compile Include="Configs\ConfigFile\Logging\LoggingEntryElement.cs" />
+    <Compile Include="Configs\DataConfig.cs" />
     <Compile Include="Configs\DataLoggingConfig.cs" />
+    <Compile Include="Configs\DbContextConfig.cs" />
+    <Compile Include="Configs\DbContextInitializerConfig.cs" />
+    <Compile Include="Configs\IDataConfigReseter.cs" />
     <Compile Include="Configs\ILoggingConfigReseter.cs" />
     <Compile Include="Configs\JceConfig.cs" />
     <Compile Include="Configs\LoggingAdapterConfig.cs" />
@@ -94,6 +103,7 @@
     <Compile Include="Domains\Repositories\Pager.cs" />
     <Compile Include="Domains\Repositories\PagerList.cs" />
     <Compile Include="Domains\StateDescription.cs" />
+    <Compile Include="Domains\TransactionalBehavior.cs" />
     <Compile Include="Domains\Uow\IUnitOfWork.cs" />
     <Compile Include="Initialize\FrameworkInitializer.cs" />
     <Compile Include="Initialize\IBasicLoggingInitializer.cs" />
@@ -117,6 +127,7 @@
       <Name>JCE.Utils</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

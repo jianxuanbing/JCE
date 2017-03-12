@@ -48,5 +48,19 @@ namespace JCE.Core.Configs.ConfigFile
             get { return (LoggingElement) this[LoggingKey]; }
             set { this[LoggingKey] = value; }
         }
+
+        [ConfigurationProperty(XmlnsKey, IsRequired = false)]
+        private string Xmlns
+        {
+            get { return (string)this[XmlnsKey]; }
+            set { this[XmlnsKey] = value; }
+        }
+
+        [ConfigurationProperty(DataKey)]
+        public virtual DataElement Data
+        {
+            get { return (DataElement)this[DataKey]; }
+            set { this[DataKey] = value; }
+        }
     }
 }
