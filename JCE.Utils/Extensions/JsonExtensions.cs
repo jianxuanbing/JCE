@@ -28,7 +28,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 //using System.Web.Script.Serialization;
-//using Json.Net;
+using Json.Net;
 
 namespace JCE.Utils.Extensions
 {
@@ -37,145 +37,145 @@ namespace JCE.Utils.Extensions
     /// </summary>
     public static class JsonExtensions
     {
-        //#region 序列化Json(Json.Net)
-        //#region dynamic(动态对象)
-        ///// <summary>
-        ///// Json字符串转为对象，Json.Net
-        ///// </summary>
-        ///// <param name="json">Json字符串</param>
-        ///// <returns>对象</returns>
-        //public static object JsonNetDeserializeToObj(this string json)
-        //{
-        //    json.CheckNotNull("json");
-        //    try
-        //    {
-        //        return JsonConvert.DeserializeObject(json);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
-        ///// <summary>
-        ///// 将对象序列化为JSON字符串，不支持存在循环引用的对象，Json.Net
-        ///// </summary>
-        ///// <param name="value">对象</param>
-        ///// <returns>Json字符串</returns>
-        //public static string JsonNetSerializeToJson(this object value)
-        //{
-        //    try
-        //    {
-        //        return JsonConvert.SerializeObject(value);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
-        //#endregion
-        //#region fixed(固定对象)
-        ///// <summary>
-        ///// Json字符串转为对象，Json.Net
-        ///// </summary>
-        ///// <typeparam name="T">要转换的目标类型</typeparam>
-        ///// <param name="json">Json字符串</param>
-        ///// <returns>对象</returns>
-        //public static T JsonNetDeserializeToObj<T>(this string json)
-        //{
-        //    json.CheckNotNull("json");
-        //    try
-        //    {
-        //        return JsonConvert.DeserializeObject<T>(json);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
+        #region 序列化Json(Json.Net)
+        #region dynamic(动态对象)
+        /// <summary>
+        /// Json字符串转为对象，Json.Net
+        /// </summary>
+        /// <param name="json">Json字符串</param>
+        /// <returns>对象</returns>
+        public static object JsonNetDeserializeToObj(this string json)
+        {
+            json.CheckNotNull("json");
+            try
+            {
+                return JsonConvert.DeserializeObject(json);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        /// <summary>
+        /// 将对象序列化为JSON字符串，不支持存在循环引用的对象，Json.Net
+        /// </summary>
+        /// <param name="value">对象</param>
+        /// <returns>Json字符串</returns>
+        public static string JsonNetSerializeToJson(this object value)
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(value);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        #endregion
+        #region fixed(固定对象)
+        /// <summary>
+        /// Json字符串转为对象，Json.Net
+        /// </summary>
+        /// <typeparam name="T">要转换的目标类型</typeparam>
+        /// <param name="json">Json字符串</param>
+        /// <returns>对象</returns>
+        public static T JsonNetDeserializeToObj<T>(this string json)
+        {
+            json.CheckNotNull("json");
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(json);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
-        //}
-        ///// <summary>
-        ///// 将对象序列化为JSON字符串，不支持存在循环引用的对象，Json.Net
-        ///// </summary>
-        ///// <typeparam name="T">泛型</typeparam>
-        ///// <param name="value">对象</param>
-        ///// <returns>Json字符串</returns>
-        //public static string JsonNetSerializeToJson<T>(this T value)
-        //{
-        //    try
-        //    {
-        //        return JsonConvert.SerializeObject(value);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
+        }
+        /// <summary>
+        /// 将对象序列化为JSON字符串，不支持存在循环引用的对象，Json.Net
+        /// </summary>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <param name="value">对象</param>
+        /// <returns>Json字符串</returns>
+        public static string JsonNetSerializeToJson<T>(this T value)
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(value);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
-        //}
-        //#endregion
-        //#region To(Json.Net扩展转换-参考老何)
-        ///// <summary>
-        ///// 将Json字符串转换为动态对象
-        ///// </summary>
-        ///// <param name="json">Json字符串</param>
-        ///// <returns></returns>
-        //public static dynamic ToObject(this string json)
-        //{
-        //    if (json.IsNullOrWhiteSpace())
-        //    {
-        //        return "";
-        //    }
-        //    return JsonConvert.DeserializeObject<dynamic>(json);
-        //}
-        ///// <summary>
-        ///// 将Json字符串转换为对象
-        ///// </summary>
-        ///// <typeparam name="T">实体类型</typeparam>
-        ///// <param name="json">Json字符串</param>
-        ///// <returns></returns>
-        //public static T ToObject<T>(this string json)
-        //{
-        //    if (json.IsNullOrWhiteSpace())
-        //    {
-        //        return default(T);
-        //    }
-        //    return JsonConvert.DeserializeObject<T>(json);
-        //}
-        ///// <summary>
-        ///// 将对象转换为Json字符串
-        ///// </summary>
-        ///// <param name="target">目标对象</param>
-        ///// <param name="isConvertSingleQuotes">是否将双引号转成单引号</param>
-        ///// <returns></returns>
-        //public static string ToJson(this object target, bool isConvertSingleQuotes = false)
-        //{
-        //    if (target == null)
-        //    {
-        //        return "{}";
-        //    }
-        //    var result = JsonConvert.SerializeObject(target);
-        //    if (isConvertSingleQuotes)
-        //    {
-        //        result = result.Replace("\"", "'");
-        //    }
-        //    return result;
-        //}
-        ///// <summary>
-        ///// 将对象转换为Json字符串，并且去除两侧括号
-        ///// </summary>
-        ///// <param name="target">目标对象</param>
-        ///// <param name="isConvertSingleQuotes">是否将双引号转成单引号</param>
-        ///// <returns></returns>
-        //public static string ToJsonWithoutBrackets(this object target, bool isConvertSingleQuotes = false)
-        //{
-        //    var result = ToJson(target, isConvertSingleQuotes);
-        //    if (result == "{}")
-        //    {
-        //        return result;
-        //    }
-        //    return result.TrimStart('{').TrimEnd('}');
-        //}
-        //#endregion
-        //#endregion
+        }
+        #endregion
+        #region To(Json.Net扩展转换-参考老何)
+        /// <summary>
+        /// 将Json字符串转换为动态对象
+        /// </summary>
+        /// <param name="json">Json字符串</param>
+        /// <returns></returns>
+        public static dynamic ToObject(this string json)
+        {
+            if (json.IsEmpty())
+            {
+                return "";
+            }
+            return JsonConvert.DeserializeObject<dynamic>(json);
+        }
+        /// <summary>
+        /// 将Json字符串转换为对象
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="json">Json字符串</param>
+        /// <returns></returns>
+        public static T ToObject<T>(this string json)
+        {
+            if (json.IsEmpty())
+            {
+                return default(T);
+            }
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+        /// <summary>
+        /// 将对象转换为Json字符串
+        /// </summary>
+        /// <param name="target">目标对象</param>
+        /// <param name="isConvertSingleQuotes">是否将双引号转成单引号</param>
+        /// <returns></returns>
+        public static string ToJson(this object target, bool isConvertSingleQuotes = false)
+        {
+            if (target == null)
+            {
+                return "{}";
+            }
+            var result = JsonConvert.SerializeObject(target);
+            if (isConvertSingleQuotes)
+            {
+                result = result.Replace("\"", "'");
+            }
+            return result;
+        }
+        /// <summary>
+        /// 将对象转换为Json字符串，并且去除两侧括号
+        /// </summary>
+        /// <param name="target">目标对象</param>
+        /// <param name="isConvertSingleQuotes">是否将双引号转成单引号</param>
+        /// <returns></returns>
+        public static string ToJsonWithoutBrackets(this object target, bool isConvertSingleQuotes = false)
+        {
+            var result = ToJson(target, isConvertSingleQuotes);
+            if (result == "{}")
+            {
+                return result;
+            }
+            return result.TrimStart('{').TrimEnd('}');
+        }
+        #endregion
+        #endregion
         //#region 序列化Json(JavaScirpt)
         //#region dynamic(动态对象)
         ///// <summary>

@@ -246,6 +246,12 @@
       <LastGenOutput>R.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JCE.Component.Json.Net\JCE.Component.Json.Net.csproj">
+      <Project>{f6f83e35-1fe5-4943-882e-e6d102b0d5a1}</Project>
+      <Name>JCE.Component.Json.Net</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
