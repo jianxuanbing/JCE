@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCE.Core", "JCE.Core\JCE.Core.csproj", "{858C7B21-6AD1-4F88-9686-8208B62293C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCE.Utils", "JCE.Utils\JCE.Utils.csproj", "{07E5C501-99EE-47B1-A179-F67BF01EAC01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{858C7B21-6AD1-4F88-9686-8208B62293C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{858C7B21-6AD1-4F88-9686-8208B62293C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{858C7B21-6AD1-4F88-9686-8208B62293C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07E5C501-99EE-47B1-A179-F67BF01EAC01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E5C501-99EE-47B1-A179-F67BF01EAC01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E5C501-99EE-47B1-A179-F67BF01EAC01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E5C501-99EE-47B1-A179-F67BF01EAC01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

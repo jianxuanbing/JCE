@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{07E5C501-99EE-47B1-A179-F67BF01EAC01}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JCE.Utils</RootNamespace>
+    <AssemblyName>JCE.Utils</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\JCE.Utils.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Algorithms\ISort.cs" />
+    <Compile Include="Algorithms\MathUtil.cs" />
+    <Compile Include="Algorithms\Sorts\BubbleSort.cs" />
+    <Compile Include="Algorithms\Sorts\InsertionSort.cs" />
+    <Compile Include="Algorithms\Sorts\SelectionSort.cs" />
+    <Compile Include="Common\AttributeUtil.cs" />
+    <Compile Include="Common\ByteUtil.cs" />
+    <Compile Include="Common\CacheUtil.cs" />
+    <Compile Include="Common\ConfigUtil.cs" />
+    <Compile Include="Common\EnumUtil.cs" />
+    <Compile Include="Common\GuidUtil.cs" />
+    <Compile Include="Common\MoneyUtil.cs" />
+    <Compile Include="Common\OrderByAttribute.cs" />
+    <Compile Include="Common\ResourceUtil.cs" />
+    <Compile Include="Common\SerializeUtil.cs" />
+    <Compile Include="Common\SystemWebSections.cs" />
+    <Compile Include="Common\ThreadUtil.cs" />
+    <Compile Include="Common\TypeUtil.cs" />
+    <Compile Include="Const.cs" />
+    <Compile Include="Conv.cs" />
+    <Compile Include="Data\CombUtil.cs" />
+    <Compile Include="Data\CsvUtil.cs" />
+    <Compile Include="Data\DataTableUtil.cs" />
+    <Compile Include="Data\EqualityUtil.cs" />
+    <Compile Include="Develops\CodeRamer.cs" />
+    <Compile Include="Develops\CodeTimer.cs" />
+    <Compile Include="Develops\UnitTester.cs" />
+    <Compile Include="Devices\Computer.cs" />
+    <Compile Include="Devices\CpuUsage.cs" />
+    <Compile Include="Devices\DiskInfo.cs" />
+    <Compile Include="Entities\Size.cs" />
+    <Compile Include="Exceptions\ExceptionUtil.cs" />
+    <Compile Include="Exceptions\JceException.cs" />
+    <Compile Include="Exceptions\Warning.cs" />
+    <Compile Include="Extensions\AssemblyExtensions.cs" />
+    <Compile Include="Extensions\BaseType\ArrayExtensions.cs" />
+    <Compile Include="Extensions\BaseType\BooleanExtensions.cs" />
+    <Compile Include="Extensions\BaseType\ComparsionTemplateOptions.cs" />
+    <Compile Include="Extensions\BaseType\BinaryMode.cs" />
+    <Compile Include="Extensions\BaseType\ByteExtensions.cs" />
+    <Compile Include="Extensions\BaseType\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\BaseType\DecimalExtensions.cs" />
+    <Compile Include="Extensions\BaseType\DoubleExtensions.cs" />
+    <Compile Include="Extensions\BaseType\EnumExtensions.cs" />
+    <Compile Include="Extensions\BaseType\FloatExtensions.cs" />
+    <Compile Include="Extensions\BaseType\ObjectExtensions.cs" />
+    <Compile Include="Extensions\BaseType\TypeExtensions.cs" />
+    <Compile Include="Extensions\BitmapExtensions.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Extensions\ComparableExtensions.cs" />
+    <Compile Include="Extensions\ComponentExtensions.cs" />
+    <Compile Include="Extensions\ConcurrentBagExtensions.cs" />
+    <Compile Include="Extensions\ConcurrentDictionaryExtensions.cs" />
+    <Compile Include="Extensions\ConstructorExtensions.cs" />
+    <Compile Include="Extensions\DataReaderExtensions.cs" />
+    <Compile Include="Extensions\DataRowExtensions.cs" />
+    <Compile Include="Extensions\DataRowViewExtensions.cs" />
+    <Compile Include="Extensions\DataTableExtensions.cs" />
+    <Compile Include="Extensions\DbConnectionExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\DirectoryInfoExtensions.cs" />
+    <Compile Include="Extensions\EventHandlerExtenders.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
+    <Compile Include="Extensions\ExpressionExtensions.cs" />
+    <Compile Include="Extensions\ExtensionMethodSetting.cs" />
+    <Compile Include="Extensions\Extensions.Convert.cs" />
+    <Compile Include="Extensions\Extensions.Format.cs" />
+    <Compile Include="Extensions\Extensions.Validate.cs" />
+    <Compile Include="Extensions\BaseType\StringExtensions.cs" />
+    <Compile Include="Extensions\BaseType\IntExtensions.cs" />
+    <Compile Include="Extensions\BaseType\LongExtensions.cs" />
+    <Compile Include="Extensions\FileInfoExtensions.cs" />
+    <Compile Include="Extensions\JsonExtensions.cs" />
+    <Compile Include="Extensions\LinqToXmlExtensions.cs" />
+    <Compile Include="Extensions\MemoryCacheExtensions.cs" />
+    <Compile Include="Extensions\PrincipalExtensions.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
+    <Compile Include="Extensions\ReaderWriterLockSlimExtensions.cs" />
+    <Compile Include="Extensions\SocketExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Extensions\StringBuilderExtensions.cs" />
+    <Compile Include="Extensions\TaskExtensions.cs" />
+    <Compile Include="Extensions\TextReaderExtensions.cs" />
+    <Compile Include="Extensions\ThreadExtensions.cs" />
+    <Compile Include="Extensions\TryCatchExtensions.cs" />
+    <Compile Include="Extensions\ValueTypeExtensions.cs" />
+    <Compile Include="Extensions\XmlExtensions.cs" />
+    <Compile Include="Extensions\XmlNodeExtensions.cs" />
+    <Compile Include="Extensions\XmlSerializerExtensions.cs" />
+    <Compile Include="Files\FileUtil.cs" />
+    <Compile Include="Files\FileUtil.Stream.Convert.cs" />
+    <Compile Include="Files\IniFile.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="Logging\ILog.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\ILoggerAdapter.cs" />
+    <Compile Include="Logging\InternalLogger.cs" />
+    <Compile Include="Logging\LogBase.cs" />
+    <Compile Include="Logging\LoggerAdapterBase.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Logging\LogManager.cs" />
+    <Compile Include="Mails\Pop3\Pop3Config.cs" />
+    <Compile Include="Mails\Pop3\Pop3Setting.cs" />
+    <Compile Include="Mails\Smtp\SmtpConfig.cs" />
+    <Compile Include="Mails\Smtp\SmtpSetting.cs" />
+    <Compile Include="Encrypts\AESCrypt.cs" />
+    <Compile Include="Encrypts\DESCrypt.cs" />
+    <Compile Include="Encrypts\HmacSHA1Crypt.cs" />
+    <Compile Include="Encrypts\MD5Crypt.cs" />
+    <Compile Include="Encrypts\RSACrypt.cs" />
+    <Compile Include="Encrypts\SHA1Crypt.cs" />
+    <Compile Include="Extensions\Extensions.Common.cs" />
+    <Compile Include="Extensions\ParamterCheckExtensions.cs" />
+    <Compile Include="INullObject.cs" />
+    <Compile Include="Maths\UnitConv.cs" />
+    <Compile Include="Medias\ExifThumbnail.cs" />
+    <Compile Include="Medias\ImageLocationMode.cs" />
+    <Compile Include="Medias\ImageUtil.cs" />
+    <Compile Include="Medias\Mp3Util.cs" />
+    <Compile Include="Medias\ThumbnailMode.cs" />
+    <Compile Include="Medias\VideoConvert.cs" />
+    <Compile Include="Modes\IdCards\Gender.cs" />
+    <Compile Include="Modes\IdCards\IdCard.cs" />
+    <Compile Include="Modes\IdCards\IdCardVerifier.cs" />
+    <Compile Include="Modes\Singleton`.cs" />
+    <Compile Include="Modes\TimestampId.cs" />
+    <Compile Include="Modes\Trees\BuildChildrenContext`.cs" />
+    <Compile Include="Modes\Trees\BuildRootContext.cs" />
+    <Compile Include="Modes\Trees\TreeBuilder.cs" />
+    <Compile Include="Modes\Trees\TreeNode.cs" />
+    <Compile Include="Modes\Trees\TreeNodeExtensions.cs" />
+    <Compile Include="Modes\Trees\TreeNode`.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="R.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>R.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Randoms\Random.cs" />
+    <Compile Include="Randoms\RandomBuilder.cs" />
+    <Compile Include="Reflection.cs" />
+    <Compile Include="Str.cs" />
+    <Compile Include="Str.Util.cs" />
+    <Compile Include="Strings\StringCompute.cs" />
+    <Compile Include="Strings\StringComputeResult.cs" />
+    <Compile Include="Strings\WebCrawlerUtil.cs" />
+    <Compile Include="Sys.cs" />
+    <Compile Include="Common\TimeUtil.cs" />
+    <Compile Include="Valid.cs" />
+    <Compile Include="Validations\SqlValidateUtil.cs" />
+    <Compile Include="VerifyCodes\IVerifyCode.cs" />
+    <Compile Include="VerifyCodes\VerifyCodeBase.cs" />
+    <Compile Include="VerifyCodes\VerifyCodeUtil.cs" />
+    <Compile Include="Webs\BrowserUtil.cs" />
+    <Compile Include="Webs\CookieUtil.cs" />
+    <Compile Include="Webs\SessionUtil.cs" />
+    <Compile Include="Webs\ShortenUrl.cs" />
+    <Compile Include="Webs\UrlUtil.cs" />
+    <Compile Include="Windows\CmdUtil.cs" />
+    <Compile Include="Windows\RegistryBaseKey.cs" />
+    <Compile Include="Windows\RegistryUtil.cs" />
+    <Compile Include="Windows\SystemInfo.cs" />
+    <Compile Include="Windows\SystemInfoHandler.cs" />
+    <Compile Include="Windows\WMIPath.cs" />
+    <Compile Include="Xmls\DynamicBuilder\ChildXmlNodesBuilder.cs" />
+    <Compile Include="Xmls\DynamicBuilder\XmlBuilder.cs" />
+    <Compile Include="Xmls\DynamicBuilder\XmlNodeBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Caches\" />
+    <Folder Include="Compress\" />
+    <Folder Include="Files\FileUtil\" />
+    <Folder Include="Files\Manager\" />
+    <Folder Include="FTP\" />
+    <Folder Include="Images\" />
+    <Folder Include="Offices\" />
+    <Folder Include="Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="R.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>R.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

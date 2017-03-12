@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,7 +41,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configs\BasicLoggingConfig.cs" />
+    <Compile Include="Configs\ConfigFile\JceFrameworkSection.cs" />
+    <Compile Include="Configs\ConfigFile\Logging\BasicLoggingElement.cs" />
+    <Compile Include="Configs\ConfigFile\Logging\DataLoggingElement.cs" />
+    <Compile Include="Configs\ConfigFile\Logging\LoggingAdapterCollection.cs" />
+    <Compile Include="Configs\ConfigFile\Logging\LoggingAdapterElement.cs" />
+    <Compile Include="Configs\ConfigFile\Logging\LoggingElement.cs" />
+    <Compile Include="Configs\ConfigFile\Logging\LoggingEntryElement.cs" />
+    <Compile Include="Configs\DataLoggingConfig.cs" />
+    <Compile Include="Configs\ILoggingConfigReseter.cs" />
+    <Compile Include="Configs\JceConfig.cs" />
+    <Compile Include="Configs\LoggingAdapterConfig.cs" />
+    <Compile Include="Configs\LoggingConfig.cs" />
+    <Compile Include="Configs\LoggingEntryConfig.cs" />
+    <Compile Include="Dependency\ActivatorUtilities.cs" />
+    <Compile Include="Dependency\IDependency.cs" />
+    <Compile Include="Dependency\IIocBuilder.cs" />
+    <Compile Include="Dependency\IIocResolver.cs" />
+    <Compile Include="Dependency\IocBuilderBase.cs" />
+    <Compile Include="Dependency\IocServiceProvider.cs" />
+    <Compile Include="Dependency\IScopeDependency.cs" />
+    <Compile Include="Dependency\IServiceCollection.cs" />
+    <Compile Include="Dependency\IServicesBuilder.cs" />
+    <Compile Include="Dependency\ISingletonDependency.cs" />
+    <Compile Include="Dependency\ITransientDependency.cs" />
+    <Compile Include="Dependency\LifetimeStyle.cs" />
+    <Compile Include="Dependency\ObjectFactory.cs" />
+    <Compile Include="Dependency\ScopeDependencyTypeFinder.cs" />
+    <Compile Include="Dependency\ServiceBuildOptions.cs" />
+    <Compile Include="Dependency\ServiceCollection.cs" />
+    <Compile Include="Dependency\ServiceCollectionExtensions.cs" />
+    <Compile Include="Dependency\ServiceDescriptor.cs" />
+    <Compile Include="Dependency\ServiceProviderExtensions.cs" />
+    <Compile Include="Dependency\ServicesBuilder.cs" />
+    <Compile Include="Dependency\SingletonDependencyTypeFinder.cs" />
+    <Compile Include="Dependency\TransientDependencyTypeFinder.cs" />
+    <Compile Include="Initialize\FrameworkInitializer.cs" />
+    <Compile Include="Initialize\IBasicLoggingInitializer.cs" />
+    <Compile Include="Initialize\IFrameworkInitializer.cs" />
+    <Compile Include="Initialize\LoggingInitializerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
+    <Compile Include="Reflection\DirectoryAssemblyFinder.cs" />
+    <Compile Include="Reflection\IAllAssemblyFinder.cs" />
+    <Compile Include="Reflection\IAssemblyFinder.cs" />
+    <Compile Include="Reflection\IFinder.cs" />
+    <Compile Include="Reflection\IMethodInfoFinder.cs" />
+    <Compile Include="Reflection\ITypeFinder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JCE.Utils\JCE.Utils.csproj">
+      <Project>{07E5C501-99EE-47B1-A179-F67BF01EAC01}</Project>
+      <Name>JCE.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
