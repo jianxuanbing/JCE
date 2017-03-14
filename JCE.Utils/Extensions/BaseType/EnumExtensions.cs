@@ -35,18 +35,7 @@ namespace JCE.Utils.Extensions
     /// 枚举（Enum）扩展
     /// </summary>
     public static class EnumExtensions
-    {
-        #region Description(获取描述)
-        /// <summary>
-        /// 获取描述,使用System.ComponentModel.Description特性设置描述
-        /// </summary>
-        /// <param name="instance">枚举实例</param>
-        /// <returns></returns>
-        public static string Description(this Enum instance)
-        {
-            return EnumUtil.GetDescription(instance.GetType(), instance);
-        }
-        #endregion
+    {        
         #region Value(获取成员值)
         /// <summary>
         /// 获取成员值
