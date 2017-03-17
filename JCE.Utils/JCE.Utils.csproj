@@ -213,6 +213,7 @@
     <Compile Include="VerifyCodes\VerifyCodeUtil.cs" />
     <Compile Include="Webs\BrowserUtil.cs" />
     <Compile Include="Webs\CookieUtil.cs" />
+    <Compile Include="Webs\NetUtil.cs" />
     <Compile Include="Webs\SessionUtil.cs" />
     <Compile Include="Webs\ShortenUrl.cs" />
     <Compile Include="Webs\UrlUtil.cs" />
