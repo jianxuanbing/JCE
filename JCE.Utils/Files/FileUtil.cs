@@ -95,7 +95,7 @@ namespace JCE.Utils.Files
         /// <returns></returns>
         public static byte[] ReadToBytes(string filePath)
         {
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 return null;
             }
