@@ -24,6 +24,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -259,6 +261,40 @@ namespace JCE.Utils.Extensions
         {
             var value = row[field];
             return (value == DBNull.Value);
-        }        
+        }
+
+        /// <summary>
+        /// 生成表达式
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="row">数据行</param>
+        /// <returns></returns>
+        public static Func<DataRow, T> ToExpression<T>(this DataRow row) where T : class, new()
+        {
+            if (row == null)
+            {
+                throw new ArgumentNullException("row", "当前对象为null无法转换为实体");
+            }
+            ParameterExpression parameter = Expression.Parameter(typeof(DataRow), "dr");
+            List<MemberBinding> binds = new List<MemberBinding>();
+            for (int i = 0; i < row.ItemArray.Length; i++)
+            {
+                string colName = row.Table.Columns[i].ColumnName;
+                PropertyInfo info = typeof(T).GetProperty(colName);
+                if (info == null)
+                {
+                    continue;
+                }
+                MethodInfo methodInfo =
+                    typeof(DataRowExtensions).GetMethod("Field", new Type[] { typeof(DataRow), typeof(string) })
+                        .MakeGenericMethod(info.PropertyType);
+                MethodCallExpression call = Expression.Call(methodInfo, parameter,
+                    Expression.Constant(colName, typeof(string)));
+                MemberAssignment bind = Expression.Bind(info, call);
+                binds.Add(bind);
+            }
+            MemberInitExpression init = Expression.MemberInit(Expression.New(typeof(T)), binds.ToArray());
+            return Expression.Lambda<Func<DataRow, T>>(init, parameter).Compile();
+        }
     }
 }
