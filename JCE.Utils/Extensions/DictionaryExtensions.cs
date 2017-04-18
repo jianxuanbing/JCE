@@ -338,5 +338,29 @@ namespace JCE.Utils.Extensions
             return default(T1);
         }
         #endregion
+
+        #region ToQueryString(转换成查询字符串)
+        /// <summary>
+        /// 将字典转换成查询字符串
+        /// </summary>
+        /// <typeparam name="TK">键类型</typeparam>
+        /// <typeparam name="TV">值类型</typeparam>
+        /// <param name="source">源字典</param>
+        /// <returns></returns>
+        public static string ToQueryString<TK, TV>(this IDictionary<TK, TV> source)
+        {
+            if (source == null || !source.Any())
+            {
+                return string.Empty;
+            }
+            Str sb=new Str();
+            foreach (var item in source)
+            {
+                sb.Append("{0}={1}&", item.Key.ToString(),item.Value.ToString());
+            }
+            sb.RemoveEnd("&");
+            return sb.ToString();
+        }
+        #endregion
     }
 }

@@ -24,6 +24,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -193,6 +195,29 @@ namespace JCE.Utils.Extensions
         public static void Write(this Stream stream, byte[] bytes)
         {
             stream.Write(bytes, 0, bytes.Length);
+        }
+        #endregion
+        #region ToDeserializeBinary(将二进制流反序列化成对象)
+        /// <summary>
+        /// 将二进制流反序列化成对象
+        /// </summary>
+        /// <param name="stream">流</param>
+        /// <returns></returns>
+        public static object ToDeserializeBinary(this Stream stream)
+        {
+            IFormatter formatter=new BinaryFormatter();
+            return formatter.Deserialize(stream);
+        }
+
+        /// <summary>
+        /// 将二进制流反序列化成泛型对象
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="stream">流</param>
+        /// <returns></returns>
+        public static T ToDeserializeBinary<T>(this Stream stream) where T : class
+        {
+            return stream.ToDeserializeBinary() as T;
         }
         #endregion
     }

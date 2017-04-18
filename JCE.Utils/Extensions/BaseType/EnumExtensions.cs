@@ -188,5 +188,16 @@ namespace JCE.Utils.Extensions
         }
 
         #endregion
+        #region ToInt(将枚举转换成Int类型)
+        /// <summary>
+        /// 将枚举转换成Int类型
+        /// </summary>
+        /// <param name="enumVal">枚举值</param>
+        /// <returns></returns>
+        public static int ToInt(this Enum enumVal)
+        {
+            return Convert.ToInt32(enumVal);
+        }
+        #endregion
     }
 }
