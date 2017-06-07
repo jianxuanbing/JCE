@@ -34,6 +34,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using JCE.Utils.VerifyCodes;
+using Encoder = System.Drawing.Imaging.Encoder;
 
 namespace JCE.Utils.Medias
 {
@@ -975,6 +976,109 @@ namespace JCE.Utils.Medias
             using (var stream = new MemoryStream(buffer))
             {
                 return FromStream(stream);
+            }
+        }
+        #endregion
+
+        #region UndamageCompress(无损压缩图片)
+        /// <summary>
+        /// 无损压缩图片
+        /// </summary>
+        /// <param name="oldFile">原文件路径</param>
+        /// <param name="newFile">新文件路径</param>
+        /// <param name="flag">压缩质量（数字越小压缩率越高）1-100</param>
+        /// <param name="size">压缩后图片的最大大小</param>
+        /// <param name="sfsc">是否第一次调用</param>
+        /// <returns></returns>
+        public static bool UndamageCompress(string oldFile, string newFile, int flag = 90, int size = 300,
+            bool sfsc = true)
+        {
+            //如果是第一次调用，原始图像的大小小于要压缩的大小，则直接复制文件，并且返回true
+            FileInfo firstFileInfo=new FileInfo(oldFile);
+            if (sfsc == true && firstFileInfo.Length < size*1024)
+            {
+                firstFileInfo.CopyTo(newFile);
+                return true;
+            }
+            Image iSource = Image.FromFile(oldFile);
+            ImageFormat tFormat = iSource.RawFormat;
+            int dHeight = iSource.Height/2;
+            int dWidth = iSource.Width/2;
+            int sW = 0, sH = 9;
+            //按比例压缩
+            Size temSize=new Size(iSource.Width,iSource.Height);
+            if (temSize.Width > dHeight || temSize.Width > dWidth)
+            {
+                if ((temSize.Width*dHeight) > (temSize.Width*dWidth))
+                {
+                    sW = dWidth;
+                    sH = (dWidth*temSize.Height)/temSize.Width;
+                }
+                else
+                {
+                    sH = dHeight;
+                    sW = (temSize.Width*dHeight)/temSize.Height;
+                }
+            }
+            else
+            {
+                sW = temSize.Width;
+                sH = temSize.Height;
+            }
+
+            Bitmap ob=new Bitmap(dWidth,dHeight);
+            Graphics g=Graphics.FromImage(ob);
+            g.Clear(Color.WhiteSmoke);
+            g.CompositingQuality=CompositingQuality.HighQuality;
+            g.SmoothingMode=SmoothingMode.HighQuality;
+            g.InterpolationMode=InterpolationMode.HighQualityBicubic;
+            g.DrawImage(iSource, new Rectangle((dWidth - sW)/2, (dHeight - sH)/2, sW, sH), 0, 0, iSource.Width,
+                iSource.Height, GraphicsUnit.Pixel);
+            g.Dispose();
+
+            //以下代码为保存图片时，设置压缩质量
+            EncoderParameters ep=new EncoderParameters();
+            long[] qy=new long[1];
+            qy[0] = flag;//设置压缩的比例1-100
+            EncoderParameter eParam=new EncoderParameter(Encoder.Quality, qy);
+            ep.Param[0] = eParam;
+
+            try
+            {
+                ImageCodecInfo[] arrayICI = ImageCodecInfo.GetImageEncoders();
+                ImageCodecInfo jpegICIinfo = null;
+                for (int x = 0; x < arrayICI.Length; x++)
+                {
+                    if (arrayICI[x].FormatDescription.Equals("JPEG"))
+                    {
+                        jpegICIinfo = arrayICI[x];
+                        break;
+                    }
+                }
+                if (jpegICIinfo != null)
+                {
+                    ob.Save(newFile, jpegICIinfo, ep);
+                    FileInfo fi = new FileInfo(newFile);
+                    if (fi.Length > 1024*size)
+                    {
+                        flag = flag - 10;
+                        UndamageCompress(oldFile, newFile, flag, size, false);
+                    }
+                }
+                else
+                {
+                    ob.Save(newFile,tFormat);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                iSource.Dispose();
+                ob.Dispose();
             }
         }
         #endregion
