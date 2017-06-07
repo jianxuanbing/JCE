@@ -609,6 +609,20 @@ namespace JCE.Utils.Extensions
             return () => string.IsNullOrEmpty(value) || !Enum.IsDefined(typeof(TEnum), value);
         }
         #endregion
+
+        #region IsRangeLength(判断字符串长度是否在指定范围内)
+        /// <summary>
+        /// 判断字符串长度是否在指定范围内
+        /// </summary>
+        /// <param name="source">源字符串</param>
+        /// <param name="minLength">最小长度</param>
+        /// <param name="maxLength">最大长度</param>
+        /// <returns></returns>
+        public static bool IsRangeLength(this string source, int minLength, int maxLength)
+        {
+            return source.Length >= minLength && source.Length <= maxLength;
+        }
+        #endregion
         #endregion
 
         #region 字符串操作

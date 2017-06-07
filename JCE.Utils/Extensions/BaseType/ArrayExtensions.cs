@@ -355,5 +355,48 @@ namespace JCE.Utils.Extensions
             return strs;
         }
         #endregion
+
+        #region Multiply(数组相乘)
+
+        /// <summary>
+        /// 两个数组相乘，返回两个的连接串，例如：["a","b","c"] * ["A","B"] = ["aA","aB","bA","bB","cA","cB"]
+        /// </summary>
+        /// <param name="array">当前字符串数组</param>
+        /// <param name="other">其他字符串数组</param>
+        /// <returns></returns>
+        public static string[] Multiply(this string[] array, string[] other)
+        {
+            if (array == null || other == null)
+            {
+                return null;
+            }
+            var temp = new string[array.Length*other.Length];
+            var i = 0;
+            foreach (string item in array)
+            {
+                foreach (string s in other)
+                {
+                    temp[i++] = item + s;
+                }
+            }
+            return temp;
+        }
+        #endregion
+
+        #region ToConvertAll(转换数组类型)
+
+        /// <summary>
+        /// 转换数组类型
+        /// </summary>
+        /// <typeparam name="TInput">输入类型</typeparam>
+        /// <typeparam name="TResult">输出类型</typeparam>
+        /// <param name="source">源数组</param>
+        /// <param name="convert">转换器</param>
+        /// <returns></returns>
+        public static TResult[] ToConvertAll<TInput, TResult>(this TInput[] source, Converter<TInput, TResult> convert)
+        {
+            return Array.ConvertAll(source, convert);
+        }
+        #endregion
     }
 }

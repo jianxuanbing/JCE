@@ -566,6 +566,8 @@ namespace JCE.Utils.Extensions
             var result = string.Format(CultureInfo.InvariantCulture, "{0}", target);
             return result;
         }
+
+        #region NotNull(空引用默认值)
         /// <summary>
         /// 如果目标对象是空引用，返回notNullValue
         /// </summary>
@@ -588,6 +590,7 @@ namespace JCE.Utils.Extensions
         {
             return ReferenceEquals(target, null) ? notNullValueProvider() : target;
         }
+        #endregion
 
         #region ToStringDump(获取对象字符串表示形式)
         /// <summary>
@@ -895,6 +898,7 @@ namespace JCE.Utils.Extensions
         }
         #endregion
 
+        #region CountLoopsToNull(循环计数Null总数)
         /// <summary>
         /// 循环计数Null总数
         /// </summary>
@@ -911,6 +915,9 @@ namespace JCE.Utils.Extensions
             }
             return num;
         }
+        #endregion
+
+        #region FindTypeByRecursion(递归查找类型实例)
         /// <summary>
         /// 递归查找类型实例
         /// </summary>
@@ -932,6 +939,7 @@ namespace JCE.Utils.Extensions
             } while ((item = function(item)) != null);
             return null;
         }
+        #endregion
 
         #region Copy(复制)
         /// <summary>
@@ -1112,6 +1120,7 @@ namespace JCE.Utils.Extensions
         }
         #endregion
 
+        #region ExceptionIfNullOrEmpty(空对象异常)
         /// <summary>
         /// 如果对象为空，则抛出指定消息异常
         /// </summary>
@@ -1125,6 +1134,7 @@ namespace JCE.Utils.Extensions
                 throw new ArgumentNullException(name, message);
             }
         }
+        #endregion
 
         #region CopyObj(对象拷贝)
         /// <summary>

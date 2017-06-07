@@ -610,5 +610,55 @@ namespace JCE.Utils
         public const string VerifyCodeSession = "JCE_VERIFY_CODE_SESSION";
 
         #endregion
+
+        #region DateFormat(日期格式化)
+        /// <summary>
+        /// 日期格式化
+        /// </summary>
+        public static class DateFormat
+        {
+            /// <summary>
+            /// yyyyMMdd
+            /// </summary>
+            // ReSharper disable once InconsistentNaming
+            public const string yyyyMMdd = "yyyyMMdd";
+
+            /// <summary>
+            /// yyyy-MM-dd
+            /// </summary>
+            // ReSharper disable once InconsistentNaming
+            public const string yyyy_MM_dd = "yyyy-MM-dd";
+
+            /// <summary>
+            /// yyyyMMddHHmm
+            /// </summary>
+            // ReSharper disable once InconsistentNaming
+            public const string yyyyMMddHHmm = "yyyyMMddHHmm";
+
+            /// <summary>
+            /// yyyy_MM_dd HH:mm
+            /// </summary>
+            // ReSharper disable once InconsistentNaming
+            public const string yyyy_MM_dd__HH_mm = "yyyy_MM_dd HH:mm";
+
+            /// <summary>
+            /// yyyyMMddHHmmss
+            /// </summary>
+            // ReSharper disable once InconsistentNaming
+            public const string yyyyMMddHHmmss = "yyyyMMddHHmmss";
+
+            /// <summary>
+            /// yyyy-MM-dd HH:mm:ss
+            /// </summary>
+            // ReSharper disable once InconsistentNaming
+            public const string yyyy_MM_dd__HH_mm_ss = "yyyy-MM-dd HH:mm:ss";
+
+            /// <summary>
+            /// yyyyMMddHHmmssfffff
+            /// </summary>
+            // ReSharper disable once InconsistentNaming
+            public const string yyyyMMddHHmmssfffff = "yyyyMMddHHmmssfffff";
+        }
+        #endregion
     }
 }

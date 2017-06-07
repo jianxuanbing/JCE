@@ -700,14 +700,14 @@ namespace JCE.Utils.Extensions
         #endregion
         #region ToList(转换为List集合)
         /// <summary>
-        /// 将DataTable转换为IList集合
+        /// 将DataTable转换为IList集合（反射实现）
         /// </summary>
         /// <typeparam name="T">实体类型</typeparam>
         /// <param name="table">数据表</param>
         /// <returns></returns>
-        public static IList<T> ToList<T>(this DataTable table) where T:class ,new()
+        public static IList<T> ToList<T>(this DataTable table) where T : class, new()
         {
-            IList<T> list=new List<T>();
+            IList<T> list = new List<T>();
             if ((table != null) && (table.Rows.Count != 0))
             {
                 PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -732,7 +732,7 @@ namespace JCE.Utils.Extensions
                             {
                                 if (column.ColumnName.Equals(info.Name, StringComparison.CurrentCultureIgnoreCase))
                                 {
-                                    info.SetValue(local,obj,null);
+                                    info.SetValue(local, obj, null);
                                 }
                             }
                         }
@@ -741,6 +741,26 @@ namespace JCE.Utils.Extensions
                 }
             }
             return list;
+        }
+        /// <summary>
+        /// 将DataTable转换为IList集合（Lambda实现）
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="table">数据表</param>
+        /// <returns></returns>
+        public static IList<T> ToListByLambda<T>(this DataTable table) where T : class, new()
+        {
+            if (table == null || table.Rows.Count <= 0)
+            {
+                throw new ArgumentNullException("table", "当前对象为null，无法生成表达式树");
+            }
+            Func<DataRow, T> func = table.Rows[0].ToExpression<T>();
+            List<T> collection = new List<T>(table.Rows.Count);
+            foreach (DataRow dataRow in table.Rows)
+            {
+                collection.Add(func(dataRow));
+            }
+            return collection;
         }
         #endregion
         #endregion
