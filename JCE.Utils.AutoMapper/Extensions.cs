@@ -44,31 +44,7 @@ namespace JCE.Utils.AutoMapper
         /// <returns></returns>
         public static TDestination MapTo<TSource, TDestination>(this TSource source, TDestination destination)
         {
-            try
-            {
-                var map = Mapper.Configuration.FindTypeMapFor<TSource, TDestination>();
-                if (map != null)
-                {
-                    return Mapper.Map(source, destination);
-                }
-                var maps = Mapper.Configuration.GetAllTypeMaps();
-                Mapper.Initialize(config =>
-                {
-                    foreach (var item in maps)
-                    {
-                        config.CreateMap(item.SourceType, item.DestinationType);
-                    }
-                    config.CreateMap<TSource, TDestination>();
-                });
-            }
-            catch (InvalidOperationException)
-            {                
-                Mapper.Initialize(config =>
-                {
-                    config.CreateMap<TSource, TDestination>();
-                });
-            }
-            return Mapper.Map(source, destination);
+            return MapTo<TDestination>(source, destination);
         }
 
         /// <summary>
@@ -80,7 +56,54 @@ namespace JCE.Utils.AutoMapper
         /// <returns></returns>
         public static TDestination MapTo<TSource, TDestination>(this TSource source) where TDestination : new()
         {
-            return source.MapTo(new TDestination());
+            return MapTo(source, new TDestination());
+        }
+
+        /// <summary>
+        /// 将源对象映射到目标对象
+        /// </summary>
+        /// <typeparam name="TDestination">目标类型</typeparam>
+        /// <param name="source">源对象</param>
+        /// <param name="destination">目标对象</param>
+        /// <returns></returns>
+        public static TDestination MapTo<TDestination>(object source, TDestination destination)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (destination == null)
+            {
+                throw new ArgumentNullException(nameof(destination));
+            }
+            var sourceType = source.GetType();
+            var destinationType = typeof(TDestination);
+            try
+            {
+                var map = Mapper.Configuration.FindTypeMapFor(sourceType,destinationType);
+                if (map != null)
+                {
+                    return Mapper.Map(source, destination);
+                }
+                var maps = Mapper.Configuration.GetAllTypeMaps();
+                Mapper.Initialize(config =>
+                {
+                    foreach (var item in maps)
+                    {
+                        config.CreateMap(item.SourceType, item.DestinationType);
+                    }
+                    config.CreateMap(sourceType,destinationType);
+                });
+
+            }
+            catch (InvalidOperationException)
+            {
+                Mapper.Initialize(config =>
+                {
+                    config.CreateMap(sourceType, destinationType);
+                });
+            }
+            return Mapper.Map(source, destination);
         }
     }
 }
