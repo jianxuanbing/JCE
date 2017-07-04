@@ -77,6 +77,22 @@ namespace JCE.Utils
         }
         #endregion
 
+        #region IsPhoneNumber(是否合法的手机号码)
+        /// <summary>
+        /// 是否合法的手机号码
+        /// </summary>
+        /// <param name="value">手机号码</param>
+        /// <returns></returns>
+        public static bool IsPhoneNumber(string value)
+        {
+            if (value.IsEmpty())
+            {
+                return false;
+            }
+            return value.IsMatch(@"^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$");
+        }
+        #endregion
+
         #region IsMobileNumber(是否手机号码)
         /// <summary>
         /// 是否手机号码
@@ -209,7 +225,7 @@ namespace JCE.Utils
                 return value.IsMatch(@"^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$");
             }
             return value.Length == 0x12 &&
-                   value.IsMatch(@"^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[A-Z])$",
+                   value.IsMatch(@"^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$",
                        RegexOptions.IgnoreCase);
         }
         #endregion
@@ -826,7 +842,7 @@ namespace JCE.Utils
             {
                 return false;
             }
-            return value.IsMatch(@"^\d{6}$", RegexOptions.IgnoreCase);
+            return value.IsMatch(@"^[1-9]\d{5}$", RegexOptions.IgnoreCase);
         }
         #endregion
 
@@ -910,6 +926,23 @@ namespace JCE.Utils
             }
             var array = value.ToCharArray();
             return array.Any(c => array.Count(t => t == c) > 1);
+        }
+        #endregion
+
+        #region IsQQ(是否合法QQ号码)
+        /// <summary>
+        /// 是否合法QQ号码
+        /// </summary>
+        /// <param name="value">QQ号码</param>
+        /// <returns></returns>
+        // ReSharper disable once InconsistentNaming
+        public static bool IsQQ(string value)
+        {
+            if (value.IsEmpty())
+            {
+                return false;
+            }
+            return value.IsMatch(@"^[1-9][0-9]{4,9}$");
         }
         #endregion
     }
