@@ -66,7 +66,7 @@ namespace JCE.Utils.AutoMapper
         /// <param name="source">源对象</param>
         /// <param name="destination">目标对象</param>
         /// <returns></returns>
-        public static TDestination MapTo<TDestination>(object source, TDestination destination)
+        private static TDestination MapTo<TDestination>(object source, TDestination destination)
         {
             if (source == null)
             {
