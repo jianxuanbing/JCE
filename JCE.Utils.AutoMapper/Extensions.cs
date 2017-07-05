@@ -21,6 +21,7 @@
  *
 /************************************************************************************/
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -76,8 +77,8 @@ namespace JCE.Utils.AutoMapper
             {
                 throw new ArgumentNullException(nameof(destination));
             }
-            var sourceType = source.GetType();
-            var destinationType = typeof(TDestination);
+            var sourceType = GetObjectType(source.GetType());
+            var destinationType = GetObjectType(typeof(TDestination));            
             try
             {
                 var map = Mapper.Configuration.FindTypeMapFor(sourceType,destinationType);
@@ -104,6 +105,21 @@ namespace JCE.Utils.AutoMapper
                 });
             }
             return Mapper.Map(source, destination);
+        }
+
+        /// <summary>
+        /// 获取对象类型
+        /// </summary>
+        /// <param name="source">类型</param>
+        /// <returns></returns>
+        private static Type GetObjectType(Type source)
+        {
+            if (source.IsGenericType && typeof(IEnumerable).IsAssignableFrom(source))
+            {
+                var type = source.GetGenericArguments()[0];
+                return GetObjectType(type);
+            }
+            return source;
         }
     }
 }
