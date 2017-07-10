@@ -42,12 +42,12 @@ namespace JCE.Logging.Log4Net
         /// <param name="services">服务映射信息集合</param>
         public static void AddLog4NetServices(this IServiceCollection services)
         {
-            if (JceConfig.LoggingConfigReseter == null)
-            {
-                JceConfig.LoggingConfigReseter=new Log4NetLoggingConfigReseter();
-            }
-            services.AddSingleton<IBasicLoggingInitializer, Log4NetLoggingInitializer>();
-            services.AddSingleton<Log4NetLoggerAdapter>();
+            //if (JceConfig.LoggingConfigReseter == null)
+            //{
+            //    JceConfig.LoggingConfigReseter=new Log4NetLoggingConfigReseter();
+            //}
+            //services.AddSingleton<IBasicLoggingInitializer, Log4NetLoggingInitializer>();
+            //services.AddSingleton<Log4NetLoggerAdapter>();
         }
     }
 }

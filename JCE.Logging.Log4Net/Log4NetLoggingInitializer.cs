@@ -34,7 +34,7 @@ namespace JCE.Logging.Log4Net
     /// <summary>
     /// log4net 日志初始化器，用于初始化基础日志功能
     /// </summary>
-    public class Log4NetLoggingInitializer:LoggingInitializerBase, IBasicLoggingInitializer
+    public class Log4NetLoggingInitializer//:LoggingInitializerBase, IBasicLoggingInitializer
     {
         /// <summary>
         /// 开始初始化基础日志
@@ -43,10 +43,11 @@ namespace JCE.Logging.Log4Net
         public void Initialize(LoggingConfig config)
         {
             LogManager.SetEntryInfo(config.EntryConfig.Enabled,config.EntryConfig.EntryLogLevel);
-            foreach (LoggingAdapterConfig adapterConfig in config.BasicLoggingConfig.AdapterConfigs)
-            {
-                SetLoggingFromAdapterConfig(adapterConfig);
-            }
+            LogManager.AddLoggerAdapter(new Log4NetLoggerAdapter());
+            //foreach (LoggingAdapterConfig adapterConfig in config.BasicLoggingConfig.AdapterConfigs)
+            //{
+            //    SetLoggingFromAdapterConfig(adapterConfig);
+            //}
         }
     }
 }
