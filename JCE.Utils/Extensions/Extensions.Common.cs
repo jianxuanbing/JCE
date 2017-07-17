@@ -61,18 +61,6 @@ namespace JCE.Utils.Extensions
         }
         #endregion
 
-        #region Value(获取成员值)
-        /// <summary>
-        /// 获取成员值
-        /// </summary>
-        /// <param name="instance">枚举实例</param>
-        /// <returns></returns>
-        public static int Value(this Enum instance)
-        {
-            return EnumUtil.GetValue(instance.GetType(), instance);
-        }
-        #endregion
-
         #region Log(写日志)
         /// <summary>
         /// 写日志
