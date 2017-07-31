@@ -34,12 +34,27 @@ namespace JCE.Utils.Mails
     public class EmailServiceSettings
     {
         /// <summary>
-        /// Smtp服务器，发送邮件的服务器地址
+        /// 主机名，如：smtp.163.com
         /// </summary>
-        public string SmtpService { get; set; }
+        public string Host { get; set; }
 
         /// <summary>
-        /// 发送方
+        /// 端口号，如：25
+        /// </summary>
+        public int Port { get; set; }
+
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public string User { get; set; }
+
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string Password { get; set; }
+
+        /// <summary>
+        /// 来源
         /// </summary>
         public string From { get; set; }
 
@@ -48,27 +63,22 @@ namespace JCE.Utils.Mails
         /// </summary>
 
         public bool UsePort { get; set; }
-
+        
+        /// <summary>
+        /// 是否启用SSL，默认：false
+        /// 如果启用，端口号要改为加密方式发送
+        /// </summary>
+        public bool EnableSsl { get; set; }
 
         /// <summary>
-        /// 邮件服务器验证的用户名
+        /// 是否包含Html代码
         /// </summary>
-        public string AuthenticationUserName { get; set; }
+        public bool IsHtml { get; set; }
 
         /// <summary>
-        /// 邮件服务器验证的用户密码
+        /// 发送者显示名
         /// </summary>
-        public string AuthenticationPassword { get; set; }
-
-        /// <summary>
-        /// 是否需要身份认证
-        /// </summary>
-        public bool IsAuthenticationRequired { get; set; }
-
-        /// <summary>
-        /// 端口号
-        /// </summary>
-        public int Port { get; set; }
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// 初始化一个<see cref="EmailServiceSettings"/>类型的实例
@@ -82,11 +92,11 @@ namespace JCE.Utils.Mails
         /// <summary>
         /// 初始化一个<see cref="EmailServiceSettings"/>类型的实例
         /// </summary>
-        /// <param name="smtpService">Smtp服务器</param>
+        /// <param name="host">主机名，如：smtp.163.com</param>
         /// <param name="port">端口号</param>
-        public EmailServiceSettings(string smtpService, int port)
+        public EmailServiceSettings(string host, int port)
         {
-            SmtpService = smtpService;
+            Host = host;
             Port = port;
         }
     }

@@ -42,20 +42,6 @@ namespace JCE.Utils.Mails
         /// <summary>
         /// 发送邮件
         /// </summary>
-        /// <param name="message">通知消息</param>
-        void Send(NotificationMessage message);
-
-        /// <summary>
-        /// 发送邮件
-        /// </summary>
-        /// <param name="message">通知消息</param>
-        /// <param name="credentialsUser">凭证用户名</param>
-        /// <param name="credentialsPassword">凭证密码</param>
-        void Send(NotificationMessage message, string credentialsUser, string credentialsPassword);
-
-        /// <summary>
-        /// 发送邮件
-        /// </summary>
         /// <param name="message">邮件消息</param>
         void Send(MailMessage message);
 
@@ -63,22 +49,87 @@ namespace JCE.Utils.Mails
         /// 发送邮件
         /// </summary>
         /// <param name="message">邮件消息</param>
-        /// <param name="useCredentials">是否使用凭证</param>
         /// <param name="credentialsUser">凭证用户名</param>
         /// <param name="credentialsPassword">凭证密码</param>
-        void Send(MailMessage message, bool useCredentials, string credentialsUser, string credentialsPassword);
+        void Send(MailMessage message,string credentialsUser, string credentialsPassword);
 
         /// <summary>
         /// 发送邮件
         /// </summary>
-        /// <param name="from">发送方</param>
-        /// <param name="to">接收方</param>
+        /// <param name="receiver">接收人邮箱</param>
+        /// <param name="body">邮件内容</param>
+        void Send(string receiver, string body);
+
+        /// <summary>
+        /// 发送邮件
+        /// </summary>
+        /// <param name="receiver">接收人邮箱</param>
+        /// <param name="body">内容</param>
+        /// <param name="isSingleSend">是否群发单显，当邮件接收人为多个时，可选择该模式，即可对多个接收人分别发送，收件方不会知道这封邮件有多个收件人</param>
+        void Send(string receiver, string body, bool isSingleSend);
+
+        /// <summary>
+        /// 发送邮件
+        /// </summary>
+        /// <param name="receiver">接收人邮箱</param>
+        /// <param name="receiverName">接收人名字</param>
+        /// <param name="body">内容</param>
+        void Send(string receiver, string receiverName, string body);
+
+        /// <summary>
+        /// 发送邮件
+        /// </summary>
+        /// <param name="receiver">接收人邮箱</param>
+        /// <param name="receiverName">接收人名字</param>
         /// <param name="subject">标题</param>
         /// <param name="body">内容</param>
-        /// <param name="useCredentials">是否使用凭证</param>
-        /// <param name="credentialsUser">凭证用户名</param>
-        /// <param name="credentialsPassword">凭证密码</param>
-        void Send(string from, string to, string subject, string body, bool useCredentials, string credentialsUser,
-            string credentialsPassword);
+        void Send(string receiver, string receiverName, string subject, string body);
+
+        /// <summary>
+        /// 发送邮件
+        /// </summary>
+        /// <param name="receiver">接收人邮箱</param>
+        /// <param name="subject">标题</param>
+        /// <param name="body">内容</param>
+        /// <param name="isSingleSend">是否群发单显，当邮件接收人为多个时，可选择该模式，即可对多个接收人分别发送，收件方不会知道这封邮件有多个收件人</param>
+        void Send(string receiver, string subject, string body, bool isSingleSend);
+
+        /// <summary>
+        /// 发送邮件（带附件）
+        /// </summary>
+        /// <param name="info">邮件信息</param>
+        /// <param name="attachments">附件列表</param>
+        void Send(MailInfo info, params Attachment[] attachments);
+
+        /// <summary>
+        /// 发送邮件（带附件）
+        /// </summary>
+        /// <param name="info">邮件信息</param>
+        /// <param name="filePath">附件路径</param>
+        void Send(MailInfo info, string filePath);
+
+        /// <summary>
+        /// 发送邮件（带附件）
+        /// </summary>
+        /// <param name="info">邮件信息</param>
+        /// <param name="filePath">附件路径</param>
+        /// <param name="isSingleSend">是否群发单显，当邮件接收人为多个时，可选择该模式，即可对多个接收人分别发送，收件方不会知道这封邮件有多个收件人</param>
+        void Send(MailInfo info, string filePath, bool isSingleSend);
+
+        /// <summary>
+        /// 发送邮件
+        /// </summary>
+        /// <param name="info">邮件信息</param>
+        /// <param name="message">邮件小，默认为null</param>
+        void Send(MailInfo info, MailMessage message = null);
+
+        /// <summary>
+        /// 发送邮件
+        /// </summary>
+        /// <param name="info">邮件信息</param>
+        /// <param name="isSingleSend">是否群发单显，当邮件接收人为多个时，可选择该模式，即可对多个接收人分别发送，收件方不会知道这封邮件有多个收件人</param>
+        /// <param name="message">邮件消息，默认为null</param>
+        void Send(MailInfo info, bool isSingleSend, MailMessage message = null);
+
     }
 }
