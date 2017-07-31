@@ -155,10 +155,11 @@
     <Compile Include="Logging\LoggerAdapterBase.cs" />
     <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Logging\LogManager.cs" />
-    <Compile Include="Mails\Pop3\Pop3Config.cs" />
-    <Compile Include="Mails\Pop3\Pop3Setting.cs" />
-    <Compile Include="Mails\Smtp\SmtpConfig.cs" />
-    <Compile Include="Mails\Smtp\SmtpSetting.cs" />
+    <Compile Include="Mails\EmailMessage.cs" />
+    <Compile Include="Mails\EmailService.cs" />
+    <Compile Include="Mails\EmailServiceSettings.cs" />
+    <Compile Include="Mails\IEmailService.cs" />
+    <Compile Include="Mails\NotificationMessage.cs" />
     <Compile Include="Encrypts\AESCrypt.cs" />
     <Compile Include="Encrypts\DESCrypt.cs" />
     <Compile Include="Encrypts\HmacSHA1Crypt.cs" />
