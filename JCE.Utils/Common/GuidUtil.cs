@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -110,5 +111,87 @@ namespace JCE.Utils.Common
             return BitConverter.ToInt64(buffer, 0);
         }
         #endregion
+
+        #region GenerateSequentialGuid(生成有序的唯一ID)
+        /// <summary>
+        /// 生成有序的唯一ID
+        /// </summary>
+        /// <param name="sequentialGuidType">有序GUID类型</param>
+        /// <returns></returns>
+        public static Guid GenerateSequentialGuid(
+            SequentialGuidType sequentialGuidType = SequentialGuidType.SequentialAsString)
+        {
+            return SequentialGuidGenerator.NewSequentialGuid(sequentialGuidType);
+        }
+        #endregion
+
+        /// <summary>
+        /// 根据枚举生成不同的有序GUID
+        /// http://www.codeproject.com/Articles/388157/GUIDs-as-fast-primary-keys-under-multiple-database
+        /// </summary>
+        private static class SequentialGuidGenerator
+        {
+            private static readonly RNGCryptoServiceProvider Rng=new RNGCryptoServiceProvider();
+
+            /// <summary>
+            /// 创建一个新的有序的GUID
+            /// </summary>
+            /// <param name="guidType">GUID类型</param>
+            /// <returns></returns>
+            public static Guid NewSequentialGuid(SequentialGuidType guidType)
+            {
+                var randomBytes = new byte[10];
+                Rng.GetBytes(randomBytes);
+
+                var timestamp = DateTime.UtcNow.Ticks/10000L;
+                var timestampBytes = BitConverter.GetBytes(timestamp);
+
+                if (BitConverter.IsLittleEndian)
+                {
+                    Array.Reverse(timestampBytes);
+                }
+                var guidBytes = new byte[16];
+
+                switch (guidType)
+                {
+                    case SequentialGuidType.SequentialAsString:
+                    case SequentialGuidType.SequentialAsBinary:
+                        Buffer.BlockCopy(timestampBytes,2,guidBytes,0,6);                        
+                        Buffer.BlockCopy(randomBytes,0,guidBytes,6,10);
+                        // If formatting as a string, we have to reverse the order
+                        // of the Data1 and Data2 blocks on little-endian systems.
+                        if (guidType == SequentialGuidType.SequentialAsString && BitConverter.IsLittleEndian)
+                        {
+                            Array.Reverse(guidBytes,0,4);
+                            Array.Reverse(guidBytes,4,2);
+                        }
+                        break;
+                    case SequentialGuidType.SequentialAtEnd:
+                        Buffer.BlockCopy(randomBytes,0,guidBytes,0,10);
+                        Buffer.BlockCopy(timestampBytes,2,guidBytes,10,6);
+                        break;
+                }
+                return new Guid(guidBytes);
+            }
+        }
+
+        /// <summary>
+        /// 有序GUID的类型（sqlServer用AtEnd，mysql用AsString或者AsBinary，oracle用AsBinary，postgresql用AsString或者AsBinary）
+        /// </summary>
+        public enum SequentialGuidType
+        {
+            /// <summary>
+            /// 有序的字符串
+            /// </summary>
+            SequentialAsString,
+            /// <summary>
+            /// 有序的二进制数组
+            /// </summary>
+            SequentialAsBinary,
+            /// <summary>
+            /// 有序的结束
+            /// </summary>
+            SequentialAtEnd,
+        }
     }
 }
