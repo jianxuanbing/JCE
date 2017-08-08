@@ -24,6 +24,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -65,6 +66,28 @@ namespace JCE.Utils.AutoMapper
         /// </summary>
         /// <typeparam name="TDestination">目标类型</typeparam>
         /// <param name="source">源对象</param>
+        /// <returns></returns>
+        public static TDestination MapTo<TDestination>(this object source) where TDestination : new()
+        {
+            return MapTo(source, new TDestination());
+        }
+
+        /// <summary>
+        /// 将源集合映射到目标集合
+        /// </summary>
+        /// <typeparam name="TDestination">目标元素类型，范例：Sample，不要加List</typeparam>
+        /// <param name="source">源集合</param>
+        /// <returns></returns>
+        public static List<TDestination> MapToList<TDestination>(this IEnumerable source)
+        {
+            return MapTo<List<TDestination>>(source);
+        }
+
+        /// <summary>
+        /// 将源对象映射到目标对象
+        /// </summary>
+        /// <typeparam name="TDestination">目标类型</typeparam>
+        /// <param name="source">源对象</param>
         /// <param name="destination">目标对象</param>
         /// <returns></returns>
         private static TDestination MapTo<TDestination>(object source, TDestination destination)
@@ -77,8 +100,8 @@ namespace JCE.Utils.AutoMapper
             {
                 throw new ArgumentNullException(nameof(destination));
             }
-            var sourceType = GetObjectType(source.GetType());
-            var destinationType = GetObjectType(typeof(TDestination));            
+            var sourceType = GetObjectType(source);
+            var destinationType = GetObjectType(destination);            
             try
             {
                 var map = Mapper.Configuration.FindTypeMapFor(sourceType,destinationType);
@@ -110,16 +133,25 @@ namespace JCE.Utils.AutoMapper
         /// <summary>
         /// 获取对象类型
         /// </summary>
-        /// <param name="source">类型</param>
+        /// <param name="obj">对象</param>
         /// <returns></returns>
-        private static Type GetObjectType(Type source)
+        private static Type GetObjectType(object obj)
         {
-            if (source.IsGenericType && typeof(IEnumerable).IsAssignableFrom(source))
+            var type = obj.GetType();
+            if ((obj is IEnumerable) == false)
             {
-                var type = source.GetGenericArguments()[0];
-                return GetObjectType(type);
+                return type;
             }
-            return source;
+            if (type.IsArray)
+            {
+                return type.GetElementType();
+            }
+            var genericArgumentsTypes = type.GetTypeInfo().GetGenericArguments();
+            if (genericArgumentsTypes == null || genericArgumentsTypes.Length == 0)
+            {
+                throw new ArgumentException("泛型参数类型不能为空");
+            }
+            return genericArgumentsTypes[0];
         }
     }
 }
