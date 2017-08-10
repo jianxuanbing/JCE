@@ -8,7 +8,7 @@ using JCE.Utils.Extensions;
 namespace JCE.Utils.Helpers
 {
     /// <summary>
-    /// 类型转换
+    /// 类型转换 操作
     /// </summary>
     public static class Convert
     {

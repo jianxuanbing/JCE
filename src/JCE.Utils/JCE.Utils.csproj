@@ -50,6 +50,7 @@
     <Compile Include="Helpers\Convert.cs" />
     <Compile Include="Helpers\Json.cs" />
     <Compile Include="Extensions\Common\Extensions.Json.cs" />
+    <Compile Include="Helpers\Valid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
