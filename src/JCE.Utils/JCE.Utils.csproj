@@ -35,6 +35,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,8 +49,10 @@
     <Compile Include="Extensions\Common\Extensions.Convert.cs" />
     <Compile Include="Helpers\Common.cs" />
     <Compile Include="Helpers\Convert.cs" />
+    <Compile Include="Helpers\Enum.cs" />
     <Compile Include="Helpers\Json.cs" />
     <Compile Include="Extensions\Common\Extensions.Json.cs" />
+    <Compile Include="Helpers\Reflection.cs" />
     <Compile Include="Helpers\Valid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
