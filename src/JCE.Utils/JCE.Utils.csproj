@@ -54,6 +54,7 @@
     <Compile Include="Extensions\Common\Extensions.Json.cs" />
     <Compile Include="Helpers\Reflection.cs" />
     <Compile Include="Helpers\Valid.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
