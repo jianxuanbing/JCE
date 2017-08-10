@@ -3,8 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCE.Utils", "src\JCE.Utils\JCE.Utils.csproj", "{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCE.Utils.Test", "test\JCE.Utils.Test\JCE.Utils.Test.csproj", "{80368D8A-2802-40F9-AD2D-015D394A9017}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{19B52163-35F0-4606-8DCC-A5F66214AE66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C8BD29E8-9698-4F26-8EE8-CC6A6CAE8BEF}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80368D8A-2802-40F9-AD2D-015D394A9017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80368D8A-2802-40F9-AD2D-015D394A9017}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80368D8A-2802-40F9-AD2D-015D394A9017}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80368D8A-2802-40F9-AD2D-015D394A9017}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3} = {19B52163-35F0-4606-8DCC-A5F66214AE66}
+		{80368D8A-2802-40F9-AD2D-015D394A9017} = {C8BD29E8-9698-4F26-8EE8-CC6A6CAE8BEF}
 	EndGlobalSection
 EndGlobal
