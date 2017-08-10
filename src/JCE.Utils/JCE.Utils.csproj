@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Extensions\Common\Extensions.Common.cs" />
     <Compile Include="Extensions\Common\Extensions.Convert.cs" />
+    <Compile Include="Formatters\JsonFormatter.cs" />
     <Compile Include="Helpers\Common.cs" />
     <Compile Include="Helpers\Convert.cs" />
     <Compile Include="Helpers\Enum.cs" />
