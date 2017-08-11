@@ -29,13 +29,21 @@ using System.Threading.Tasks;
 namespace JCE.Utils.Formatters
 {
     /// <summary>
-    /// Json格式化
+    /// Json 格式化器
     /// </summary>
     public class JsonFormatter
     {
+        /// <summary>
+        /// 缩进
+        /// </summary>
         public static string Indent = "    ";
 
-        public static string PrettyPrint(string input)
+        /// <summary>
+        /// 格式化
+        /// </summary>
+        /// <param name="input">输入值</param>
+        /// <returns></returns>
+        public static string Format(string input)
         {
             var output=new StringBuilder(input.Length*2);
             char? quote = null;
@@ -113,13 +121,25 @@ namespace JCE.Utils.Formatters
         }
     }
 
-    static class Extensions
+    internal static class Extensions
     {
+        /// <summary>
+        /// 循环输出
+        /// </summary>
+        /// <param name="str">输入值</param>
+        /// <param name="count">循环次数</param>
+        /// <returns></returns>
         public static string Repeat(this string str, int count)
         {
             return new StringBuilder().Insert(0,str,count).ToString();
         }
 
+        /// <summary>
+        /// 是否闭合
+        /// </summary>
+        /// <param name="str">输入值</param>
+        /// <param name="index">当前索引</param>
+        /// <returns></returns>
         public static bool IsEscaped(this string str, int index)
         {
             bool escaped = false;
@@ -130,6 +150,12 @@ namespace JCE.Utils.Formatters
             return escaped;
         }
 
+        /// <summary>
+        /// 是否闭合
+        /// </summary>
+        /// <param name="str">输入值</param>
+        /// <param name="index">当前索引</param>
+        /// <returns></returns>
         public static bool IsEscaped(this StringBuilder str, int index)
         {
             return str.ToString().IsEscaped(index);

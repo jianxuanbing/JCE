@@ -24,7 +24,7 @@ namespace JCE.Utils.Test.Helpers
             list.Add(new Item("测试3", "003"));
             var result = list.ToJson();
             Console.WriteLine(list.ToJson());
-            Console.WriteLine(JsonFormatter.PrettyPrint(result));
+            Console.WriteLine(JsonFormatter.Format(result));
         }
     }
 }
