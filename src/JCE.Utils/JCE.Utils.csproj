@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="Extensions\Common\Extensions.Common.cs" />
     <Compile Include="Extensions\Common\Extensions.Convert.cs" />
     <Compile Include="Formatters\JsonFormatter.cs" />
@@ -58,10 +59,15 @@
     <Compile Include="Helpers\Valid.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\IValidation.cs" />
+    <Compile Include="Validations\IValidationHandler.cs" />
+    <Compile Include="Validations\IValidationRule.cs" />
+    <Compile Include="Validations\Validation.cs" />
+    <Compile Include="Validations\ValidationFactory.cs" />
+    <Compile Include="Validations\ValidationHandler.cs" />
+    <Compile Include="Validations\ValidationResultCollection.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
