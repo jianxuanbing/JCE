@@ -50,6 +50,7 @@
     <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="Extensions\Common\Extensions.Common.cs" />
     <Compile Include="Extensions\Common\Extensions.Convert.cs" />
+    <Compile Include="Extensions\Common\Extensions.DateTime.cs" />
     <Compile Include="Extensions\Common\Extensions.Lambda.cs" />
     <Compile Include="Formatters\JsonFormatter.cs" />
     <Compile Include="Formatters\XmlFormatter.cs" />

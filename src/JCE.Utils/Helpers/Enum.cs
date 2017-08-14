@@ -217,5 +217,42 @@ namespace JCE.Utils.Helpers
             return (TEnum) System.Enum.Parse(type, fieldInfo.Name);
         }
         #endregion
+
+        #region GetDictionary(获取枚举字典)
+        /// <summary>
+        /// 获取枚举字典
+        /// </summary>
+        /// <typeparam name="TEnum">枚举类型</typeparam>
+        /// <returns></returns>
+        public static Dictionary<int, string> GetDictionary<TEnum>()
+        {
+            Type enumType = Common.GetType<TEnum>().GetTypeInfo();
+            ValidateEnum(enumType);
+
+            Dictionary<int,string> dic=new Dictionary<int, string>();
+            foreach (var field in enumType.GetFields())
+            {
+                AddItem<TEnum>(dic, field);
+            }
+            return dic;
+        }
+
+        /// <summary>
+        /// 添加描述项
+        /// </summary>
+        /// <typeparam name="TEnum">枚举类型</typeparam>
+        /// <param name="result">集合</param>
+        /// <param name="field">字典</param>
+        private static void AddItem<TEnum>(Dictionary<int, string> result, FieldInfo field)
+        {
+            if (!field.FieldType.GetTypeInfo().IsEnum)
+            {
+                return;
+            }
+            var value = GetValue<TEnum>(field.Name);
+            var description = Reflection.GetDescription(field);
+            result.Add(value, description);
+        }
+        #endregion
     }
 }
