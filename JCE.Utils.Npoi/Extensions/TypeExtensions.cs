@@ -34,7 +34,6 @@ namespace JCE.Utils.Npoi.Extensions
             {typeof(double), default(double)},
             {typeof(float), default(float)},
             {typeof(decimal), default(decimal)},
-            {typeof(bool), default(bool)},
         };
 
         /// <summary>

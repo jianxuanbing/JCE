@@ -196,10 +196,10 @@ namespace JCE.Utils.Npoi.Extensions
                                     System.Diagnostics.Debug.WriteLine(ex.ToString());
                                 }
                             }
-                        }
-                        var titleCell = titleRow.CreateCell(index);
-                        titleCell.CellStyle = titleStyle;
-                        titleCell.SetCellValue(title);
+                            var titleCell = titleRow.CreateCell(index);
+                            titleCell.CellStyle = titleStyle;
+                            titleCell.SetCellValue(title);
+                        }                       
                     }
 
                     var value = property.GetValue(item, null);
@@ -226,21 +226,30 @@ namespace JCE.Utils.Npoi.Extensions
                         {
                             cell.SetCellValue(Convert.ToDouble(value));
                         }
+                        else if (unwrapType == typeof(decimal))
+                        {
+                            cell.SetCellValue(Convert.ToDouble(value));
+                        }
                         else if (value is IFormattable)
                         {
                             var fv = value as IFormattable;
                             cell.SetCellValue(fv.ToString(config.Formatter, CultureInfo.CurrentCulture));
-                        }
+                        }                        
                         else
                         {
                             cell.SetCellValue(value.ToString());
                         }
+                    }
+                    else if (value is decimal)
+                    {
+                        cell.SetCellValue(Convert.ToDouble(value));
                     }
                     else if (value is IFormattable)
                     {
                         var fv = value as IFormattable;
                         cell.SetCellValue(fv.ToString(config.Formatter, CultureInfo.CurrentCulture));
                     }
+                    
                     else
                     {
                         cell.SetCellValue(value.ToString());

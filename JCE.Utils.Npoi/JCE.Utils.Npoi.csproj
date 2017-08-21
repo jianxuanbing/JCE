@@ -65,12 +65,17 @@
     <Compile Include="Attributes\NpoiFreezeAttribute.cs" />
     <Compile Include="Attributes\NpoiStatisticsAttribute.cs" />
     <Compile Include="Excel.cs" />
+    <Compile Include="ExcelFormat.cs" />
     <Compile Include="ExcelSetting.cs" />
+    <Compile Include="Extensions\ConvertExtensions.cs" />
+    <Compile Include="Extensions\ICellExtensions.cs" />
+    <Compile Include="Extensions\ICellStyleExtensions.cs" />
     <Compile Include="Extensions\IEnumerableNpoiExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Configs\FluentConfiguration.cs" />
     <Compile Include="Configs\IFluentConfiguration.cs" />
     <Compile Include="Configs\PropertyConfiguration.cs" />
+    <Compile Include="Helpers\ExcelUtil.cs" />
     <Compile Include="Internal\CellConfig.cs" />
     <Compile Include="Internal\FilterConfig.cs" />
     <Compile Include="Internal\FreezeConfig.cs" />
