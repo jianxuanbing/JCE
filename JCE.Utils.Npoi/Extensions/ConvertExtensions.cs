@@ -17,7 +17,7 @@ namespace JCE.Utils.Npoi.Extensions
         /// <param name="value">值</param>
         /// <param name="conversionType">转换类型</param>
         /// <returns></returns>
-        public static object CastTo(object value, Type conversionType)
+        public static object CastTo(this object value, Type conversionType)
         {
             if (value == null)
             {

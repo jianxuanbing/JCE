@@ -139,7 +139,7 @@ namespace JCE.Utils.Npoi.Extensions
             var workbook = InitializeWorkbook(excelFile);
 
             // 创建工作表
-            var sheet = workbook.CreateSheet(sheetName);
+            var sheet = workbook.GetOrCreateSheet(sheetName);
 
             // 缓存单元格样式
             var cellStyles=new Dictionary<int,ICellStyle>();
@@ -148,15 +148,15 @@ namespace JCE.Utils.Npoi.Extensions
             var titleStyle = workbook.CreateCellStyle();
             titleStyle.Alignment=HorizontalAlignment.Center;
             titleStyle.VerticalAlignment=VerticalAlignment.Center;
-            titleStyle.FillPattern=FillPattern.Bricks;
+            //titleStyle.FillPattern=FillPattern.Bricks;
             titleStyle.FillBackgroundColor = HSSFColor.Grey40Percent.Index;
             titleStyle.FillForegroundColor = HSSFColor.White.Index;
 
-            var titleRow = sheet.CreateRow(0);
+            var titleRow = sheet.GetOrCreateRow(0);
             var rowIndex = 1;
             foreach (var item in source)
             {
-                var row = sheet.CreateRow(rowIndex);
+                var row = sheet.GetOrCreateRow(rowIndex);
                 for (int i = 0; i < properties.Length; i++)
                 {
                     var property = properties[i];
@@ -196,7 +196,7 @@ namespace JCE.Utils.Npoi.Extensions
                                     System.Diagnostics.Debug.WriteLine(ex.ToString());
                                 }
                             }
-                            var titleCell = titleRow.CreateCell(index);
+                            var titleCell = titleRow.GetOrCreateCell(index);
                             titleCell.CellStyle = titleStyle;
                             titleCell.SetCellValue(title);
                         }                       
@@ -207,53 +207,14 @@ namespace JCE.Utils.Npoi.Extensions
                     {
                         continue;
                     }
-                    var cell = row.CreateCell(index);
+                    var cell = row.GetOrCreateCell(index);
                     ICellStyle cellStyle;
                     if (cellStyles.TryGetValue(i, out cellStyle))
                     {
                         cell.CellStyle = cellStyle;
-
-                        var unwrapType = property.PropertyType.UnwrapNullableType();
-                        if (unwrapType == typeof(bool))
-                        {
-                            cell.SetCellValue((bool)value);
-                        }
-                        else if (unwrapType == typeof(DateTime))
-                        {
-                            cell.SetCellValue(Convert.ToDateTime(value));
-                        }
-                        else if (unwrapType == typeof(double))
-                        {
-                            cell.SetCellValue(Convert.ToDouble(value));
-                        }
-                        else if (unwrapType == typeof(decimal))
-                        {
-                            cell.SetCellValue(Convert.ToDouble(value));
-                        }
-                        else if (value is IFormattable)
-                        {
-                            var fv = value as IFormattable;
-                            cell.SetCellValue(fv.ToString(config.Formatter, CultureInfo.CurrentCulture));
-                        }                        
-                        else
-                        {
-                            cell.SetCellValue(value.ToString());
-                        }
                     }
-                    else if (value is decimal)
-                    {
-                        cell.SetCellValue(Convert.ToDouble(value));
-                    }
-                    else if (value is IFormattable)
-                    {
-                        var fv = value as IFormattable;
-                        cell.SetCellValue(fv.ToString(config.Formatter, CultureInfo.CurrentCulture));
-                    }
-                    
-                    else
-                    {
-                        cell.SetCellValue(value.ToString());
-                    }
+                    var unwrapType = property.PropertyType.UnwrapNullableType();
+                    cell.SetCellValueExt(value,unwrapType,config.Formatter);                    
                 }
                 rowIndex++;
             }
@@ -294,8 +255,7 @@ namespace JCE.Utils.Npoi.Extensions
                     if (rowspan > 1)
                     {
                         sheet.GetRow(row - rowspan).Cells[config.Index].CellStyle = vStyle;
-                        sheet.AddMergedRegion(new CellRangeAddress(row - rowspan, row - 1, config.Index,
-                            config.Index));
+                        sheet.MergeCell(row - rowspan, row - 1, config.Index, config.Index);                        
                     }
                 }
             }

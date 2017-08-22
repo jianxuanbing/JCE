@@ -20,7 +20,7 @@ namespace JCE.Utils.Npoi.Test
                 ExportModel entity=new ExportModel();
                 entity.Id=Guid.NewGuid();
                 entity.Name = "测试00" + i;
-                entity.CreateTime=DateTime.Now.AddMilliseconds(i);
+                entity.CreateTime=DateTime.Now.AddSeconds(i);
                 entity.Sort = i;
                 entity.Amount = i*20;
                 entity.Sex = i%2 == 0 ? "男" : "女";

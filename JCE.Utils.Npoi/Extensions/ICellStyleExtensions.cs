@@ -63,6 +63,18 @@ namespace JCE.Utils.Npoi.Extensions
         }
 
         /// <summary>
+        /// 设置填充背景颜色
+        /// </summary>
+        /// <param name="cellStyle">单元格样式</param>
+        /// <param name="backgroundColor">填充背景颜色</param>
+        /// <returns></returns>
+        public static ICellStyle SetFillBackgroundColor(this ICellStyle cellStyle, short backgroundColor)
+        {
+            cellStyle.FillBackgroundColor = backgroundColor;
+            return cellStyle;
+        }
+
+        /// <summary>
         /// 设置填充模式
         /// </summary>
         /// <param name="cellStyle">单元格样式</param>

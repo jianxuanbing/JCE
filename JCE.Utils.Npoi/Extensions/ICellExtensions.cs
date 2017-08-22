@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,51 @@ namespace JCE.Utils.Npoi.Extensions
         /// </summary>
         /// <param name="cell">单元格</param>
         /// <param name="value">值</param>
-        public static void SetCellValueExt(this ICell cell, object value)
+        /// <param name="type">类型</param>
+        /// <param name="format">格式化字符串</param>
+        public static void SetCellValueExt(this ICell cell, object value, Type type,
+            string format = "yyyy-MM-dd HH:mm:ss")
+        {
+            if (value == null)
+            {
+                cell.SetCellValue("");
+            }
+            else if (type == typeof(bool))
+            {
+                cell.SetCellValue(value.CastTo<bool>());                
+            }
+            else if (type == typeof(DateTime))
+            {
+                cell.SetCellValue(value.CastTo<DateTime>());
+                cell.SetCellStyle(
+                    style => style.SetDataFormat(cell.Row.Sheet.Workbook.CreateDateFormat(format)));                
+            }
+            else if (type == typeof(byte) || type == typeof(short) || type == typeof(int) || type == typeof(long))
+            {
+                cell.SetCellValue(value.CastTo<int>());
+            }
+            else if (type == typeof(float) || type == typeof(double) || type == typeof(decimal))
+            {
+                cell.SetCellValue(value.CastTo<double>());
+            }
+            else if (value is IFormattable)
+            {
+                var fv = value as IFormattable;
+                cell.SetCellValue(fv.ToString(format, CultureInfo.CurrentCulture));
+            }
+            else
+            {
+                cell.SetCellValue(value.ToString());
+            }
+        }
+
+        /// <summary>
+        /// 设置单元格值
+        /// </summary>
+        /// <param name="cell">单元格</param>
+        /// <param name="value">值</param>
+        /// <param name="format">格式化字符串</param>
+        public static void SetCellValueExt(this ICell cell, object value,string format= "yyyy-MM-dd HH:mm:ss")
         {
             if (value == null)
             {
@@ -31,7 +76,8 @@ namespace JCE.Utils.Npoi.Extensions
                     break;
                 case "System.DateTime":
                     cell.SetCellValue(value.CastTo<DateTime>());
-                    //cell.SetCellStyle(style => style.SetDataFormat(cell.Row.Sheet.Workbook.Cre()))
+                    cell.SetCellStyle(
+                        style => style.SetDataFormat(cell.Row.Sheet.Workbook.CreateDateFormat(format)));
                     break;
                 case "System.Boolean":
                     cell.SetCellValue(value.CastTo<bool>());
