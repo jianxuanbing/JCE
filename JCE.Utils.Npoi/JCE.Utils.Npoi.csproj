@@ -71,6 +71,10 @@
     <Compile Include="Extensions\ICellExtensions.cs" />
     <Compile Include="Extensions\ICellStyleExtensions.cs" />
     <Compile Include="Extensions\IEnumerableNpoiExtensions.cs" />
+    <Compile Include="Extensions\IFontExtensions.cs" />
+    <Compile Include="Extensions\IRowExtensions.cs" />
+    <Compile Include="Extensions\ISheetExtensions.cs" />
+    <Compile Include="Extensions\IWorkbookExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Configs\FluentConfiguration.cs" />
     <Compile Include="Configs\IFluentConfiguration.cs" />

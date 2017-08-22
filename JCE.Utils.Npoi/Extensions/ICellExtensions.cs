@@ -3,62 +3,146 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NPOI.SS.UserModel;
 
 namespace JCE.Utils.Npoi.Extensions
 {
     /// <summary>
-    /// ICell单元格扩展
+    /// <see cref="ICell"/> 单元格扩展
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    internal static class ICellExtensions
+    public static class ICellExtensions
     {
-        ///// <summary>
-        ///// 设置单元格值
-        ///// </summary>
-        ///// <param name="cell">单元格</param>
-        ///// <param name="value">值</param>
-        //public static void SetCellValueExt(this NPOI.SS.UserModel.ICell cell, object value)
-        //{
-        //    if (value == null)
-        //    {
-        //        return;
-        //    }
-        //    switch (value.GetType().ToString())
-        //    {
-        //        case "System.String":
-        //            cell.SetCellValue(value.ToString());
-        //            break;
-        //        case "System.DateTime":
-        //            cell.SetCellValue(value.CastTo<DateTime>());
-        //            cell.SetCellStyle(style=>style)
-        //    }
-        //}
+        /// <summary>
+        /// 设置单元格值
+        /// </summary>
+        /// <param name="cell">单元格</param>
+        /// <param name="value">值</param>
+        public static void SetCellValueExt(this ICell cell, object value)
+        {
+            if (value == null)
+            {
+                return;
+            }
+            switch (value.GetType().ToString())
+            {
+                case "System.String":
+                    cell.SetCellValue(value.ToString());
+                    break;
+                case "System.DateTime":
+                    cell.SetCellValue(value.CastTo<DateTime>());
+                    //cell.SetCellStyle(style => style.SetDataFormat(cell.Row.Sheet.Workbook.Cre()))
+                    break;
+                case "System.Boolean":
+                    cell.SetCellValue(value.CastTo<bool>());
+                    break;
+                case "System.Byte":
+                case "System.Int16":
+                case "System.Int32":
+                case "System.Int64":
+                    cell.SetCellValue(value.CastTo<int>());
+                    break;
+                case "System.Double":
+                case "System.Decimal":
+                    cell.SetCellValue(value.CastTo<double>());
+                    break;
+                case "System.DBNull":
+                default:
+                    cell.SetCellValue("");
+                    break;
+            }
+        }
 
-        //public static object GetCellValue(this NPOI.SS.UserModel.ICell cell)
-        //{
-            
-        //}
+        /// <summary>
+        /// 获取单元格的值
+        /// </summary>
+        /// <param name="cell">单元格</param>
+        /// <returns></returns>
+        public static object GetCellValue(this ICell cell)
+        {
+            object value = null;
+            switch (cell.CellType)
+            {
+                case CellType.Blank:
+                    break;
+                case CellType.Boolean:
+                    value = cell.BooleanCellValue;
+                    break;
+                case CellType.Error:
+                    value = cell.ErrorCellValue;
+                    break;
+                case CellType.Formula:
+                    value = cell.StringCellValue;
+                    break;
+                case CellType.Numeric:
+                    value = cell.NumericCellValue;
+                    break;
+                case CellType.String:
+                    value = cell.StringCellValue;
+                    break;
+                case CellType.Unknown:
+                    break;
+                default:
+                    break;
+            }
+            return value;
+        }
 
-        //public static T GetCelLValue<T>(this NPOI.SS.UserModel.ICell cell)
-        //{
-            
-        //}
+        /// <summary>
+        /// 获取单元格的值
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <param name="cell">单元格</param>
+        /// <returns></returns>
+        public static T GetCellValue<T>(this ICell cell)
+        {
+            return cell.GetCellValue().CastTo<T>();
+        }
 
-        //public static T GetCellValue<T>(this NPOI.SS.UserModel.ICell cell, T defaultValue)
-        //{
-            
-        //}
+        /// <summary>
+        /// 获取单元格的值
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <param name="cell">单元格</param>
+        /// <param name="defaultValue">默认值</param>
+        /// <returns></returns>
+        public static T GetCellValue<T>(this ICell cell, T defaultValue)
+        {
+            return cell.GetCellValue().CastTo<T>(defaultValue);
+        }
 
-        //public static NPOI.SS.UserModel.ICell SetCellStyle(this NPOI.SS.UserModel.ICell cell,
-        //    NPOI.SS.UserModel.ICellStyle cellStyle)
-        //{
-            
-        //}
+        /// <summary>
+        /// 设置单元格样式
+        /// </summary>
+        /// <param name="cell">单元格</param>
+        /// <param name="cellStyle">单元格样式</param>
+        /// <returns></returns>
+        public static ICell SetCellStyle(this ICell cell, ICellStyle cellStyle)
+        {
+            cell.CellStyle = cellStyle;
+            return cell;
+        }
 
-        //public static NPOI.SS.UserModel.ICell SetCellStyle(this NPOI.SS.UserModel.ICell cell,
-        //    Action<NPOI.SS.UserModel.ICellStyle> action)
-        //{
-            
-        //}
+        /// <summary>
+        /// 设置单元格样式
+        /// </summary>
+        /// <param name="cell">单元格</param>
+        /// <param name="action">单元格样式</param>
+        /// <returns></returns>
+        public static ICell SetCellStyle(this ICell cell,
+            Action<ICellStyle> action)
+        {
+            var cellStyle = cell.Row.Sheet.Workbook.CreateCellStyle();
+            if (cell.CellStyle != null)
+            {
+                cell.CellStyle.CloneStyleFrom(cellStyle);
+            }
+            if (action != null)
+            {
+                action(cellStyle);
+            }
+            cell.CellStyle = cellStyle;
+            return cell;
+        }
     }
 }

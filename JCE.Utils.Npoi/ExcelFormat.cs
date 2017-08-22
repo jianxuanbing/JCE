@@ -12,6 +12,10 @@ namespace JCE.Utils.Npoi
     public enum ExcelFormat
     {
         /// <summary>
+        /// 未知
+        /// </summary>
+        None,
+        /// <summary>
         /// 97-2003
         /// </summary>
         Xls,
