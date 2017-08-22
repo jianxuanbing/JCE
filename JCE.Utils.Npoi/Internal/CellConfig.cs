@@ -40,5 +40,10 @@ namespace JCE.Utils.Npoi
         /// 获取或设置 格式化格式
         /// </summary>
         public string Formatter { get; set; }
+
+        /// <summary>
+        /// 获取或设置 自定义枚举
+        /// </summary>
+        public Type CustomEnum { get; set; }
     }
 }

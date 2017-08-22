@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JCE.Utils.Common;
 using NPOI.SS.UserModel;
 
 namespace JCE.Utils.Npoi.Extensions
@@ -20,8 +21,9 @@ namespace JCE.Utils.Npoi.Extensions
         /// <param name="cell">单元格</param>
         /// <param name="value">值</param>
         /// <param name="type">类型</param>
+        /// <param name="enumType">枚举类型</param>
         /// <param name="format">格式化字符串</param>
-        public static void SetCellValueExt(this ICell cell, object value, Type type,
+        public static void SetCellValueExt(this ICell cell, object value, Type type,Type enumType,
             string format = "yyyy-MM-dd HH:mm:ss")
         {
             if (value == null)
@@ -54,6 +56,12 @@ namespace JCE.Utils.Npoi.Extensions
             else
             {
                 cell.SetCellValue(value.ToString());
+            }
+
+            if (enumType != null && enumType.IsEnum)
+            {
+                var enumDesc=EnumUtil.GetDescription(enumType, value);
+                cell.SetCellValue(enumDesc);
             }
         }
 

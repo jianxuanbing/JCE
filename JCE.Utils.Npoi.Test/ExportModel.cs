@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,9 @@ namespace JCE.Utils.Npoi.Test
         [NpoiColumn(Title = "性别",AllowMerge = true,Index = 3)]
         public string Sex { get; set; }
 
+        [NpoiColumn(Title = "性别", AllowMerge = true, Index = 7,CustomEnum = typeof(Sex))]
+        public int SexNum { get; set; }
+
         [NpoiColumn(Title = "帐户金额",Index = 4)]
         public decimal Amount { get; set; }
 
@@ -32,5 +36,22 @@ namespace JCE.Utils.Npoi.Test
 
         [NpoiColumn(Title = "创建时间",Formatter = "yyyy-MM-dd HH:mm:ss",Index = 6)]
         public DateTime CreateTime { get; set; }
+    }
+
+    /// <summary>
+    /// 性别
+    /// </summary>
+    public enum Sex
+    {
+        /// <summary>
+        /// 男
+        /// </summary>
+        [Description("男")]
+        Boy=0,
+        /// <summary>
+        /// 女
+        /// </summary>
+        [Description("女")]
+        Girl=1
     }
 }

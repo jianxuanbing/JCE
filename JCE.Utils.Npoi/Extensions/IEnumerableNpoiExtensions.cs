@@ -214,7 +214,7 @@ namespace JCE.Utils.Npoi.Extensions
                         cell.CellStyle = cellStyle;
                     }
                     var unwrapType = property.PropertyType.UnwrapNullableType();
-                    cell.SetCellValueExt(value,unwrapType,config.Formatter);                    
+                    cell.SetCellValueExt(value,unwrapType,config.CustomEnum,config.Formatter);
                 }
                 rowIndex++;
             }

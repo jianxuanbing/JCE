@@ -24,6 +24,7 @@ namespace JCE.Utils.Npoi.Test
                 entity.Sort = i;
                 entity.Amount = i*20;
                 entity.Sex = i%2 == 0 ? "男" : "女";
+                entity.SexNum = i%2==0?1:0;
                 entity.Power = i%3*10;
 
                 entities.Add(entity);

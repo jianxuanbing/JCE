@@ -71,6 +71,15 @@ namespace JCE.Utils.Npoi.Attributes
         }
 
         /// <summary>
+        /// 获取或设置 自定义枚举
+        /// </summary>
+        public Type CustomEnum
+        {
+            get { return CellConfig.CustomEnum; }
+            set { CellConfig.CustomEnum = value; }
+        }
+
+        /// <summary>
         /// 初始化一个<see cref="NpoiColumnAttribute"/>类型的实例
         /// </summary>
         public NpoiColumnAttribute()
