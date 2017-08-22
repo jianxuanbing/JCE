@@ -22,10 +22,10 @@ namespace JCE.Utils.Npoi.Test
         [NpoiColumn(Title = "排序",Index = 2)]
         public int Sort { get; set; }
 
-        [NpoiColumn(Title = "性别",AllowMerge = true,Index = 3)]
+        [NpoiColumn(Title = "性别",Index = 3)]
         public string Sex { get; set; }
 
-        [NpoiColumn(Title = "性别", AllowMerge = true, Index = 7,CustomEnum = typeof(Sex))]
+        [NpoiColumn(Title = "性别",  Index = 7,CustomEnum = typeof(Sex))]
         public int SexNum { get; set; }
 
         [NpoiColumn(Title = "帐户金额",Index = 4)]
@@ -34,7 +34,7 @@ namespace JCE.Utils.Npoi.Test
         [NpoiColumn(Title = "权重",Index = 5)]
         public int Power { get; set; }
 
-        [NpoiColumn(Title = "创建时间",Formatter = "yyyy-MM-dd HH:mm:ss",Index = 6)]
+        [NpoiColumn(Title = "创建时间",Formatter = "yyyy-MM-dd HH:mm:ss",Index = 6,AllowMerge = true)]
         public DateTime CreateTime { get; set; }
     }
 
