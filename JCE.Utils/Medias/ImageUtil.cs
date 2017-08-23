@@ -386,6 +386,7 @@ namespace JCE.Utils.Medias
             }
             return path;
         }
+
         /// <summary>
         /// 设置图片水印，使用MagickImage.Net
         /// </summary>
@@ -395,6 +396,11 @@ namespace JCE.Utils.Medias
         /// <returns></returns>
         public static string ImageWatermarkByMagick(string path, string waterpath, ImageLocationMode location)
         {
+            string extName = Path.GetExtension(path);
+            if (!(extName == ".jpg" || extName == ".bmp" || extName == ".jpeg" || extName == ".png"))
+            {
+                return path;
+            }
             // 读取需要水印的图片
             using (ImageMagick.MagickImage image = new ImageMagick.MagickImage(path))
             {
@@ -404,7 +410,7 @@ namespace JCE.Utils.Medias
                     // 设置水印透明度
                     watermark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 5);
                     // 设置绘制水印位置
-                    image.Composite(watermark, GetLocation(location), CompositeOperator.Over);                                       
+                    image.Composite(watermark, GetLocation(location), CompositeOperator.Over);
                 }
                 image.Resize(image.Width, image.Height);
                 image.Quality = 75;
