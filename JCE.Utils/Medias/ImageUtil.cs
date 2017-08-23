@@ -33,6 +33,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ImageMagick;
 using JCE.Utils.VerifyCodes;
 using Encoder = System.Drawing.Imaging.Encoder;
 
@@ -336,31 +337,115 @@ namespace JCE.Utils.Medias
         public static string ImageWatermark(string path, string waterpath, ImageLocationMode location)
         {
             string extName = Path.GetExtension(path);
-            if (extName == ".jpg" || extName == ".bmp" || extName == ".jpeg")
+            if (extName == ".jpg" || extName == ".bmp" || extName == ".jpeg"||extName==".png")
             {
                 DateTime time = DateTime.Now;
                 string fileName = "" + time.Year.ToString() + time.Month.ToString() + time.Day.ToString() +
                                   time.Hour.ToString() + time.Minute.ToString() + time.Second.ToString() +
                                   time.Millisecond.ToString();
-                Image img = Bitmap.FromFile(path);
-                Image waterImg = Image.FromFile(waterpath);
-                Graphics g = Graphics.FromImage(img);
-                ArrayList coors = GetLocation(location, img, waterImg);
-                g.DrawImage(waterImg, new Rectangle(int.Parse(coors[0].ToString()), int.Parse(coors[1].ToString()),
-                    waterImg.Width, waterImg.Height));
-                waterImg.Dispose();
-                g.Dispose();
-                string newPath = Path.GetDirectoryName(path) + fileName + extName;
-                img.Save(newPath);
-                img.Dispose();
-                File.Copy(newPath, path, true);
-                if (File.Exists(newPath))
+                
+                Image img = null;
+                Graphics g = null;
+                try
                 {
-                    File.Delete(newPath);
+                    img = Bitmap.FromFile(path);
+                    g = Graphics.FromImage(img);
+                    Image waterImg = Image.FromFile(waterpath);
+                    ArrayList coors = GetLocation(location, img, waterImg);
+                    g.DrawImage(waterImg, new Rectangle(int.Parse(coors[0].ToString()), int.Parse(coors[1].ToString()),
+                    waterImg.Width, waterImg.Height));
+                    waterImg.Dispose();
+                    string newPath = Path.GetDirectoryName(path) + fileName + extName;
+                    img.Save(newPath);
+                    File.Copy(newPath, path, true);
+                    if (File.Exists(newPath))
+                    {
+                        File.Delete(newPath);
+                    }
                 }
+                catch (OutOfMemoryException ex)
+                {
+                    if (img != null)
+                    {
+                        img.Dispose();
+                        img = null;
+                    }
+                    return ImageWatermarkByMagick(path, waterpath, location);
+                }
+                finally
+                {
+                    if (img != null)
+                    {
+                        img.Dispose();
+                    }
+                    if (g != null)
+                    {
+                        g.Dispose();
+                    }
+                }                
             }
             return path;
         }
+        /// <summary>
+        /// 设置图片水印，使用MagickImage.Net
+        /// </summary>
+        /// <param name="path">需要加载水印的图片路径（绝对路径）</param>
+        /// <param name="waterpath">水印图片（绝对路径）</param>
+        /// <param name="location">水印位置</param>
+        /// <returns></returns>
+        public static string ImageWatermarkByMagick(string path, string waterpath, ImageLocationMode location)
+        {
+            // 读取需要水印的图片
+            using (ImageMagick.MagickImage image = new ImageMagick.MagickImage(path))
+            {
+                // 读取水印图片
+                using (ImageMagick.MagickImage watermark = new ImageMagick.MagickImage(waterpath))
+                {
+                    // 设置水印透明度
+                    watermark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 5);
+                    // 设置绘制水印位置
+                    image.Composite(watermark, GetLocation(location), CompositeOperator.Over);                                       
+                }
+                image.Resize(image.Width, image.Height);
+                image.Quality = 75;
+                image.CompressionMethod = ImageMagick.CompressionMethod.JPEG;
+                image.Write(path);
+                return path;
+            }
+        }
+
+        /// <summary>
+        /// 获取水印位置
+        /// </summary>
+        /// <param name="location">水印位置</param>
+        /// <returns></returns>
+        private static Gravity GetLocation(ImageLocationMode location)
+        {
+            switch (location)
+            {
+                case ImageLocationMode.LeftTop:
+                    return Gravity.Northwest;
+                case ImageLocationMode.Top:
+                    return Gravity.North;
+                case ImageLocationMode.RightTop:
+                    return Gravity.Northeast;
+                case ImageLocationMode.RightCenter:
+                    return Gravity.East;
+                case ImageLocationMode.RightBottom:
+                    return Gravity.Southeast;
+                case ImageLocationMode.Bottom:
+                    return Gravity.South;
+                case ImageLocationMode.LeftBottom:
+                    return Gravity.Southwest;
+                case ImageLocationMode.LeftCenter:
+                    return Gravity.West;
+                case ImageLocationMode.Center:
+                    return Gravity.Center;
+                default:
+                    return Gravity.Center;
+            }
+        }
+
         /// <summary>
         /// 获取水印位置
         /// </summary>

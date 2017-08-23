@@ -14,7 +14,7 @@ namespace JCE.Utils.Test.Medias
         [TestMethod]
         public void TestImageWatermark()
         {
-            string imgUrl = "D:\\001.jpg";
+            string imgUrl = "D:\\20170623143033_5077.jpg";
             string waterUrl = "D:\\鸿荣水印图.png";
             string result=ImageUtil.ImageWatermark(imgUrl, waterUrl, ImageLocationMode.Center);
             Console.WriteLine(result);
