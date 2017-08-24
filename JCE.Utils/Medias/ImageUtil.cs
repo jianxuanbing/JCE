@@ -397,6 +397,11 @@ namespace JCE.Utils.Medias
         public static string ImageWatermarkByMagick(string path, string waterpath, ImageLocationMode location)
         {
             string extName = Path.GetExtension(path);
+            if (string.IsNullOrEmpty(extName))
+            {
+                return path;
+            }
+            extName = extName.ToLower();
             if (!(extName == ".jpg" || extName == ".bmp" || extName == ".jpeg" || extName == ".png"))
             {
                 return path;
@@ -407,10 +412,10 @@ namespace JCE.Utils.Medias
                 // 读取水印图片
                 using (ImageMagick.MagickImage watermark = new ImageMagick.MagickImage(waterpath))
                 {
-                    // 设置水印透明度
-                    watermark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 5);
                     // 设置绘制水印位置
                     image.Composite(watermark, GetLocation(location), CompositeOperator.Over);
+                    // 设置水印透明度
+                    watermark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 1);
                 }
                 image.Resize(image.Width, image.Height);
                 image.Quality = 75;
