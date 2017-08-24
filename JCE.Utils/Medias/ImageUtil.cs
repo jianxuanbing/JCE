@@ -412,10 +412,10 @@ namespace JCE.Utils.Medias
                 // 读取水印图片
                 using (ImageMagick.MagickImage watermark = new ImageMagick.MagickImage(waterpath))
                 {
-                    // 设置绘制水印位置
-                    image.Composite(watermark, GetLocation(location), CompositeOperator.Over);
                     // 设置水印透明度
-                    watermark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 1);
+                    watermark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 3);
+                    // 设置绘制水印位置
+                    image.Composite(watermark, GetLocation(location), CompositeOperator.Over);                    
                 }
                 image.Resize(image.Width, image.Height);
                 image.Quality = 75;
