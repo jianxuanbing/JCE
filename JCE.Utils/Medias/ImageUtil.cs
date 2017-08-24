@@ -413,7 +413,7 @@ namespace JCE.Utils.Medias
                 using (ImageMagick.MagickImage watermark = new ImageMagick.MagickImage(waterpath))
                 {
                     // 设置水印透明度
-                    watermark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 3);
+                    //watermark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 7);
                     // 设置绘制水印位置
                     image.Composite(watermark, GetLocation(location), CompositeOperator.Over);                    
                 }

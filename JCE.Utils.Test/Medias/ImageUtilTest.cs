@@ -16,7 +16,7 @@ namespace JCE.Utils.Test.Medias
         {
             string imgUrl = "D:\\20170623143033_5077.jpg";
             string waterUrl = "D:\\鸿荣水印图.png";
-            string result=ImageUtil.ImageWatermark(imgUrl, waterUrl, ImageLocationMode.Center);
+            string result=ImageUtil.ImageWatermarkByMagick(imgUrl, waterUrl, ImageLocationMode.Center);
             Console.WriteLine(result);
         }
     }
