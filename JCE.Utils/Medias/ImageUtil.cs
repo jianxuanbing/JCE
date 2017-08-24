@@ -343,46 +343,76 @@ namespace JCE.Utils.Medias
                 string fileName = "" + time.Year.ToString() + time.Month.ToString() + time.Day.ToString() +
                                   time.Hour.ToString() + time.Minute.ToString() + time.Second.ToString() +
                                   time.Millisecond.ToString();
-                
-                Image img = null;
-                Graphics g = null;
-                try
+
+                //Image img = null;
+                //Graphics g = null;
+                //try
+                //{
+                //    img = Bitmap.FromFile(path);
+                //    g = Graphics.FromImage(img);
+                //    Image waterImg = Image.FromFile(waterpath);
+                //    ArrayList coors = GetLocation(location, img, waterImg);
+                //    g.DrawImage(waterImg, new Rectangle(int.Parse(coors[0].ToString()), int.Parse(coors[1].ToString()),
+                //    waterImg.Width, waterImg.Height));
+                //    waterImg.Dispose();
+                //    string newPath = Path.GetDirectoryName(path) + fileName + extName;
+                //    img.Save(newPath);
+                //    File.Copy(newPath, path, true);
+                //    if (File.Exists(newPath))
+                //    {
+                //        File.Delete(newPath);
+                //    }
+                //}
+                //catch (OutOfMemoryException ex)
+                //{
+                //    if (img != null)
+                //    {
+                //        img.Dispose();
+                //        img = null;
+                //    }
+                //    throw ex;
+                //    //return ImageWatermarkByMagick(path, waterpath, location);
+                //}
+                //finally
+                //{
+                //    if (img != null)
+                //    {
+                //        img.Dispose();
+                //    }
+                //    if (g != null)
+                //    {
+                //        g.Dispose();
+                //    }
+                //}
+                Image img = Image.FromFile(path);
+                // 处理不在指定范围内的图片
+                if (!Enum.IsDefined(typeof(PixelFormat), img.PixelFormat))
                 {
-                    img = Bitmap.FromFile(path);
-                    g = Graphics.FromImage(img);
-                    Image waterImg = Image.FromFile(waterpath);
+                    int width = img.Width;
+                    int height = img.Height;
+                    img.Dispose();
+                    img = null;
+                    using (Bitmap temp = new Bitmap(path))
+                    {
+                        img = temp.Clone(new Rectangle(0, 0, width, height), PixelFormat.Format32bppRgb);
+                    }
+                }
+                Image waterImg = Image.FromFile(waterpath);
+                using (Graphics g = Graphics.FromImage(img))
+                {
                     ArrayList coors = GetLocation(location, img, waterImg);
                     g.DrawImage(waterImg, new Rectangle(int.Parse(coors[0].ToString()), int.Parse(coors[1].ToString()),
-                    waterImg.Width, waterImg.Height));
+                        waterImg.Width, waterImg.Height));
                     waterImg.Dispose();
-                    string newPath = Path.GetDirectoryName(path) + fileName + extName;
-                    img.Save(newPath);
-                    File.Copy(newPath, path, true);
-                    if (File.Exists(newPath))
-                    {
-                        File.Delete(newPath);
-                    }
                 }
-                catch (OutOfMemoryException ex)
+                string newPath = Path.GetDirectoryName(path) + fileName + extName;
+                img.Save(newPath);
+                img.Dispose();
+                File.Copy(newPath, path, true);
+                if (File.Exists(newPath))
                 {
-                    if (img != null)
-                    {
-                        img.Dispose();
-                        img = null;
-                    }
-                    return ImageWatermarkByMagick(path, waterpath, location);
+                    File.Delete(newPath);
                 }
-                finally
-                {
-                    if (img != null)
-                    {
-                        img.Dispose();
-                    }
-                    if (g != null)
-                    {
-                        g.Dispose();
-                    }
-                }                
             }
             return path;
         }
