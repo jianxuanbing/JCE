@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datas\Queries\Operator.cs" />
+    <Compile Include="Exceptions\ExceptionUtils.cs" />
     <Compile Include="Expressions\ParameterRebinder.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="Extensions\Common\Extensions.Common.cs" />
@@ -73,7 +74,9 @@
     <Compile Include="Validations\ValidationHandler.cs" />
     <Compile Include="Validations\ValidationResultCollection.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Strings\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
