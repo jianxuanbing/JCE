@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C8BD29E8-9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "document", "document", "{2DC3DC6A-25F3-43B4-B9E3-B68FD37334AE}"
 	ProjectSection(SolutionItems) = preProject
+		document\JCE.Utils工具库设计API.xmind = document\JCE.Utils工具库设计API.xmind
 		README.md = README.md
 	EndProjectSection
 EndProject
