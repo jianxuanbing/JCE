@@ -50,12 +50,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Extensions\Xml\XmlExtensionsTest.cs" />
     <Compile Include="Helpers\JsonTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Samples\User.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\src\JCE.Utils\JCE.Utils.csproj">
       <Project>{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}</Project>

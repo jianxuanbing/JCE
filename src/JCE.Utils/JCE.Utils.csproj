@@ -54,6 +54,9 @@
     <Compile Include="Extensions\Common\Extensions.DateTime.cs" />
     <Compile Include="Extensions\Common\Extensions.Lambda.cs" />
     <Compile Include="Extensions\Common\Extensions.Validate.cs" />
+    <Compile Include="Extensions\TaskExtensions.cs" />
+    <Compile Include="Extensions\UrlExtensions.cs" />
+    <Compile Include="Extensions\Xml\XmlExtensions.Convert.cs" />
     <Compile Include="Formatters\JsonFormatter.cs" />
     <Compile Include="Formatters\XmlFormatter.cs" />
     <Compile Include="Helpers\Common.cs" />
