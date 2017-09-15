@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datas\Queries\Operator.cs" />
+    <Compile Include="Encrypts\MD5Crypt.cs" />
     <Compile Include="Exceptions\ExceptionUtils.cs" />
     <Compile Include="Expressions\ParameterRebinder.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
@@ -62,10 +63,13 @@
     <Compile Include="Helpers\Common.cs" />
     <Compile Include="Helpers\Convert.cs" />
     <Compile Include="Helpers\Enum.cs" />
+    <Compile Include="Helpers\Id.cs" />
+    <Compile Include="Helpers\Internal\ObjectId.cs" />
     <Compile Include="Helpers\Json.cs" />
     <Compile Include="Extensions\Common\Extensions.Json.cs" />
     <Compile Include="Helpers\Lambda.cs" />
     <Compile Include="Helpers\Reflection.cs" />
+    <Compile Include="Helpers\Time.cs" />
     <Compile Include="Helpers\Valid.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
