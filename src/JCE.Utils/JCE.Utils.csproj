@@ -82,6 +82,7 @@
     <Compile Include="Logs\Abstractions\ILogFormat.cs" />
     <Compile Include="Logs\Abstractions\ILogProvider.cs" />
     <Compile Include="Logs\Core\LogBase.cs" />
+    <Compile Include="Logs\Core\LogContent.cs" />
     <Compile Include="Logs\Core\LogContext.cs" />
     <Compile Include="Logs\Core\LogLevel.cs" />
     <Compile Include="Logs\Core\NullLog.cs" />
