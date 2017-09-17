@@ -193,5 +193,42 @@ namespace JCE.Utils.Extensions
         }
 
         #endregion
+
+        #region Description(获取描述)
+        /// <summary>
+        /// 获取描述
+        /// </summary>
+        /// <param name="span">时间间隔</param>
+        /// <returns></returns>
+        public static string Description(this TimeSpan span)
+        {
+            StringBuilder result=new StringBuilder();
+            if (span.Days > 0)
+            {
+                result.AppendFormat("{0}天", span.Days);
+            }
+            if (span.Hours > 0)
+            {
+                result.AppendFormat("{0}小时", span.Hours);
+            }
+            if (span.Minutes > 0)
+            {
+                result.AppendFormat("{0}分", span.Minutes);
+            }
+            if (span.Seconds > 0)
+            {
+                result.AppendFormat("{0}秒", span.Seconds);
+            }
+            if (span.Milliseconds > 0)
+            {
+                result.AppendFormat("{0}毫秒", span.Milliseconds);
+            }
+            if (result.Length > 0)
+            {
+                return result.ToString();
+            }
+            return $"{span.TotalMilliseconds*1000}毫秒";
+        }
+        #endregion
     }
 }

@@ -81,9 +81,13 @@
     <Compile Include="Logs\Abstractions\ILogContext.cs" />
     <Compile Include="Logs\Abstractions\ILogFormat.cs" />
     <Compile Include="Logs\Abstractions\ILogProvider.cs" />
+    <Compile Include="Logs\Core\LogBase.cs" />
     <Compile Include="Logs\Core\LogContext.cs" />
+    <Compile Include="Logs\Core\LogLevel.cs" />
     <Compile Include="Logs\Core\NullLog.cs" />
     <Compile Include="Logs\Core\NullLogManager.cs" />
+    <Compile Include="Logs\Extensions\LogContentExtensions.cs" />
+    <Compile Include="Logs\Extensions\LogExtensions.cs" />
     <Compile Include="Logs\ILogManager.cs" />
     <Compile Include="Logs\Internal\LogContextInfo.cs" />
     <Compile Include="Nets\WebUtil.cs" />
@@ -99,7 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
-    <Folder Include="Logs\Extensions\" />
     <Folder Include="Strings\" />
   </ItemGroup>
   <ItemGroup>
