@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F2A038E2-CE7A-4182-AFE3-AE0B579D0136}</ProjectGuid>
+    <ProjectGuid>{C417F475-A750-440F-B965-2CD95EC24671}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JCE.Utils.Http.Test</RootNamespace>
-    <AssemblyName>JCE.Utils.Http.Test</AssemblyName>
+    <RootNamespace>JCE.Core.Test</RootNamespace>
+    <AssemblyName>JCE.Core.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -36,8 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac.Extras.IocManager">
+      <HintPath>..\..\..\packages\Autofac.Extras.IocManager.3.1.3\lib\net452\Autofac.Extras.IocManager.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -52,13 +54,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="HttpRequestParameterTest.cs" />
+    <Compile Include="Samples\AccountManager.cs" />
+    <Compile Include="Samples\IAccountManager.cs" />
+    <Compile Include="Samples\IUserManager.cs" />
+    <Compile Include="Samples\UserManager.cs" />
+    <Compile Include="TestIoc.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\JCE.Utils.Http\JCE.Utils.Http.csproj">
-      <Project>{6A57DACE-84BD-48E8-867E-3F2528CB4270}</Project>
-      <Name>JCE.Utils.Http</Name>
+    <ProjectReference Include="..\..\JCE.Core\JCE.Core.csproj">
+      <Project>{FC117CD9-31FF-41D9-9768-552E2F20DAC3}</Project>
+      <Name>JCE.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
