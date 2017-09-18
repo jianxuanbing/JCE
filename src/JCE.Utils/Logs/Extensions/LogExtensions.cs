@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JCE.Utils.Exceptions;
 using JCE.Utils.Logs.Abstractions;
 using JCE.Utils.Logs.Core;
 
@@ -138,6 +139,66 @@ namespace JCE.Utils.Logs.Extensions
         public static ILog SqlLine(this ILog log, string value, params object[] args)
         {
             return log.Set<LogContent>(content => content.AppendLine(content.Sql, value, args));
+        }
+
+        /// <summary>
+        /// 设置Sql参数
+        /// </summary>
+        /// <param name="log">日志操作</param>
+        /// <param name="value">值</param>
+        /// <param name="args">变量值</param>
+        /// <returns></returns>
+        public static ILog SqlParams(this ILog log, string value, params object[] args)
+        {
+            return log.Set<LogContent>(content => content.Append(content.SqlParams, value, args));
+        }
+
+        /// <summary>
+        /// 设置Sql参数并换行
+        /// </summary>
+        /// <param name="log">日志操作</param>
+        /// <param name="value">值</param>
+        /// <param name="args">变量值</param>
+        /// <returns></returns>
+        public static ILog SqlParamsLine(this ILog log, string value, params object[] args)
+        {
+            return log.Set<LogContent>(content => content.AppendLine(content.SqlParams, value, args));
+        }
+
+        /// <summary>
+        /// 设置异常
+        /// </summary>
+        /// <param name="log">日志操作</param>
+        /// <param name="exception">异常</param>
+        /// <param name="errorCode">错误码</param>
+        /// <returns></returns>
+        public static ILog Exception(this ILog log, Exception exception, string errorCode = "")
+        {
+            if (exception == null)
+            {
+                return log;
+            }
+            return Exception(log, new Warning("", errorCode, exception));
+        }
+
+        /// <summary>
+        /// 设置异常
+        /// </summary>
+        /// <param name="log">日志操作</param>
+        /// <param name="exception">异常</param>
+        /// <returns></returns>
+        public static ILog Exception(this ILog log, Warning exception)
+        {
+            if (exception == null)
+            {
+                return log;
+            }
+            return log.Set<LogContent>(content =>
+            {
+                content.ErrorCode = exception.Code;
+                content.Exception = exception.Message;
+                content.StackTrace = exception.StackTrace;
+            });
         }
     }
 }
