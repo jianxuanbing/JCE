@@ -51,7 +51,7 @@
     <Compile Include="ServiceCollectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\JCE.Utils\JCE.Utils.csproj">
+    <ProjectReference Include="..\JCE.Utils\JCE.Utils.csproj">
       <Project>{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}</Project>
       <Name>JCE.Utils</Name>
     </ProjectReference>

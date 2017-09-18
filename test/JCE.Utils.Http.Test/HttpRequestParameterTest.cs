@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using JCE.Utils.Http.Enums;
 using JCE.Utils.Http.Extensions;
 using JCE.Utils.Http.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using HttpMethod = JCE.Utils.Http.Enums.HttpMethod;
 
 namespace JCE.Utils.Http.Test
 {

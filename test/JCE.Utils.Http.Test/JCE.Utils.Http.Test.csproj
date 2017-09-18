@@ -55,7 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JCE.Utils.Http\JCE.Utils.Http.csproj">
+    <ProjectReference Include="..\..\src\JCE.Utils.Http\JCE.Utils.Http.csproj">
       <Project>{6A57DACE-84BD-48E8-867E-3F2528CB4270}</Project>
       <Name>JCE.Utils.Http</Name>
     </ProjectReference>
