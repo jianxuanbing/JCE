@@ -90,6 +90,8 @@
     <Compile Include="Logs\Core\NullLogManager.cs" />
     <Compile Include="Logs\Extensions\LogContentExtensions.cs" />
     <Compile Include="Logs\Extensions\LogExtensions.cs" />
+    <Compile Include="Logs\Formats\TextContentFormat.cs" />
+    <Compile Include="Logs\Formats\TextFormatProvider.cs" />
     <Compile Include="Logs\ILogManager.cs" />
     <Compile Include="Logs\Internal\LogContextInfo.cs" />
     <Compile Include="Nets\WebUtil.cs" />
