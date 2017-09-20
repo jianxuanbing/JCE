@@ -61,9 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyInjection\ConfigBase.cs" />
     <Compile Include="DependencyInjection\Container.cs" />
     <Compile Include="DependencyInjection\IConfig.cs" />
     <Compile Include="DependencyInjection\IContainer.cs" />
+    <Compile Include="Helpers\Ioc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

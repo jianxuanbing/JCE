@@ -31,15 +31,7 @@ namespace JCE.Core.DependencyInjection
         /// 注册依赖
         /// </summary>
         /// <param name="configs">依赖配置</param>
-        void Register(params IConfig[] configs);
-
-        /// <summary>
-        /// 注册依赖
-        /// </summary>
-        /// <param name="services">服务注册</param>
-        /// <param name="configs">依赖配置</param>
-        /// <returns></returns>
-        IIocBuilder Register(IServiceRegistration services,params IConfig[] configs);
+        IIocBuilder Register(params IConfig[] configs);
 
         /// <summary>
         /// 释放资源
