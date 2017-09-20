@@ -196,8 +196,7 @@ namespace JCE.Utils.Logs.Extensions
             return log.Set<LogContent>(content =>
             {
                 content.ErrorCode = exception.Code;
-                content.Exception = exception.Message;
-                content.StackTrace = exception.StackTrace;
+                content.Exception = exception;
             });
         }
     }

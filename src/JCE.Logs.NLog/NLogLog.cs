@@ -25,7 +25,7 @@ namespace JCE.Logs.NLog
         /// <param name="provider">日志提供程序</param>
         /// <param name="context">日志上下文</param>
         /// <param name="class">类名</param>
-        internal NLogLog(ILogProvider provider, ILogContext context,string @class) : base(provider, context)
+        internal NLogLog(ILogProvider provider, ILogContext context,string @class) : base(provider, context,null)
         {
             _class = @class;
         }
@@ -95,9 +95,9 @@ namespace JCE.Logs.NLog
         /// <param name="context">日志上下文</param>
         /// <param name="class">类名</param>
         /// <returns></returns>
-        internal static ILog GetLog(Logger logger, ILogFormat format, ILogContext context, string @class)
-        {
-            return new NLogLog(new NLogLogProvider(logger,format), context,@class);
-        }
+        //internal static ILog GetLog(Logger logger, ILogFormat format, ILogContext context, string @class)
+        //{
+        //    return new NLogLog(new NLogLogProvider(logger,format), context,@class);
+        //}
     }
 }

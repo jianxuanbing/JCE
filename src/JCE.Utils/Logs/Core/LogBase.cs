@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using JCE.Utils.Contexts;
 using JCE.Utils.Extensions;
 using JCE.Utils.Logs.Abstractions;
 using JCE.Utils.Logs.Extensions;
@@ -38,6 +39,11 @@ namespace JCE.Utils.Logs.Core
         public ILogContext Context { get; }
 
         /// <summary>
+        /// 用户上下文
+        /// </summary>
+        public IUserContext UserContext { get; set; }
+
+        /// <summary>
         /// 调试级别是否启用
         /// </summary>
         public bool IsDebugEnabled => Provider.IsDebugEnabled;
@@ -49,15 +55,18 @@ namespace JCE.Utils.Logs.Core
         #endregion
 
         #region Constructor(构造函数)
+
         /// <summary>
         /// 初始化一个<see cref="LogBase{TContent}"/>类型的实例
         /// </summary>
         /// <param name="provider">日志提供程序</param>
         /// <param name="context">日志上下文</param>
-        protected LogBase(ILogProvider provider, ILogContext context)
+        /// <param name="userContext">用户上下文</param>
+        protected LogBase(ILogProvider provider, ILogContext context,IUserContext userContext)
         {
             Provider = provider;
             Context = context;
+            UserContext = userContext;
         }
         #endregion
 
@@ -90,7 +99,7 @@ namespace JCE.Utils.Logs.Core
         public void Trace()
         {
             _content = LogContent;
-            Execute(ref _content,LogLevel.Trace);
+            Execute(LogLevel.Trace, ref _content);
         }
         
         /// <summary>
@@ -110,7 +119,7 @@ namespace JCE.Utils.Logs.Core
         public void Debug()
         {
             _content = LogContent;
-            Execute(ref _content,LogLevel.Debug);
+            Execute(LogLevel.Debug, ref _content);
         }
 
         /// <summary>
@@ -130,7 +139,7 @@ namespace JCE.Utils.Logs.Core
         public void Info()
         {
             _content = LogContent;
-            Execute(ref _content,LogLevel.Information);
+            Execute(LogLevel.Information, ref _content);
         }
 
         /// <summary>
@@ -150,7 +159,7 @@ namespace JCE.Utils.Logs.Core
         public void Warn()
         {
             _content = LogContent;
-            Execute(ref _content,LogLevel.Warning);
+            Execute(LogLevel.Warning, ref _content);
         }
 
         /// <summary>
@@ -170,7 +179,7 @@ namespace JCE.Utils.Logs.Core
         public void Error()
         {
             _content = LogContent;
-            Execute(ref _content,LogLevel.Error);
+            Execute(LogLevel.Error, ref _content);
         }
 
         /// <summary>
@@ -190,7 +199,7 @@ namespace JCE.Utils.Logs.Core
         public void Fatal()
         {
             _content = LogContent;
-            Execute(ref _content,LogLevel.Fatal);
+            Execute(LogLevel.Fatal, ref _content);
         }
 
         /// <summary>
@@ -219,35 +228,31 @@ namespace JCE.Utils.Logs.Core
             content.ThreadId = Thread.CurrentThread.ManagedThreadId.ToString();
             content.Browser = Context.Browser;
             content.Url = Context.Url;
-            content.UserId = "";//此处UserID暂为空
+            content.UserId = UserContext.UserId;
         }
 
         /// <summary>
         /// 执行
         /// </summary>
-        /// <param name="content">日志内容</param>
         /// <param name="level">日志级别</param>
-        protected virtual void Execute(ref TContent content, LogLevel level)
+        /// <param name="content">日志内容</param>
+        protected virtual void Execute(LogLevel level,ref TContent content)
         {
+            if (content == null)
+            {
+                return;
+            }
             try
             {
+                content.Level = Helpers.Enum.GetName<LogLevel>(level);
                 Init(content);
-                WriteLog(content, level);
+                Provider.WriteLog(level, content);
+
             }
             finally
             {
                 content = null;
             }
-        }
-
-        /// <summary>
-        /// 写日志
-        /// </summary>
-        /// <param name="content">日志内容</param>
-        /// <param name="level">日志级别</param>
-        private void WriteLog(TContent content, LogLevel level)
-        {
-
         }
     }
 }

@@ -49,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\IContext.cs" />
+    <Compile Include="Contexts\IUserContext.cs" />
+    <Compile Include="Contexts\NullUserContext.cs" />
+    <Compile Include="Contexts\UserContext.cs" />
     <Compile Include="Contexts\WebContext.cs" />
     <Compile Include="Datas\Queries\Operator.cs" />
     <Compile Include="Encrypts\MD5Crypt.cs" />

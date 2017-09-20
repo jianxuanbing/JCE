@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JCE.Utils.Exceptions;
 using JCE.Utils.Logs.Abstractions;
 
 namespace JCE.Utils.Logs.Core
@@ -139,14 +140,10 @@ namespace JCE.Utils.Logs.Core
         public string ErrorCode { get; set; }
 
         /// <summary>
-        /// 异常消息
+        /// 异常
         /// </summary>
-        public string Exception { get; set; }
+        public Warning Exception { get; set; }
 
-        /// <summary>
-        /// 堆栈跟踪
-        /// </summary>
-        public string StackTrace { get; set; }
         #endregion
 
         #region Constructor(构造函数)

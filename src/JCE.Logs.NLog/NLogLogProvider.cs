@@ -18,7 +18,7 @@ namespace JCE.Logs.NLog
         /// <summary>
         /// NLog 日志操作
         /// </summary>
-        private readonly Logger _logger;
+        private readonly ILogger _logger;
 
         /// <summary>
         /// 日志格式化器
@@ -39,20 +39,41 @@ namespace JCE.Logs.NLog
         /// 跟踪级别是否启用
         /// </summary>
         public bool IsTraceEnabled => _logger.IsTraceEnabled;
+
+        public void WriteLog(Utils.Logs.Core.LogLevel level, ILogContent content)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteLog(LogLevel level, ILogContent content)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region Constructor(构造函数)
         /// <summary>
         /// 初始化一个<see cref="NLogLogProvider"/>类型的实例
         /// </summary>
-        /// <param name="logger">NLog日志操作</param>
+        /// <param name="logName">日志名称</param>
         /// <param name="format">日志格式化器</param>
-        public NLogLogProvider(Logger logger, ILogFormat format = null)
+        public NLogLogProvider(string logName, ILogFormat format = null)
         {
-            _logger = logger;
+            _logger = GetLogger(logName);
             _format = format;
         }
         #endregion
+
+        /// <summary>
+        /// 获取NLog日志操作
+        /// </summary>
+        /// <param name="logName">日志名称</param>
+        /// <returns></returns>
+        public static ILogger GetLogger(string logName)
+        {
+            return LogManager.GetLogger(logName);
+        }
 
         /// <summary>
         /// 跟踪
@@ -155,6 +176,32 @@ namespace JCE.Logs.NLog
                 return null;
             }
             return new TextFormatProvider(_format);
+        }
+
+        /// <summary>
+        /// 转换日志等级
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        private LogLevel ConvertTo(JCE.Utils.Logs.Core.LogLevel level)
+        {
+            switch (level)
+            {
+                case Utils.Logs.Core.LogLevel.Trace:
+                    return LogLevel.Trace;
+                case Utils.Logs.Core.LogLevel.Debug:
+                    return LogLevel.Debug;
+                case Utils.Logs.Core.LogLevel.Information:
+                    return LogLevel.Info;
+                case Utils.Logs.Core.LogLevel.Warning:
+                    return LogLevel.Warn;
+                case Utils.Logs.Core.LogLevel.Error:
+                    return LogLevel.Error;
+                case Utils.Logs.Core.LogLevel.Fatal:
+                    return LogLevel.Fatal;
+                default:
+                    return LogLevel.Off;
+            }
         }
     }
 }

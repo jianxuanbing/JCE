@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JCE.Utils.Exceptions;
 
 namespace JCE.Utils.Logs.Abstractions
 {
@@ -70,5 +71,10 @@ namespace JCE.Utils.Logs.Abstractions
         /// 内容
         /// </summary>
         StringBuilder Content { get; set; }
+
+        /// <summary>
+        /// 异常消息
+        /// </summary>
+        Warning Exception { get; set; }
     }
 }
