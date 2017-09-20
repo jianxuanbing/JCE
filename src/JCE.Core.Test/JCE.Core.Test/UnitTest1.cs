@@ -46,7 +46,7 @@ namespace JCE.Core.Test
     public static class IocExtensionsTest
     {
         public static IIocBuilder UseManager(this IIocBuilder builder)
-        {
+        {            
             builder.RegisterServices(r => r.Register<IUserManager, UserManager>());
             return builder;
         }

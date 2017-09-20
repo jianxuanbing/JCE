@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JCE.Utils.Exceptions;
 using JCE.Utils.Logs.Abstractions;
+using JCE.Utils.Logs.Contents;
 using JCE.Utils.Logs.Core;
 
 namespace JCE.Utils.Logs.Extensions

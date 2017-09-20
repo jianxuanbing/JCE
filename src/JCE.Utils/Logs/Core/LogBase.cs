@@ -247,7 +247,6 @@ namespace JCE.Utils.Logs.Core
                 content.Level = Helpers.Enum.GetName<LogLevel>(level);
                 Init(content);
                 Provider.WriteLog(level, content);
-
             }
             finally
             {

@@ -40,14 +40,20 @@ namespace JCE.Logs.NLog
         /// </summary>
         public bool IsTraceEnabled => _logger.IsTraceEnabled;
 
+        /// <summary>
+        /// 写日志
+        /// </summary>
+        /// <param name="level">日志等级</param>
+        /// <param name="content">日志内容</param>
         public void WriteLog(Utils.Logs.Core.LogLevel level, ILogContent content)
         {
-            throw new NotImplementedException();
-        }
-
-        public void WriteLog(LogLevel level, ILogContent content)
-        {
-            throw new NotImplementedException();
+            var provider = GetFormatProvider();
+            if (provider == null)
+            {
+                _logger.Log(ConvertTo(level), content);
+                return;
+            }
+            _logger.Log(ConvertTo(level), provider, content);
         }
 
         #endregion
@@ -74,97 +80,7 @@ namespace JCE.Logs.NLog
         {
             return LogManager.GetLogger(logName);
         }
-
-        /// <summary>
-        /// 跟踪
-        /// </summary>
-        /// <param name="message">日志消息</param>
-        public void Trace(object message)
-        {
-            var provider = GetFormatProvider();
-            if (provider == null)
-            {
-                _logger.Trace(message);
-                return;
-            }
-            _logger.Trace(provider, message);
-        }
-
-        /// <summary>
-        /// 调试
-        /// </summary>
-        /// <param name="message">日志消息</param>
-        public void Debug(object message)
-        {
-            var provider = GetFormatProvider();
-            if (provider == null)
-            {
-                _logger.Debug(message);
-                return;
-            }
-            _logger.Debug(provider,message);
-        }
-
-        /// <summary>
-        /// 信息
-        /// </summary>
-        /// <param name="message">日志消息</param>
-        public void Info(object message)
-        {
-            var provider = GetFormatProvider();
-            if (provider == null)
-            {
-                _logger.Info(message);
-                return;
-            }
-            _logger.Info(provider, message);
-        }
-
-        /// <summary>
-        /// 警告
-        /// </summary>
-        /// <param name="message">日志消息</param>
-        public void Warn(object message)
-        {
-            var provider = GetFormatProvider();
-            if (provider == null)
-            {
-                _logger.Warn(message);
-                return;
-            }
-            _logger.Warn(provider, message);
-        }
-
-        /// <summary>
-        /// 错误
-        /// </summary>
-        /// <param name="message">日志消息</param>
-        public void Error(object message)
-        {
-            var provider = GetFormatProvider();
-            if (provider == null)
-            {
-                _logger.Error(message);
-                return;
-            }
-            _logger.Error(provider, message);
-        }
-
-        /// <summary>
-        /// 致命错误
-        /// </summary>
-        /// <param name="message">日志消息</param>
-        public void Fatal(object message)
-        {
-            var provider = GetFormatProvider();
-            if (provider == null)
-            {
-                _logger.Fatal(message);
-                return;
-            }
-            _logger.Fatal(provider, message);
-        }
-
+                
         /// <summary>
         /// 获取格式化提供程序
         /// </summary>
