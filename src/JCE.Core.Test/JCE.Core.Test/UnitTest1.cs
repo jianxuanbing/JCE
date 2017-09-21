@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading;
 using Autofac.Extras.IocManager;
 using JCE.Core.DependencyInjection;
 using JCE.Core.Helpers;
@@ -16,7 +19,8 @@ namespace JCE.Core.Test
         [TestInitialize]
         public void Init()
         {
-            Ioc.Register(new IocConfig());
+            //Ioc.Register(new IocConfig());
+            Thread.CurrentPrincipal = new ClaimsPrincipal(GetIdentity(Guid.NewGuid().ToString(), "jian玄冰"));
         }
         [TestMethod]
         public void TestMethod1()
@@ -31,6 +35,25 @@ namespace JCE.Core.Test
             var container = Ioc.CreateContainer(new IocConfig());
             var userManager = container.Create<IUserManager>();
             userManager.WriteInfo();
+        }
+
+        [TestMethod]
+        public void TestCurrentPrincipal()
+        {
+            var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var username = identity.Claims.Where(c => c.Type == "username").Select(c => c.Value).SingleOrDefault();
+            Console.WriteLine(username);
+
+        }
+
+        private ClaimsIdentity GetIdentity(string userid, string userName)
+        {
+            var identity = new ClaimsIdentity("JWT");
+
+            identity.AddClaim(new Claim("userid", userid));
+            identity.AddClaim(new Claim("username", userName));
+
+            return identity;
         }
     }
 
