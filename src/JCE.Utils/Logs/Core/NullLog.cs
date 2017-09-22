@@ -18,7 +18,14 @@ namespace JCE.Utils.Logs.Core
         /// </summary>
         public static readonly ILog Instance=new NullLog();
 
+        /// <summary>
+        /// 调试级别是否启用
+        /// </summary>
         public bool IsDebugEnabled { get; }
+
+        /// <summary>
+        /// 跟踪级别是否启用
+        /// </summary>
         public bool IsTraceEnabled { get; }
         #endregion        
 

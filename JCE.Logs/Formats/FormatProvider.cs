@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using JCE.Utils.Logs.Abstractions;
 
-namespace JCE.Utils.Logs.Formats
+namespace JCE.Logs.Formats
 {
     /// <summary>
-    /// 文本日志格式化提供程序
+    /// 日志格式化提供程序
     /// </summary>
-    public class TextFormatProvider:IFormatProvider,ICustomFormatter
+    public class FormatProvider:IFormatProvider,ICustomFormatter
     {
         /// <summary>
         /// 日志格式化器
@@ -18,10 +14,10 @@ namespace JCE.Utils.Logs.Formats
         private readonly ILogFormat _format;
 
         /// <summary>
-        /// 初始化一个<see cref="TextFormatProvider"/>类型的实例
+        /// 初始化一个<see cref="FormatProvider"/>类型的实例
         /// </summary>
         /// <param name="format">日志格式化器</param>
-        public TextFormatProvider(ILogFormat format)
+        public FormatProvider(ILogFormat format)
         {
             if (format == null)
             {

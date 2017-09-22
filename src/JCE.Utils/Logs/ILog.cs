@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using JCE.Utils.Logs.Abstractions;
 
-namespace JCE.Utils.Logs.Abstractions
+namespace JCE.Utils.Logs
 {
     /// <summary>
     /// 日志操作

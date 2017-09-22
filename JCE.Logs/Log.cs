@@ -4,19 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JCE.Core.Helpers;
+using JCE.Logs.Contents;
 using JCE.Utils.Contexts;
+using JCE.Utils.Logs;
 using JCE.Utils.Logs.Abstractions;
-using JCE.Utils.Logs.Contents;
 using JCE.Utils.Logs.Core;
-using JCE.Utils.Logs.Formats;
-using NLog;
 
-namespace JCE.Logs.NLog
+namespace JCE.Logs
 {
     /// <summary>
-    /// NLog日志
+    /// 日志操作
     /// </summary>
-    public class NLogLog:LogBase<LogContent>
+    public class Log:LogBase<LogContent>
     {
         /// <summary>
         /// 类名
@@ -24,13 +23,25 @@ namespace JCE.Logs.NLog
         private readonly string _class;
 
         /// <summary>
-        /// 初始化一个<see cref="NLogLog"/>类型的实例
+        /// 初始化一个<see cref="Log"/>类型的实例
+        /// </summary>
+        /// <param name="providerFactory">日志提供程序工厂</param>
+        /// <param name="context">日志上下文</param>
+        /// <param name="format">日志格式器</param>
+        /// <param name="userContext">用户上下文</param>
+        public Log(ILogProviderFactory providerFactory, ILogContext context, ILogFormat format, IUserContext userContext)
+            : base(providerFactory.Create("", format), context, userContext)
+        {
+        }
+
+        /// <summary>
+        /// 初始化一个<see cref="Log"/>类型的实例
         /// </summary>
         /// <param name="provider">日志提供程序</param>
         /// <param name="context">日志上下文</param>
         /// <param name="userContext">用户上下文</param>
         /// <param name="class">类名</param>
-        internal NLogLog(ILogProvider provider, ILogContext context,IUserContext userContext,string @class) : base(provider, context,userContext)
+        public Log(ILogProvider provider, ILogContext context, IUserContext userContext,string @class) : base(provider, context, userContext)
         {
             _class = @class;
         }
@@ -90,28 +101,16 @@ namespace JCE.Logs.NLog
         /// <summary>
         /// 获取日志操作实例
         /// </summary>
-        /// <param name="logName">日志名</param>
+        /// <param name="logName">日志名称</param>
         /// <param name="class">类名</param>
         /// <returns></returns>
         private static ILog GetLog(string logName, string @class)
         {
+            var providerFactory = Ioc.Create<ILogProviderFactory>();
+            var format = Ioc.Create<ILogFormat>();
             var context = Ioc.Create<ILogContext>();
             var userContext = Ioc.Create<IUserContext>();
-            return GetLog(logName, new TextContentFormat(), context, userContext, @class);
-        }
-
-        /// <summary>
-        /// 获取日志操作实例
-        /// </summary>
-        /// <param name="logName">日志名称</param>
-        /// <param name="format">日志格式化器</param>
-        /// <param name="context">日志上下文</param>
-        /// <param name="userContext">用户上下文</param>
-        /// <param name="class">类名</param>
-        /// <returns></returns>
-        internal static ILog GetLog(string logName, ILogFormat format, ILogContext context,IUserContext userContext, string @class)
-        {
-            return new NLogLog(new NLogLogProvider(logName, format), context, userContext, @class);
+            return new Log(providerFactory.Create(logName, format), context, userContext, @class);
         }
     }
 }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JCE.Logs.Formats;
 using JCE.Utils.Logs.Abstractions;
-using JCE.Utils.Logs.Formats;
 using NLog;
 
 namespace JCE.Logs.NLog
@@ -40,22 +40,6 @@ namespace JCE.Logs.NLog
         /// </summary>
         public bool IsTraceEnabled => _logger.IsTraceEnabled;
 
-        /// <summary>
-        /// 写日志
-        /// </summary>
-        /// <param name="level">日志等级</param>
-        /// <param name="content">日志内容</param>
-        public void WriteLog(Utils.Logs.Core.LogLevel level, ILogContent content)
-        {
-            var provider = GetFormatProvider();
-            if (provider == null)
-            {
-                _logger.Log(ConvertTo(level), content);
-                return;
-            }
-            _logger.Log(ConvertTo(level), provider, content);
-        }
-
         #endregion
 
         #region Constructor(构造函数)
@@ -80,7 +64,23 @@ namespace JCE.Logs.NLog
         {
             return LogManager.GetLogger(logName);
         }
-                
+
+        /// <summary>
+        /// 写日志
+        /// </summary>
+        /// <param name="level">日志等级</param>
+        /// <param name="content">日志内容</param>
+        public void WriteLog(Utils.Logs.Core.LogLevel level, ILogContent content)
+        {
+            var provider = GetFormatProvider();
+            if (provider == null)
+            {
+                _logger.Log(ConvertTo(level), content);
+                return;
+            }
+            _logger.Log(ConvertTo(level), provider, content);
+        }
+                        
         /// <summary>
         /// 获取格式化提供程序
         /// </summary>
@@ -91,7 +91,7 @@ namespace JCE.Logs.NLog
             {
                 return null;
             }
-            return new TextFormatProvider(_format);
+            return new FormatProvider(_format);
         }
 
         /// <summary>

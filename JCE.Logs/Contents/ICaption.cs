@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JCE.Utils.Logs.Contents
+namespace JCE.Logs.Contents
 {
     /// <summary>
     /// 标题

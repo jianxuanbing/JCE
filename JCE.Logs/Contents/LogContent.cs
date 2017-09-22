@@ -2,7 +2,7 @@
 using JCE.Utils.Exceptions;
 using JCE.Utils.Logs.Abstractions;
 
-namespace JCE.Utils.Logs.Contents
+namespace JCE.Logs.Contents
 {
     /// <summary>
     /// 日志内容
