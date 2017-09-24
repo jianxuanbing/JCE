@@ -75,7 +75,7 @@
     <Compile Include="ServiceExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\JCE.Logs\JCE.Logs.csproj">
+    <ProjectReference Include="..\JCE.Logs\JCE.Logs.csproj">
       <Project>{5DBB0A9A-5E6C-4428-8F90-4A98181C0FBE}</Project>
       <Name>JCE.Logs</Name>
     </ProjectReference>

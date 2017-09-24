@@ -33,9 +33,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCE.Core.WebApi.Test", "tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCE.Utils.Security", "src\JCE.Utils.Security\JCE.Utils.Security\JCE.Utils.Security.csproj", "{2A99EB97-DCA6-4F82-950E-91D497F46B56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCE.Logs.Exceptionless", "JCE.Logs.Exceptionless\JCE.Logs.Exceptionless.csproj", "{CDC06295-0D98-452F-B289-08A198FC1822}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCE.Logs.Exceptionless", "src\JCE.Logs.Exceptionless\JCE.Logs.Exceptionless.csproj", "{CDC06295-0D98-452F-B289-08A198FC1822}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCE.Logs", "JCE.Logs\JCE.Logs.csproj", "{5DBB0A9A-5E6C-4428-8F90-4A98181C0FBE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCE.Logs", "src\JCE.Logs\JCE.Logs.csproj", "{5DBB0A9A-5E6C-4428-8F90-4A98181C0FBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{E3FED6D4-464F-473C-BBDB-4D5450BCE327}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCE.Samples.Webs", "sample\JCE.Samples.Webs\JCE.Samples.Webs\JCE.Samples.Webs.csproj", "{FFDD310B-666A-4E3F-AFB1-305AE30638A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +95,10 @@ Global
 		{5DBB0A9A-5E6C-4428-8F90-4A98181C0FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DBB0A9A-5E6C-4428-8F90-4A98181C0FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DBB0A9A-5E6C-4428-8F90-4A98181C0FBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFDD310B-666A-4E3F-AFB1-305AE30638A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFDD310B-666A-4E3F-AFB1-305AE30638A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFDD310B-666A-4E3F-AFB1-305AE30638A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFDD310B-666A-4E3F-AFB1-305AE30638A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,5 +116,6 @@ Global
 		{2A99EB97-DCA6-4F82-950E-91D497F46B56} = {19B52163-35F0-4606-8DCC-A5F66214AE66}
 		{CDC06295-0D98-452F-B289-08A198FC1822} = {19B52163-35F0-4606-8DCC-A5F66214AE66}
 		{5DBB0A9A-5E6C-4428-8F90-4A98181C0FBE} = {19B52163-35F0-4606-8DCC-A5F66214AE66}
+		{FFDD310B-666A-4E3F-AFB1-305AE30638A3} = {E3FED6D4-464F-473C-BBDB-4D5450BCE327}
 	EndGlobalSection
 EndGlobal

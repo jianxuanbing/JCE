@@ -54,11 +54,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\JCE.Core\JCE.Core.csproj">
+    <ProjectReference Include="..\JCE.Core\JCE.Core.csproj">
       <Project>{FC117CD9-31FF-41D9-9768-552E2F20DAC3}</Project>
       <Name>JCE.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\JCE.Utils\JCE.Utils.csproj">
+    <ProjectReference Include="..\JCE.Utils\JCE.Utils.csproj">
       <Project>{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}</Project>
       <Name>JCE.Utils</Name>
     </ProjectReference>
