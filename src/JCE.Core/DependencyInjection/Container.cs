@@ -44,7 +44,7 @@ namespace JCE.Core.DependencyInjection
         /// <param name="name">服务名称</param>
         /// <returns></returns>
         public object Create(Type type,string name=null)
-        {
+        {            
             return HttpContext.Current != null ? GetServiceFromHttpContext(type, name) : GetService(type, name);
         }
 
