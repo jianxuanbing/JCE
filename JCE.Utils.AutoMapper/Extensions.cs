@@ -37,6 +37,11 @@ namespace JCE.Utils.AutoMapper
     public static class Extensions
     {
         /// <summary>
+        /// 同步锁
+        /// </summary>
+        private static readonly object Sync=new object();
+
+        /// <summary>
         /// 将源对象映射到目标对象
         /// </summary>
         /// <typeparam name="TSource">源类型</typeparam>
@@ -101,10 +106,15 @@ namespace JCE.Utils.AutoMapper
                 throw new ArgumentNullException(nameof(destination));
             }
             var sourceType = GetObjectType(source);
-            var destinationType = GetObjectType(destination);            
-            try
+            var destinationType = GetObjectType(destination);
+            var map = GetMap(sourceType, destinationType);
+            if (map != null)
             {
-                var map = Mapper.Configuration.FindTypeMapFor(sourceType,destinationType);
+                return Mapper.Map(source, destination);
+            }
+            lock (Sync)
+            {
+                map = GetMap(sourceType, destinationType);
                 if (map != null)
                 {
                     return Mapper.Map(source, destination);
@@ -116,18 +126,42 @@ namespace JCE.Utils.AutoMapper
                     {
                         config.CreateMap(item.SourceType, item.DestinationType);
                     }
-                    config.CreateMap(sourceType,destinationType);
-                });
-
-            }
-            catch (InvalidOperationException)
-            {
-                Mapper.Initialize(config =>
-                {
                     config.CreateMap(sourceType, destinationType);
                 });
             }
             return Mapper.Map(source, destination);
+        }
+
+        /// <summary>
+        /// 获取映射配置
+        /// </summary>
+        /// <param name="sourceType">源类型</param>
+        /// <param name="destinationType">目标类型</param>
+        /// <returns></returns>
+        private static TypeMap GetMap(Type sourceType, Type destinationType)
+        {
+            try
+            {
+                return Mapper.Configuration.FindTypeMapFor(sourceType, destinationType);
+            }
+            catch (InvalidOperationException)
+            {
+                lock (Sync)
+                {
+                    try
+                    {
+                        return Mapper.Configuration.FindTypeMapFor(sourceType, destinationType);
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        Mapper.Initialize(config =>
+                        {
+                            config.CreateMap(sourceType, destinationType);
+                        });
+                    }
+                    return Mapper.Configuration.FindTypeMapFor(sourceType, destinationType);
+                }
+            }
         }
 
         /// <summary>
