@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using Autofac;
 using Autofac.Extras.IocManager;
 using JCE.Core.DependencyInjection;
 using JCE.Logs.NLog;
@@ -15,13 +16,9 @@ namespace JCE.Samples.Webs.Configs
     /// </summary>
     public class IocConfig:ConfigBase
     {
-        /// <summary>
-        /// 注册配置
-        /// </summary>
-        /// <param name="iocBuilder">IOC生成器</param>
-        public override void Register(IIocBuilder iocBuilder)
+        protected override void Load(ContainerBuilder builder)
         {
-            LoadInfrastructure(iocBuilder);
+            base.Load(builder);
         }
 
         /// <summary>

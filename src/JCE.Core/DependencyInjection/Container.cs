@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http;
 using Autofac;
-using Autofac.Extras.IocManager;
+using Autofac.Integration.WebApi;
 
 namespace JCE.Core.DependencyInjection
 {
     /// <summary>
     /// Autofac对象容器
     /// </summary>
-    public class Container:IContainer
+    internal class Container:IContainer
     {
         /// <summary>
-        /// 本地IOC管理器
+        /// 容器
         /// </summary>
-        protected IIocManager LocalIocManager;
+        private Autofac.IContainer _container;
+
+        /// <summary>
+        /// WebApi 依赖解析器
+        /// </summary>
+        private AutofacWebApiDependencyResolver _webapiResolver;
 
         /// <summary>
         /// 创建对象
@@ -25,7 +32,7 @@ namespace JCE.Core.DependencyInjection
         /// <returns></returns>
         public T Create<T>()
         {
-            return LocalIocManager.Resolve<T>();
+            return _container.Resolve<T>();
         }
 
         /// <summary>
@@ -35,60 +42,49 @@ namespace JCE.Core.DependencyInjection
         /// <returns></returns>
         public object Create(Type type)
         {            
-            return LocalIocManager.Resolve(type);
+            return _container.Resolve(type);
         }
 
         /// <summary>
         /// 注册依赖
         /// </summary>
+        /// <param name="assembly">项目所在的程序集</param>
+        /// <param name="action">在注册模块前执行的操作</param>
         /// <param name="configs">依赖配置</param>
-        public IIocBuilder Register(params IConfig[] configs)
+        public void Register(Assembly assembly, Action<ContainerBuilder> action, params IConfig[] configs)
         {
-            return Register(null, configs);
-        }       
-
-        /// <summary>
-        /// 注册依赖
-        /// </summary>
-        /// <param name="actionBefore">注册前操作</param>
-        /// <param name="configs">依赖配置</param>
-        /// <returns></returns>
-        public IIocBuilder Register(Action<IIocBuilder> actionBefore,
-            params IConfig[] configs)
-        {
-            var builder = CreateBuilder(actionBefore, configs);
-            builder.CreateResolver().UseIocManager(LocalIocManager);
-            return builder;
+            var config= GlobalConfiguration.Configuration;
+            var builder = CreateBuilder(action, configs);
+            builder.RegisterApiControllers(assembly);
+            builder.RegisterWebApiFilterProvider(config);
+            _container = builder.Build();
+            _webapiResolver=new AutofacWebApiDependencyResolver(_container);
+            config.DependencyResolver = _webapiResolver;
         }
 
         /// <summary>
         /// 创建容器生成器
         /// </summary>
-        /// <param name="actionBefore"></param>
+        /// <param name="action"></param>
         /// <param name="configs"></param>
         /// <returns></returns>
-        public IIocBuilder CreateBuilder(Action<IIocBuilder> actionBefore,
-            params IConfig[] configs)
+        public ContainerBuilder CreateBuilder(Action<ContainerBuilder> action, params IConfig[] configs)
         {
-            LocalIocManager=new IocManager();
-            var builder = IocBuilder.New
-                .UseAutofacContainerBuilder()
-                .RegisterIocManager(LocalIocManager);
-            
-            actionBefore?.Invoke(builder);
+            var builder=new ContainerBuilder();
+            action?.Invoke(builder);
             foreach (var config in configs)
-            {                
-                builder.RegisterModule<IConfig>(config);
-            }            
+            {
+                builder.RegisterModule(config);
+            }
             return builder;
-        }
+        }        
 
         /// <summary>
         /// 释放资源
         /// </summary>
         public void Dispose()
         {
-            LocalIocManager.Resolver.Container.Dispose();
+            _container.Dispose();
         }
     }
 }

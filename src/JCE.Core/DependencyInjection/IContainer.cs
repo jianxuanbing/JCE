@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
-using Autofac.Extras.IocManager;
 
 namespace JCE.Core.DependencyInjection
 {
@@ -30,8 +30,10 @@ namespace JCE.Core.DependencyInjection
         /// <summary>
         /// 注册依赖
         /// </summary>
+        /// <param name="assembly">项目所在的程序集</param>
+        /// <param name="action">在注册模块前执行的操作</param>
         /// <param name="configs">依赖配置</param>
-        IIocBuilder Register(params IConfig[] configs);
+        void Register(Assembly assembly, Action<ContainerBuilder> action, params IConfig[] configs);
 
         /// <summary>
         /// 释放资源

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using JCE.Core.DependencyInjection;
@@ -17,22 +18,16 @@ namespace JCE.Core.Helpers
         /// 默认容器
         /// </summary>
         private static readonly Container DefaultContainer=new Container();
+
+        /// <summary>
+        /// 需要跳过的程序集列表
+        /// </summary>
+        private const string AssemblySkipLoadingPattern =
+            "^System|^mscorlib|^Microsoft|^AjaxControlToolkit|^Antlr3|^Autofac|^NSubstitute|^AutoMapper|^Castle|^ComponentArt|^CppCodeProvider|^DotNetOpenAuth|^EntityFramework|^EPPlus|^FluentValidation|^ImageResizer|^itextsharp|^log4net|^MaxMind|^MbUnit|^MiniProfiler|^Mono.Math|^MvcContrib|^Newtonsoft|^NHibernate|^nunit|^Org.Mentalis|^PerlRegex|^QuickGraph|^Recaptcha|^Remotion|^RestSharp|^Telerik|^Iesi|^TestFu|^UserAgentStringLibrary|^VJSharpCodeProvider|^WebActivator|^WebDev|^WebGrease";
         #endregion
 
         #region Constructor(构造函数)
         #endregion
-
-        /// <summary>
-        /// 创建容器
-        /// </summary>
-        /// <param name="configs">依赖配置</param>
-        /// <returns></returns>
-        public static IContainer CreateContainer(params IConfig[] configs)
-        {
-            var container=new Container();
-            container.Register(configs);
-            return container;
-        }
 
         /// <summary>
         /// 创建实例
@@ -54,13 +49,14 @@ namespace JCE.Core.Helpers
             return DefaultContainer.Create(type);
         }
 
-        /// <summary>
-        /// 注册依赖
-        /// </summary>
-        /// <param name="configs">依赖配置</param>
-        public static void Register(params IConfig[] configs)
+        public static void Register(Assembly assembly, params IConfig[] configs)
         {
-            DefaultContainer.Register(null, configs);
+            
+        }
+
+        public static void Register(Assembly assembly, bool autoRegister, params IConfig[] configs)
+        {
+            
         }
 
         /// <summary>
