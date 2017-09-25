@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.UI;
+using Autofac;
 using JCE.Core.DependencyInjection;
 
 namespace JCE.Core.Helpers
@@ -49,14 +52,53 @@ namespace JCE.Core.Helpers
             return DefaultContainer.Create(type);
         }
 
+        /// <summary>
+        /// 注册依赖
+        /// </summary>
+        /// <param name="assembly">项目所在的程序集</param>
+        /// <param name="configs">依赖配置</param>
         public static void Register(Assembly assembly, params IConfig[] configs)
         {
-            
+            DefaultContainer.Register(assembly,configs);
         }
 
         public static void Register(Assembly assembly, bool autoRegister, params IConfig[] configs)
         {
             
+        }
+
+        public static void Init(Assembly[] assemblies, params IConfig[] configs)
+        {
+            DefaultContainer.Init(builder=>RegisterTypes(assemblies,builder),configs);
+        }
+
+        public static void Init(params IConfig[] configs)
+        {
+            DefaultContainer.Init(null,configs);
+        }
+
+        private static void RegisterTypes(IEnumerable<Assembly> assemblies, ContainerBuilder builder)
+        {
+            //builder.RegisterAssemblyModules(FilterSystemAssembly(assemblies));
+            //builder.RegisterAssemblyTypes(FilterSystemAssembly(assemblies))
+            //    .Where(t => !t.IsAbstract)
+            //    .AsImplementedInterfaces()
+            //    .PropertiesAutowired()
+            //    .InstancePerLifetimeScope();
+        }
+
+        /// <summary>
+        /// 过滤系统程序集
+        /// </summary>
+        /// <param name="assemblies">程序集</param>
+        /// <returns></returns>
+        private static Assembly[] FilterSystemAssembly(IEnumerable<Assembly> assemblies)
+        {
+            return
+                assemblies.Where(
+                    assembly =>
+                        !Regex.IsMatch(assembly.FullName, AssemblySkipLoadingPattern,
+                            RegexOptions.IgnoreCase | RegexOptions.Compiled)).ToArray();
         }
 
         /// <summary>

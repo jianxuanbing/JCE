@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
@@ -29,20 +30,72 @@ namespace JCE.Core.DependencyInjection
         /// 创建对象
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="name">服务名称</param>
         /// <returns></returns>
-        public T Create<T>()
+        public T Create<T>(string name=null)
         {
-            return _container.Resolve<T>();
+            return (T) Create(typeof(T), name);
         }
 
         /// <summary>
         /// 创建对象
         /// </summary>
         /// <param name="type">对象类型</param>
+        /// <param name="name">服务名称</param>
         /// <returns></returns>
-        public object Create(Type type)
-        {            
-            return _container.Resolve(type);
+        public object Create(Type type,string name=null)
+        {
+            return HttpContext.Current != null ? GetServiceFromHttpContext(type, name) : GetService(type, name);
+        }
+
+        /// <summary>
+        /// 从HttpContext获取服务
+        /// </summary>
+        /// <param name="type">对象类型</param>
+        /// <param name="name">服务名称</param>
+        /// <returns></returns>
+        private object GetServiceFromHttpContext(Type type, string name)
+        {
+            if (name == null)
+            {
+                return _webapiResolver.GetService(type);
+            }
+            var context = _webapiResolver.Container.ResolveNamed(name, type);
+            return context;
+        }
+
+        /// <summary>
+        /// 获取服务
+        /// </summary>
+        /// <param name="type">对象类型</param>
+        /// <param name="name">服务名称</param>
+        /// <returns></returns>
+        private object GetService(Type type, string name)
+        {
+            if (name == null)
+            {
+                return _container.Resolve(type);
+            }
+            return _container.ResolveNamed(name, type);
+        }
+
+        /// <summary>
+        /// 作用域开始
+        /// </summary>
+        /// <returns></returns>
+        public IScope BeginScope()
+        {
+            return new Scope(_container.BeginLifetimeScope());
+        }
+
+        /// <summary>
+        /// 注册依赖
+        /// </summary>
+        /// <param name="assembly">项目所在的程序集</param>
+        /// <param name="configs">依赖配置</param>
+        public void Register(Assembly assembly, params IConfig[] configs)
+        {
+            Register(assembly,null,configs);
         }
 
         /// <summary>
@@ -55,6 +108,7 @@ namespace JCE.Core.DependencyInjection
         {
             var config= GlobalConfiguration.Configuration;
             var builder = CreateBuilder(action, configs);
+            builder.RegisterAssemblyTypes(assembly);
             builder.RegisterApiControllers(assembly);
             builder.RegisterWebApiFilterProvider(config);
             _container = builder.Build();
@@ -77,7 +131,18 @@ namespace JCE.Core.DependencyInjection
                 builder.RegisterModule(config);
             }
             return builder;
-        }        
+        }
+
+        private void RegisterAop(ContainerBuilder builder)
+        {
+            
+        }
+
+        public void Init(Action<ContainerBuilder> action, params IConfig[] configs)
+        {
+            var builder = CreateBuilder(action, configs);
+            _container = builder.Build();
+        }
 
         /// <summary>
         /// 释放资源

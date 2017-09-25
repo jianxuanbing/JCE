@@ -17,15 +17,30 @@ namespace JCE.Core.DependencyInjection
         /// 创建实例
         /// </summary>
         /// <typeparam name="T">实例类型</typeparam>
+        /// <param name="name">服务名称</param>
         /// <returns></returns>
-        T Create<T>();
+        T Create<T>(string name=null);
 
         /// <summary>
         /// 创建对象
         /// </summary>
         /// <param name="type">对象类型</param>
+        /// <param name="name">服务名称</param>
         /// <returns></returns>
-        object Create(Type type);
+        object Create(Type type,string name=null);
+
+        /// <summary>
+        /// 作用域开始
+        /// </summary>
+        /// <returns></returns>
+        IScope BeginScope();
+
+        /// <summary>
+        /// 注册依赖
+        /// </summary>
+        /// <param name="assembly">项目所在的程序集</param>
+        /// <param name="configs">依赖配置</param>
+        void Register(Assembly assembly, params IConfig[] configs);
 
         /// <summary>
         /// 注册依赖
@@ -35,9 +50,6 @@ namespace JCE.Core.DependencyInjection
         /// <param name="configs">依赖配置</param>
         void Register(Assembly assembly, Action<ContainerBuilder> action, params IConfig[] configs);
 
-        /// <summary>
-        /// 释放资源
-        /// </summary>
-        void Dispose();
+        void Init(Action<ContainerBuilder> action, params IConfig[] configs);
     }
 }

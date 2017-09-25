@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Threading;
+using Autofac;
+using Autofac.Core;
 using Autofac.Extras.IocManager;
 using JCE.Core.DependencyInjection;
 using JCE.Core.Helpers;
@@ -32,8 +35,10 @@ namespace JCE.Core.Test
         [TestMethod]
         public void TestCurrentRegister()
         {
-            var container = Ioc.CreateContainer(new IocConfig());
-            var userManager = container.Create<IUserManager>();
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var executionAssembly = Assembly.GetExecutingAssembly();
+            Ioc.Register(Assembly.GetExecutingAssembly(),new IocConfig());
+            var userManager = Ioc.Create<IUserManager>();
             userManager.WriteInfo();
         }
 
@@ -57,21 +62,13 @@ namespace JCE.Core.Test
         }
     }
 
-    public class IocConfig : IConfig
+    public class IocConfig : ConfigBase
     {
-        public void Register(IIocBuilder builder)
+        protected override void Load(ContainerBuilder builder)
         {            
-            builder.RegisterServices(r => r.Register<IAccountManager, AccountManager>());
-            builder.UseManager();
-        }
-    }
-
-    public static class IocExtensionsTest
-    {
-        public static IIocBuilder UseManager(this IIocBuilder builder)
-        {            
-            builder.RegisterServices(r => r.Register<IUserManager, UserManager>());
-            return builder;
+            builder.AddScoped<IUserManager, UserManager>();
+            builder.AddScoped<IAccountManager, AccountManager>();
+            //builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies());
         }
     }
 }

@@ -11,7 +11,7 @@ namespace JCE.Core.DependencyInjection
     /// <summary>
     /// Ioc配置基类
     /// </summary>
-    public abstract class ConfigBase:Module
+    public abstract class ConfigBase:Module,IConfig
     {
     }
 }
