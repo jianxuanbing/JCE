@@ -19,18 +19,18 @@ namespace JCE.Samples.Webs.Configs
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
+            LoadInfrastructure(builder);
         }
 
         /// <summary>
         /// 加载基础设施
         /// </summary>
-        /// <param name="iocBuilder"></param>
-        private void LoadInfrastructure(IIocBuilder iocBuilder)
+        /// <param name="builder"></param>
+        private void LoadInfrastructure(ContainerBuilder builder)
         {
-            iocBuilder.RegisterServices(x => x.Register<IContext, WebContext>(Lifetime.Singleton));
-            iocBuilder.RegisterServices(x => x.Register<IUserContext, NullUserContext>(Lifetime.LifetimeScope));
-            iocBuilder.RegisterServices(x => x.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly()));
-            iocBuilder.AddNLog();
+            builder.AddSingleton<IContext, WebContext>();
+            builder.AddScoped<IUserContext, NullUserContext>();
+            builder.AddNLog();
         }
     }
 }
