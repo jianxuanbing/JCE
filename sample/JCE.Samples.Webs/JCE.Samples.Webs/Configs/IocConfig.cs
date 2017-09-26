@@ -28,7 +28,7 @@ namespace JCE.Samples.Webs.Configs
         /// <param name="builder"></param>
         private void LoadInfrastructure(ContainerBuilder builder)
         {
-            builder.AddSingleton<IContext, WebContext>();
+            builder.AddScoped<IContext, WebContext>();
             builder.AddScoped<IUserContext, NullUserContext>();
             builder.AddNLog();
         }
