@@ -26,6 +26,7 @@ namespace JCE.Utils.Contexts
         /// </summary>
         public WebContext()
         {
+            HttpContext.Current
             TraceId = Guid.NewGuid().ToString();
         }
         #endregion
