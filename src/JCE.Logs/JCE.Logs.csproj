@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AspectCore.Abstractions">
+      <HintPath>..\..\packages\AspectCore.Abstractions.0.2.0-preview8\lib\net45\AspectCore.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,8 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aspects\DebugLogAttribute.cs" />
+    <Compile Include="Aspects\LogAttributeBase.cs" />
     <Compile Include="Contents\ICaption.cs" />
     <Compile Include="Contents\LogContent.cs" />
+    <Compile Include="Extensions\AspectExtensions.cs" />
     <Compile Include="Extensions\LogExtensions.cs" />
     <Compile Include="Formats\ContentFormat.cs" />
     <Compile Include="Formats\FormatProvider.cs" />

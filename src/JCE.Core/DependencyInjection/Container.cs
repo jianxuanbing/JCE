@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using AspectCore.DynamicProxy.Parameters;
+using AspectCore.Extensions.Autofac;
 using Autofac;
 using Autofac.Integration.WebApi;
 
@@ -108,6 +110,7 @@ namespace JCE.Core.DependencyInjection
         {
             var config= GlobalConfiguration.Configuration;
             var builder = CreateBuilder(action, configs);
+            RegisterAop(builder);
             builder.RegisterAssemblyTypes(assembly);
             builder.RegisterApiControllers(assembly);
             builder.RegisterWebApiFilterProvider(config);
@@ -133,9 +136,14 @@ namespace JCE.Core.DependencyInjection
             return builder;
         }
 
+        /// <summary>
+        /// 注册AOP
+        /// </summary>
+        /// <param name="builder">容器生成器</param>
         private void RegisterAop(ContainerBuilder builder)
         {
-            
+            builder.RegisterDynamicProxy(config => config.EnableParameterAspect());
+            builder.EnableAspectScoped();
         }
 
         public void Init(Action<ContainerBuilder> action, params IConfig[] configs)
