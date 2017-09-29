@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.6.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Exceptionless, Version=4.0.1955.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Exceptionless.4.0.1955\lib\net45\Exceptionless.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,7 +48,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExceptionlessConfig.cs" />
+    <Compile Include="ExceptionlessProvider.cs" />
+    <Compile Include="ILogConvert.cs" />
+    <Compile Include="LogContent.cs" />
+    <Compile Include="LogContext.cs" />
+    <Compile Include="LogProviderFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JCE.Core\JCE.Core.csproj">
+      <Project>{FC117CD9-31FF-41D9-9768-552E2F20DAC3}</Project>
+      <Name>JCE.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JCE.Logs\JCE.Logs.csproj">
+      <Project>{5dbb0a9a-5e6c-4428-8f90-4a98181c0fbe}</Project>
+      <Name>JCE.Logs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JCE.Utils\JCE.Utils.csproj">
+      <Project>{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}</Project>
+      <Name>JCE.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

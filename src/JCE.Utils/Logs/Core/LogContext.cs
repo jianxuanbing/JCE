@@ -97,24 +97,38 @@ namespace JCE.Utils.Logs.Core
         /// 创建日志上下文信息
         /// </summary>
         /// <returns></returns>
-        private LogContextInfo CreateInfo()
+        protected virtual LogContextInfo CreateInfo()
         {
-            var traceId = Context.TraceId;
-            if (traceId.IsEmpty())
-            {
-                traceId = Guid.NewGuid().ToString();
-            }
-            Stopwatch stopwatch=new Stopwatch();
-            stopwatch.Start();
             return new LogContextInfo()
             {
-                TraceId = traceId,
-                Stopwatch = stopwatch,
+                TraceId = GetTraceId(),
+                Stopwatch = GetStopwatch(),
                 Ip = WebUtil.Ip,
                 Host = WebUtil.Host,
                 Browser = WebUtil.Browser,
                 Url = WebUtil.Url
             };
+        }
+
+        /// <summary>
+        /// 获取跟踪号
+        /// </summary>
+        /// <returns></returns>
+        protected string GetTraceId()
+        {
+            var traceId = Context.TraceId;
+            return string.IsNullOrWhiteSpace(traceId) ? Guid.NewGuid().ToString() : traceId;
+        }
+
+        /// <summary>
+        /// 获取计时器
+        /// </summary>
+        /// <returns></returns>
+        protected Stopwatch GetStopwatch()
+        {
+            Stopwatch stopwatch=new Stopwatch();
+            stopwatch.Start();
+            return stopwatch;
         }
     }
 }

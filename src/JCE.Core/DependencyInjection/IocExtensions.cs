@@ -65,15 +65,5 @@ namespace JCE.Core.DependencyInjection
         {
             return builder.RegisterInstance(instance).As<TService>().SingleInstance();
         }
-
-        public static IRegistrationBuilder<TImplementation, ConcreteReflectionActivatorData, SingleRegistrationStyle> Add<TService, TImplementation>(
-            this ContainerBuilder builder, string name = null) where TService : class where TImplementation :class,TService
-        {
-            if (name == null)
-            {
-                return builder.RegisterType<TImplementation>().As<TService>();
-            }
-            return builder.RegisterType<TImplementation>().Named<TService>(name);
-        }
     }
 }

@@ -7,7 +7,7 @@ namespace JCE.Logs.Contents
     /// <summary>
     /// 日志内容
     /// </summary>
-    public class LogContent:ILogContent
+    public class LogContent:ILogContent,ICaption
     {
         #region Property(属性)
         /// <summary>
@@ -56,7 +56,7 @@ namespace JCE.Logs.Contents
         public string Browser { get; set; }
 
         /// <summary>
-        /// 请I去地址
+        /// 请求地址
         /// </summary>
         public string Url { get; set; }
 

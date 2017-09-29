@@ -12,7 +12,7 @@ namespace JCE.Logs.NLog
     /// <summary>
     /// NLog 日志提供程序
     /// </summary>
-    public class NLogLogProvider:ILogProvider
+    public class NLogProvider:ILogProvider
     {
         #region Property(属性)
         /// <summary>
@@ -44,11 +44,11 @@ namespace JCE.Logs.NLog
 
         #region Constructor(构造函数)
         /// <summary>
-        /// 初始化一个<see cref="NLogLogProvider"/>类型的实例
+        /// 初始化一个<see cref="NLogProvider"/>类型的实例
         /// </summary>
         /// <param name="logName">日志名称</param>
         /// <param name="format">日志格式化器</param>
-        public NLogLogProvider(string logName, ILogFormat format = null)
+        public NLogProvider(string logName, ILogFormat format = null)
         {
             _logger = GetLogger(logName);
             _format = format;

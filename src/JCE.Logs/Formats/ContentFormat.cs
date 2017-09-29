@@ -376,7 +376,8 @@ namespace JCE.Logs.Formats
             for (int i = 0; i < 125; i++)
             {
                 result.Append("-");
-            }            
+            }
+            result.AppendLine();
         }
     }
 }

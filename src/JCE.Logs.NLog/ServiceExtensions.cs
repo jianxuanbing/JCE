@@ -19,7 +19,7 @@ namespace JCE.Logs.NLog
         /// <summary>
         /// 注册NLog日志操作
         /// </summary>
-        /// <param name="builder">IOC生成器</param>
+        /// <param name="builder">容器生成器</param>
         /// <returns></returns>
         public static void AddNLog(this ContainerBuilder builder)
         {

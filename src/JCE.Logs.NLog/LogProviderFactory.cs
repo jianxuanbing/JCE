@@ -20,7 +20,7 @@ namespace JCE.Logs.NLog
         /// <returns></returns>
         public ILogProvider Create(string logName, ILogFormat format = null)
         {
-            return new NLogLogProvider(logName,format);
+            return new NLogProvider(logName,format);
         }
     }
 }

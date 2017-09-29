@@ -14,12 +14,12 @@ namespace JCE.Logs.Log4Net
     /// <summary>
     /// 日志服务 扩展
     /// </summary>
-    public static partial class ServiceCollectionExtensions
+    public static partial class ServiceExtensions
     {
         /// <summary>
         /// 注册Log4Net日志操作
         /// </summary>
-        /// <param name="builder"></param>
+        /// <param name="builder">容器生成器</param>
         public static void AddLog4Net(this ContainerBuilder builder)
         {
             builder.AddScoped<ILogProviderFactory, JCE.Logs.Log4Net.LogProviderFactory>();

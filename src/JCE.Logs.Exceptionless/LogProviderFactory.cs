@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using JCE.Utils.Logs.Abstractions;
 
-namespace JCE.Logs.Log4Net
+namespace JCE.Logs.Exceptionless
 {
     /// <summary>
-    /// Log4Net日志提供程序工厂
+    /// Exceptionless日志提供程序工厂
     /// </summary>
     public class LogProviderFactory:ILogProviderFactory
     {
@@ -20,7 +20,7 @@ namespace JCE.Logs.Log4Net
         /// <returns></returns>
         public ILogProvider Create(string logName, ILogFormat format = null)
         {
-            return new Log4NetProvider(logName,format);
+            return new ExceptionlessProvider(logName);
         }
     }
 }

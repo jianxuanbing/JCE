@@ -22,7 +22,7 @@ namespace JCE.Logs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class LogResource {
+    public class LogResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace JCE.Logs {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("JCE.Logs.LogResource", typeof(LogResource).Assembly);
@@ -51,7 +51,7 @@ namespace JCE.Logs {
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 应用程序 的本地化字符串。
         /// </summary>
-        internal static string Application {
+        public static string Application {
             get {
                 return ResourceManager.GetString("Application", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 浏览器 的本地化字符串。
         /// </summary>
-        internal static string Browser {
+        public static string Browser {
             get {
                 return ResourceManager.GetString("Browser", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 业务编号 的本地化字符串。
         /// </summary>
-        internal static string BusinessId {
+        public static string BusinessId {
             get {
                 return ResourceManager.GetString("BusinessId", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 标题 的本地化字符串。
         /// </summary>
-        internal static string Caption {
+        public static string Caption {
             get {
                 return ResourceManager.GetString("Caption", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 类名 的本地化字符串。
         /// </summary>
-        internal static string Class {
+        public static string Class {
             get {
                 return ResourceManager.GetString("Class", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 内容 的本地化字符串。
         /// </summary>
-        internal static string Content {
+        public static string Content {
             get {
                 return ResourceManager.GetString("Content", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 已执行 的本地化字符串。
         /// </summary>
-        internal static string Duration {
+        public static string Duration {
             get {
                 return ResourceManager.GetString("Duration", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 错误码 的本地化字符串。
         /// </summary>
-        internal static string ErrorCode {
+        public static string ErrorCode {
             get {
                 return ResourceManager.GetString("ErrorCode", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 异常 的本地化字符串。
         /// </summary>
-        internal static string Exception {
+        public static string Exception {
             get {
                 return ResourceManager.GetString("Exception", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 主机 的本地化字符串。
         /// </summary>
-        internal static string Host {
+        public static string Host {
             get {
                 return ResourceManager.GetString("Host", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 日志名称 的本地化字符串。
         /// </summary>
-        internal static string LogName {
+        public static string LogName {
             get {
                 return ResourceManager.GetString("LogName", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 方法 的本地化字符串。
         /// </summary>
-        internal static string Method {
+        public static string Method {
             get {
                 return ResourceManager.GetString("Method", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 模块 的本地化字符串。
         /// </summary>
-        internal static string Module {
+        public static string Module {
             get {
                 return ResourceManager.GetString("Module", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 操作时间 的本地化字符串。
         /// </summary>
-        internal static string OperationTime {
+        public static string OperationTime {
             get {
                 return ResourceManager.GetString("OperationTime", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 操作人 的本地化字符串。
         /// </summary>
-        internal static string Operator {
+        public static string Operator {
             get {
                 return ResourceManager.GetString("Operator", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 参数名 的本地化字符串。
         /// </summary>
-        internal static string ParameterName {
+        public static string ParameterName {
             get {
                 return ResourceManager.GetString("ParameterName", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 参数类型 的本地化字符串。
         /// </summary>
-        internal static string ParameterType {
+        public static string ParameterType {
             get {
                 return ResourceManager.GetString("ParameterType", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 参数值 的本地化字符串。
         /// </summary>
-        internal static string ParameterValue {
+        public static string ParameterValue {
             get {
                 return ResourceManager.GetString("ParameterValue", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 参数 的本地化字符串。
         /// </summary>
-        internal static string Params {
+        public static string Params {
             get {
                 return ResourceManager.GetString("Params", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 角色 的本地化字符串。
         /// </summary>
-        internal static string Role {
+        public static string Role {
             get {
                 return ResourceManager.GetString("Role", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 Sql语句 的本地化字符串。
         /// </summary>
-        internal static string Sql {
+        public static string Sql {
             get {
                 return ResourceManager.GetString("Sql", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 Sql参数 的本地化字符串。
         /// </summary>
-        internal static string SqlParams {
+        public static string SqlParams {
             get {
                 return ResourceManager.GetString("SqlParams", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 堆栈跟踪 的本地化字符串。
         /// </summary>
-        internal static string StackTrace {
+        public static string StackTrace {
             get {
                 return ResourceManager.GetString("StackTrace", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 租户 的本地化字符串。
         /// </summary>
-        internal static string Tenant {
+        public static string Tenant {
             get {
                 return ResourceManager.GetString("Tenant", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 线程号 的本地化字符串。
         /// </summary>
-        internal static string ThreadId {
+        public static string ThreadId {
             get {
                 return ResourceManager.GetString("ThreadId", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 跟踪号 的本地化字符串。
         /// </summary>
-        internal static string TraceId {
+        public static string TraceId {
             get {
                 return ResourceManager.GetString("TraceId", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace JCE.Logs {
         /// <summary>
         ///   查找类似 操作人编号 的本地化字符串。
         /// </summary>
-        internal static string UserId {
+        public static string UserId {
             get {
                 return ResourceManager.GetString("UserId", resourceCulture);
             }

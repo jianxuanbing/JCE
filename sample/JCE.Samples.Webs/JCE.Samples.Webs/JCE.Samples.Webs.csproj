@@ -55,6 +55,10 @@
       <HintPath>..\..\..\packages\Autofac.WebApi2.4.0.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Exceptionless, Version=4.0.1955.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Exceptionless.4.0.1955\lib\net45\Exceptionless.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -132,6 +136,7 @@
     <Content Include="packages.config" />
     <Content Include="nlog.config" />
     <Content Include="log4net.config" />
+    <Content Include="Configs\ExceptionlessConfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -148,6 +153,10 @@
     <ProjectReference Include="..\..\..\src\JCE.Core\JCE.Core.csproj">
       <Project>{FC117CD9-31FF-41D9-9768-552E2F20DAC3}</Project>
       <Name>JCE.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\JCE.Logs.Exceptionless\JCE.Logs.Exceptionless.csproj">
+      <Project>{CDC06295-0D98-452F-B289-08A198FC1822}</Project>
+      <Name>JCE.Logs.Exceptionless</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\src\JCE.Logs.Log4Net\JCE.Logs.Log4Net.csproj">
       <Project>{C51BDD7A-7BE8-4309-B17C-08DF383DC619}</Project>
