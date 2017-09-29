@@ -24,11 +24,7 @@ namespace JCE.Utils.Helpers
         public static MemberInfo GetMember(Expression expression)
         {
             var memberExpression = GetMemberExpression(expression);
-            if (memberExpression == null)
-            {
-                return null;
-            }
-            return memberExpression.Member;
+            return memberExpression?.Member;
         }
 
         /// <summary>

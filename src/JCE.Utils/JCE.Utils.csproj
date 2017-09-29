@@ -109,12 +109,13 @@
     </Compile>
     <Compile Include="Threads\ThreadManager.cs" />
     <Compile Include="Threads\ThreadUtils.cs" />
+    <Compile Include="Validations\DataAnnotationValidation.cs" />
     <Compile Include="Validations\IValidation.cs" />
     <Compile Include="Validations\IValidationHandler.cs" />
     <Compile Include="Validations\IValidationRule.cs" />
-    <Compile Include="Validations\Validation.cs" />
-    <Compile Include="Validations\ValidationFactory.cs" />
-    <Compile Include="Validations\ValidationHandler.cs" />
+    <Compile Include="Validations\Handlers\NothingHandler.cs" />
+    <Compile Include="Validations\Handlers\ThrowHandler.cs" />
+    <Compile Include="Validations\Handlers\ValidationHandler.cs" />
     <Compile Include="Validations\ValidationResultCollection.cs" />
   </ItemGroup>
   <ItemGroup>

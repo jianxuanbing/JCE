@@ -22,18 +22,13 @@ namespace JCE.Utils.Validations
         /// <summary>
         /// 是否有效
         /// </summary>
-        public bool IsValid
-        {
-            get { return _results.Count==0; }
-        }
+        public bool IsValid => _results.Count==0;
 
         /// <summary>
         /// 验证结果个数
         /// </summary>
-        public int Count
-        {
-            get { return _results.Count; }
-        }
+        public int Count => _results.Count;
+
         #endregion
 
         #region Constructor(构造函数)
