@@ -40,8 +40,7 @@ namespace JCE.Logs.Extensions
             {
                 return parameter.Value.SafeString();
             }
-            //return ((IEnumerable<object>) parameter).Select(t => t.SafeString()).Join();
-            return "";
+            return ((IEnumerable<object>) parameter).Select(t => t.SafeString()).Join();
         }
     }
 }

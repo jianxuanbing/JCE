@@ -9,6 +9,7 @@ using JCE.Utils.Contexts;
 using JCE.Utils.Logs;
 using JCE.Utils.Logs.Abstractions;
 using JCE.Utils.Logs.Core;
+using JCE.Utils.Security;
 
 namespace JCE.Logs
 {
@@ -62,6 +63,10 @@ namespace JCE.Logs
         protected override void Init(LogContent content)
         {
             base.Init(content);
+            content.Tenant = UserContext.GetTenant();
+            content.Application = UserContext.GetApplication();
+            content.Operator = UserContext.GetFullName();
+            content.Role = UserContext.GetRoleName();
         }
 
         /// <summary>
@@ -112,5 +117,10 @@ namespace JCE.Logs
             var userContext = Ioc.Create<IUserContext>();
             return new Log(providerFactory.Create(logName, format), context, userContext, @class);
         }
+
+        /// <summary>
+        /// 空日志操作
+        /// </summary>
+        public static readonly ILog Null = NullLog.Instance;
     }
 }

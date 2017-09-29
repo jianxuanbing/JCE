@@ -97,7 +97,7 @@ namespace JCE.Logs.NLog
         /// <summary>
         /// 转换日志等级
         /// </summary>
-        /// <param name="level"></param>
+        /// <param name="level">平台日志等级</param>
         /// <returns></returns>
         private LogLevel ConvertTo(JCE.Utils.Logs.Core.LogLevel level)
         {

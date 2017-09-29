@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aspects\DebugLogAttribute.cs" />
+    <Compile Include="Aspects\ErrorLogAttribute.cs" />
     <Compile Include="Aspects\LogAttributeBase.cs" />
+    <Compile Include="Aspects\TraceLogAttribute.cs" />
     <Compile Include="Contents\ICaption.cs" />
     <Compile Include="Contents\LogContent.cs" />
     <Compile Include="Extensions\AspectExtensions.cs" />
@@ -63,6 +65,10 @@
     <ProjectReference Include="..\JCE.Core\JCE.Core.csproj">
       <Project>{FC117CD9-31FF-41D9-9768-552E2F20DAC3}</Project>
       <Name>JCE.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JCE.Utils.Security\JCE.Utils.Security\JCE.Utils.Security.csproj">
+      <Project>{2A99EB97-DCA6-4F82-950E-91D497F46B56}</Project>
+      <Name>JCE.Utils.Security</Name>
     </ProjectReference>
     <ProjectReference Include="..\JCE.Utils\JCE.Utils.csproj">
       <Project>{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}</Project>

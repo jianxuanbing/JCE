@@ -26,7 +26,7 @@ namespace JCE.Utils.Contexts
         /// </summary>
         public WebContext()
         {
-            HttpContext.Current
+            // TODO:此处应该为请求跟踪ID
             TraceId = Guid.NewGuid().ToString();
         }
         #endregion

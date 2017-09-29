@@ -6,6 +6,7 @@ using System.Web;
 using Autofac;
 using Autofac.Extras.IocManager;
 using JCE.Core.DependencyInjection;
+using JCE.Logs.Log4Net;
 using JCE.Logs.NLog;
 using JCE.Utils.Contexts;
 
@@ -30,7 +31,8 @@ namespace JCE.Samples.Webs.Configs
         {
             builder.AddScoped<IContext, WebContext>();
             builder.AddScoped<IUserContext, NullUserContext>();
-            builder.AddNLog();
+            //builder.AddNLog();
+            builder.AddLog4Net();
         }
     }
 }

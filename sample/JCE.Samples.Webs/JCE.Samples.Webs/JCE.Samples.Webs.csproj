@@ -131,6 +131,7 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="nlog.config" />
+    <Content Include="log4net.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -147,6 +148,10 @@
     <ProjectReference Include="..\..\..\src\JCE.Core\JCE.Core.csproj">
       <Project>{FC117CD9-31FF-41D9-9768-552E2F20DAC3}</Project>
       <Name>JCE.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\JCE.Logs.Log4Net\JCE.Logs.Log4Net.csproj">
+      <Project>{C51BDD7A-7BE8-4309-B17C-08DF383DC619}</Project>
+      <Name>JCE.Logs.Log4Net</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\src\JCE.Logs.NLog\JCE.Logs.NLog.csproj">
       <Project>{FA7FD421-906E-4A37-B585-3E8E267E021B}</Project>

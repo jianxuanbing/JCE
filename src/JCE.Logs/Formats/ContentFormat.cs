@@ -10,26 +10,6 @@ namespace JCE.Logs.Formats
     /// </summary>
     public class ContentFormat: ILogFormat
     {
-        /// <summary>
-        /// 行号
-        /// </summary>
-        private int _line;
-
-        /// <summary>
-        /// 初始化一个<see cref="ContentFormat"/>类型的实例
-        /// </summary>
-        public ContentFormat()
-        {
-            InitLine();
-        }
-
-        /// <summary>
-        /// 初始化行号
-        /// </summary>
-        private void InitLine()
-        {
-            _line = 1;
-        }
 
         /// <summary>
         /// 格式化
@@ -52,22 +32,23 @@ namespace JCE.Logs.Formats
         /// <returns></returns>
         protected virtual string Format(LogContent content)
         {
+            int line = 1;
             StringBuilder result=new StringBuilder();
-            Line1(result,content);
-            Line2(result, content);
-            Line3(result, content);
-            Line4(result, content);
-            Line5(result, content);
-            Line6(result, content);
-            Line7(result, content);
-            Line8(result, content);
-            Line9(result, content);
-            Line10(result, content);
-            Line11(result, content);
-            Line12(result, content);
-            Line13(result, content);
-            Line14(result, content);
-            Finish(result);            
+            Line1(result,content,ref line);
+            Line2(result, content, ref line);
+            Line3(result, content, ref line);
+            Line4(result, content, ref line);
+            Line5(result, content, ref line);
+            Line6(result, content, ref line);
+            Line7(result, content, ref line);
+            Line8(result, content, ref line);
+            Line9(result, content, ref line);
+            Line10(result, content, ref line);
+            Line11(result, content, ref line);
+            Line12(result, content, ref line);
+            Line13(result, content, ref line);
+            Line14(result, content, ref line);
+            Finish(result);
             return result.ToString();
         }
 
@@ -77,9 +58,10 @@ namespace JCE.Logs.Formats
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
         /// <param name="action">操作</param>
-        protected void AppendLine(StringBuilder result, LogContent content, Action<StringBuilder, LogContent> action)
+        /// <param name="line">行号</param>
+        protected void AppendLine(StringBuilder result, LogContent content, Action<StringBuilder, LogContent> action,ref int line)
         {
-            Append(result,content,action);
+            Append(result, content, action, ref line);
             result.AppendLine();
         }
 
@@ -89,9 +71,10 @@ namespace JCE.Logs.Formats
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
         /// <param name="action">操作</param>
-        protected void Append(StringBuilder result, LogContent content, Action<StringBuilder, LogContent> action)
+        /// <param name="line">行号</param>
+        protected void Append(StringBuilder result, LogContent content, Action<StringBuilder, LogContent> action, ref int line)
         {
-            result.AppendFormat("{0}. ", _line++);
+            result.AppendFormat("{0}. ", line++);
             action(result, content);
         }
 
@@ -115,7 +98,8 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line1(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line1(StringBuilder result, LogContent content, ref int line)
         {
             AppendLine(result,content, (r, c) =>
             {
@@ -127,7 +111,7 @@ namespace JCE.Logs.Formats
                     return;                    
                 }
                 r.AppendFormat("{0}: {1}    ", LogResource.Duration, c.Duration);
-            });
+            }, ref line);
         }
 
         /// <summary>
@@ -135,14 +119,15 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line2(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line2(StringBuilder result, LogContent content, ref int line)
         {
             AppendLine(result,content, (r, c) =>
             {
                 Append(r,"IP",c.Ip);
                 Append(r,LogResource.Host,c.Host);
                 Append(r,LogResource.ThreadId,c.ThreadId);
-            });
+            }, ref line);
         }
 
         /// <summary>
@@ -150,13 +135,14 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line3(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line3(StringBuilder result, LogContent content, ref int line)
         {
             if (string.IsNullOrWhiteSpace(content.Browser))
             {
                 return;                    
             }
-            AppendLine(result,content,(r,c)=>Append(r,LogResource.Browser,c.Browser));
+            AppendLine(result,content,(r,c)=>Append(r,LogResource.Browser,c.Browser), ref line);
         }
 
         /// <summary>
@@ -164,13 +150,14 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line4(StringBuilder result, LogContent content)
+        /// <param name="line"></param>
+        protected void Line4(StringBuilder result, LogContent content, ref int line)
         {
             if (string.IsNullOrWhiteSpace(content.Url))
             {
                 return;
             }
-            AppendLine(result, content, (r, c) => r.Append("Url: " + c.Url));
+            AppendLine(result, content, (r, c) => r.Append("Url: " + c.Url), ref line);
         }
 
         /// <summary>
@@ -178,7 +165,8 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line5(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line5(StringBuilder result, LogContent content, ref int line)
         {
             if (string.IsNullOrWhiteSpace(content.UserId) && string.IsNullOrWhiteSpace(content.Operator)&&string.IsNullOrWhiteSpace(content.Role))
             {
@@ -189,7 +177,7 @@ namespace JCE.Logs.Formats
                 Append(r,LogResource.UserId,c.UserId);
                 Append(r,LogResource.Operator,c.Operator);
                 Append(r,LogResource.Role,c.Role);
-            });
+            }, ref line);
         }
 
         /// <summary>
@@ -197,7 +185,8 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line6(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line6(StringBuilder result, LogContent content, ref int line)
         {
             if (string.IsNullOrWhiteSpace(content.BussinessId) && string.IsNullOrWhiteSpace(content.Tenant) &&
                 string.IsNullOrWhiteSpace(content.Application) && string.IsNullOrWhiteSpace(content.Module))
@@ -210,7 +199,7 @@ namespace JCE.Logs.Formats
                 Append(r,LogResource.Tenant,c.Tenant);
                 Append(r,LogResource.Application,c.Application);
                 Append(r,LogResource.Module,c.Module);
-            });
+            }, ref line);
         }
 
         /// <summary>
@@ -218,7 +207,8 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line7(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line7(StringBuilder result, LogContent content, ref int line)
         {
             if (string.IsNullOrWhiteSpace(content.Class) && string.IsNullOrWhiteSpace(content.Method))
             {
@@ -228,7 +218,7 @@ namespace JCE.Logs.Formats
             {
                 Append(r,LogResource.Class,c.Class);
                 Append(r,LogResource.Method,c.Method);
-            });
+            }, ref line);
         }
 
         /// <summary>
@@ -236,7 +226,8 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line8(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line8(StringBuilder result, LogContent content, ref int line)
         {
             if (content.Params.Length == 0)
             {
@@ -246,7 +237,7 @@ namespace JCE.Logs.Formats
             {
                 r.AppendLine($"{LogResource.Params}:");
                 r.Append(c.Params);
-            });
+            }, ref line);
         }
 
         /// <summary>
@@ -254,7 +245,8 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line9(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line9(StringBuilder result, LogContent content, ref int line)
         {
             if (string.IsNullOrWhiteSpace(content.Caption))
             {
@@ -263,7 +255,7 @@ namespace JCE.Logs.Formats
             AppendLine(result,content, (r, c) =>
             {
                 r.AppendFormat("{0}: {1}", LogResource.Caption, c.Caption);
-            });
+            }, ref line);
         }
 
         /// <summary>
@@ -271,7 +263,8 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line10(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line10(StringBuilder result, LogContent content, ref int line)
         {
             if (content.Content.Length == 0)
             {
@@ -281,7 +274,7 @@ namespace JCE.Logs.Formats
             {
                 r.AppendLine($"{LogResource.Content}");
                 r.Append(c.Content);
-            });
+            }, ref line);
         }
 
         /// <summary>
@@ -289,7 +282,8 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line11(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line11(StringBuilder result, LogContent content, ref int line)
         {
             if (content.Sql.Length == 0)
             {
@@ -299,7 +293,7 @@ namespace JCE.Logs.Formats
             {
                 r.AppendLine($"{LogResource.Sql}:");
                 r.Append(c.Sql);
-            });
+            }, ref line);
         }
 
         /// <summary>
@@ -307,7 +301,8 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line12(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line12(StringBuilder result, LogContent content, ref int line)
         {
             if (content.SqlParams.Length == 0)
             {
@@ -317,7 +312,7 @@ namespace JCE.Logs.Formats
             {
                 r.AppendLine($"{LogResource.SqlParams}:");
                 r.Append(c.SqlParams);
-            });
+            }, ref line);
         }
 
         /// <summary>
@@ -325,7 +320,8 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line13(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line13(StringBuilder result, LogContent content, ref int line)
         {
             if (content.Exception == null)
             {
@@ -335,7 +331,7 @@ namespace JCE.Logs.Formats
             {
                 r.AppendLine($"{LogResource.Exception}: {GetErrorCode(content.ErrorCode)}");
                 r.Append($"   {c.Exception.Message}");
-            });
+            }, ref line);
         }
 
         /// <summary>
@@ -357,7 +353,8 @@ namespace JCE.Logs.Formats
         /// </summary>
         /// <param name="result">拼接器</param>
         /// <param name="content">日志内容</param>
-        protected void Line14(StringBuilder result, LogContent content)
+        /// <param name="line">行号</param>
+        protected void Line14(StringBuilder result, LogContent content, ref int line)
         {
             if (content.Exception == null)
             {
@@ -367,7 +364,7 @@ namespace JCE.Logs.Formats
             {
                 r.AppendLine($"{LogResource.StackTrace}:");
                 r.Append(c.Exception.StackTrace);
-            });
+            },ref line);
         }
 
         /// <summary>
@@ -379,8 +376,7 @@ namespace JCE.Logs.Formats
             for (int i = 0; i < 125; i++)
             {
                 result.Append("-");
-            }
-            InitLine();
+            }            
         }
     }
 }
