@@ -39,7 +39,7 @@ namespace JCE.Samples.Webs.Controllers
                 .Sql("select * from Orders")
                 .SqlParams("@a={0},@b={1}",1,2)
                 .SqlParams("@userId={0}",Guid.NewGuid().ToString())
-                .Info();
+                .Debug();
         }
     }
 }

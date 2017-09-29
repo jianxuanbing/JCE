@@ -25,8 +25,9 @@ namespace JCE.Logs.Exceptionless
         /// <param name="configAction">配置操作</param>
         public static void AddExceptionless(this ContainerBuilder builder,Action<ExceptionlessConfiguration> configAction)
         {
+            ExceptionlessConfig.Register();
             builder.AddScoped<ILogProviderFactory, JCE.Logs.Exceptionless.LogProviderFactory>();
-            builder.AddScoped<ILogFormat, NullLogFormat>().WithParameter("format",null);
+            builder.AddScoped<ILogFormat, NullLogFormat>();
             builder.AddScoped<ILogContext, JCE.Logs.Exceptionless.LogContext>();
             builder.AddScoped<ILog, JCE.Logs.Log>();
             configAction?.Invoke(ExceptionlessClient.Default.Configuration);

@@ -38,6 +38,10 @@
       <HintPath>..\..\packages\Exceptionless.4.0.1955\lib\net45\Exceptionless.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,8 +54,6 @@
   <ItemGroup>
     <Compile Include="ExceptionlessConfig.cs" />
     <Compile Include="ExceptionlessProvider.cs" />
-    <Compile Include="ILogConvert.cs" />
-    <Compile Include="LogContent.cs" />
     <Compile Include="LogContext.cs" />
     <Compile Include="LogProviderFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

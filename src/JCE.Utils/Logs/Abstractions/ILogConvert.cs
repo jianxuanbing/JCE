@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JCE.Utils;
 
-namespace JCE.Logs.Exceptionless
+namespace JCE.Utils.Logs.Abstractions
 {
     /// <summary>
     /// 日志转换器

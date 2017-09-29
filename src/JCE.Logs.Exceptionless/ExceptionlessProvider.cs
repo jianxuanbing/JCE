@@ -43,10 +43,7 @@ namespace JCE.Logs.Exceptionless
         /// </summary>
         public bool IsTraceEnabled { get; }
 
-
-
         #endregion
-
 
         /// <summary>
         /// 初始化一个<see cref="ExceptionlessProvider"/>类型的实例
@@ -55,14 +52,26 @@ namespace JCE.Logs.Exceptionless
         public ExceptionlessProvider(string logName)
         {
             LogName = logName;
-            IsDebugEnabled = true;
-            IsTraceEnabled = true;
-            //IsDebugEnabled = ExceptionlessConfig.Instance.EnabledDebug;
-            //IsTraceEnabled = ExceptionlessConfig.Instance.EnabledTrace;
+            IsDebugEnabled = ExceptionlessConfig.Instance.EnabledDebug;
+            IsTraceEnabled = ExceptionlessConfig.Instance.EnabledTrace;
             _client=el.ExceptionlessClient.Default;
         }
+
+        /// <summary>
+        /// 写日志
+        /// </summary>
+        /// <param name="level">平台日志等级</param>
+        /// <param name="content">日志内容</param>
         public void WriteLog(LogLevel level, ILogContent content)
         {
+            if (!IsTraceEnabled&&level==LogLevel.Trace)
+            {
+                return;
+            }
+            if (!IsDebugEnabled && level <= LogLevel.Debug)
+            {
+                return;
+            }
             InitLine();
             var builder = CreateBuilder(level, content);
             SetUser(content);

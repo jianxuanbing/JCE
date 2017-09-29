@@ -40,9 +40,9 @@ namespace JCE.Logs.Exceptionless
         public bool EnabledTrace { get; set; }
 
         /// <summary>
-        /// 静态构造函数
+        /// 注册Exceptionless配置
         /// </summary>
-        static ExceptionlessConfig()
+        internal static void Register()
         {
             try
             {
