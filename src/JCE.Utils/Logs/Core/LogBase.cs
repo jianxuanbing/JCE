@@ -242,6 +242,10 @@ namespace JCE.Utils.Logs.Core
             {
                 return;
             }
+            if (Enabled(level) == false)
+            {
+                return;
+            }
             try
             {
                 content.Level = Helpers.Enum.GetName<LogLevel>(level);
@@ -252,6 +256,20 @@ namespace JCE.Utils.Logs.Core
             {
                 content = null;
             }
+        }
+
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        private bool Enabled(LogLevel level)
+        {
+            if (level > LogLevel.Debug)
+            {
+                return true;
+            }
+            return IsDebugEnabled || IsTraceEnabled && level == LogLevel.Trace;
         }
     }
 }

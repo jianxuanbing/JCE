@@ -63,15 +63,7 @@ namespace JCE.Logs.Exceptionless
         /// <param name="level">平台日志等级</param>
         /// <param name="content">日志内容</param>
         public void WriteLog(LogLevel level, ILogContent content)
-        {
-            if (!IsTraceEnabled&&level==LogLevel.Trace)
-            {
-                return;
-            }
-            if (!IsDebugEnabled && level <= LogLevel.Debug)
-            {
-                return;
-            }
+        {            
             InitLine();
             var builder = CreateBuilder(level, content);
             SetUser(content);

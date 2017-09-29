@@ -108,6 +108,7 @@
       <DependentUpon>R.resx</DependentUpon>
     </Compile>
     <Compile Include="Threads\ThreadManager.cs" />
+    <Compile Include="Threads\ThreadUtils.cs" />
     <Compile Include="Validations\IValidation.cs" />
     <Compile Include="Validations\IValidationHandler.cs" />
     <Compile Include="Validations\IValidationRule.cs" />

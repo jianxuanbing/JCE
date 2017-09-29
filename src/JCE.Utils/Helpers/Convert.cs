@@ -338,6 +338,10 @@ namespace JCE.Utils.Helpers
             Type type = Common.GetType<T>();
             try
             {
+                if (type.Name.ToLower() == "string")
+                {
+                    return (T) (object) input.ToString();
+                }
                 if (type.Name.ToLower() == "guid")
                 {
                     return (T) (object) new Guid(input.ToString());
