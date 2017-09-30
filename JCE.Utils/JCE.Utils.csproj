@@ -222,6 +222,7 @@
     <Compile Include="Webs\SessionUtil.cs" />
     <Compile Include="Webs\ShortenUrl.cs" />
     <Compile Include="Webs\UrlUtil.cs" />
+    <Compile Include="Webs\WebUtil.cs" />
     <Compile Include="Windows\CmdUtil.cs" />
     <Compile Include="Windows\RegistryBaseKey.cs" />
     <Compile Include="Windows\RegistryUtil.cs" />
