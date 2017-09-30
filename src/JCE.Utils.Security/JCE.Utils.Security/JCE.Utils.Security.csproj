@@ -40,6 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\Password\Hasher\SHA256PasswordHasher.cs" />
+    <Compile Include="Authentication\Password\IPasswordHasher.cs" />
+    <Compile Include="Authentication\Password\PasswordVerificationResult.cs" />
+    <Compile Include="Authentication\Password\Validator\PasswordOptions.cs" />
+    <Compile Include="Authentication\Password\Validator\PasswordValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserContextExtensions.cs" />
   </ItemGroup>
@@ -48,6 +53,9 @@
       <Project>{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}</Project>
       <Name>JCE.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Cryptography\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
