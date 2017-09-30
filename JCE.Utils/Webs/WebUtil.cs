@@ -13,7 +13,7 @@ namespace JCE.Utils.Webs
     /// <summary>
     /// Web帮助类 - File操作
     /// </summary>
-    public partial class WebHelper
+    public partial class WebUtil
     {
         #region DownloadFile(下载文件)
         /// <summary>
