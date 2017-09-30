@@ -143,7 +143,7 @@ namespace JCE.Core.DependencyInjection
         private void RegisterAop(ContainerBuilder builder)
         {
             builder.RegisterDynamicProxy(config => config.EnableParameterAspect());
-            builder.EnableAspectScoped();
+            //builder.EnableAspectScoped();
         }
 
         public void Init(Action<ContainerBuilder> action, params IConfig[] configs)
