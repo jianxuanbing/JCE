@@ -104,8 +104,12 @@
     <Compile Include="DependencyInjection\Container.cs" />
     <Compile Include="DependencyInjection\IConfig.cs" />
     <Compile Include="DependencyInjection\IContainer.cs" />
+    <Compile Include="DependencyInjection\IDependency.cs" />
     <Compile Include="DependencyInjection\IocExtensions.cs" />
     <Compile Include="DependencyInjection\IScope.cs" />
+    <Compile Include="DependencyInjection\IScopeDependency.cs" />
+    <Compile Include="DependencyInjection\ISingletonDependency.cs" />
+    <Compile Include="DependencyInjection\ITransientDependency.cs" />
     <Compile Include="DependencyInjection\Scope.cs" />
     <Compile Include="Events\Bus\DefaultEventBus.cs" />
     <Compile Include="Events\Bus\Factories\IEventHandlerFactory.cs" />
