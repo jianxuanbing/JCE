@@ -60,6 +60,10 @@
       <Project>{6A57DACE-84BD-48E8-867E-3F2528CB4270}</Project>
       <Name>JCE.Utils.Http</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\JCE.Utils\JCE.Utils.csproj">
+      <Project>{DFBE85DD-3F35-41BE-84D8-47ACB7E7CFF3}</Project>
+      <Name>JCE.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -180,7 +180,6 @@ namespace JCE.Utils.Http.Extensions
         }
         #endregion
 
-
         #region 非文件上传请求
         /// <summary>
         /// 获取请求的内容信息（非文件上传请求）
