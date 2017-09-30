@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace JCE.Utils.Helpers
 {
@@ -25,19 +26,31 @@ namespace JCE.Utils.Helpers
         #endregion
 
         #region ToJson(将对象转换为Json字符串)
+
         /// <summary>
         /// 将对象转换为Json字符串
         /// </summary>
         /// <param name="target">目标对象</param>
         /// <param name="isConvertToSingleQuotes">是否将双引号转换成单引号</param>
+        /// <param name="camelCase">是否驼峰式命名</param>
+        /// <param name="indented">是否缩进</param>
         /// <returns></returns>
-        public static string ToJson(object target, bool isConvertToSingleQuotes = false)
+        public static string ToJson(object target, bool isConvertToSingleQuotes = false, bool camelCase = false, bool indented = false)
         {
             if (target == null)
             {
                 return "{}";
             }
-            var result = JsonConvert.SerializeObject(target);
+            var options=new JsonSerializerSettings();
+            if (camelCase)
+            {
+                options.ContractResolver=new CamelCasePropertyNamesContractResolver();
+            }
+            if (indented)
+            {
+                options.Formatting = Formatting.Indented;
+            }
+            var result = JsonConvert.SerializeObject(target,options);
             if (isConvertToSingleQuotes)
             {
                 result = result.Replace("\"", "'");

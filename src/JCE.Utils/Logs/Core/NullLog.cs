@@ -21,12 +21,12 @@ namespace JCE.Utils.Logs.Core
         /// <summary>
         /// 调试级别是否启用
         /// </summary>
-        public bool IsDebugEnabled { get; }
+        public bool IsDebugEnabled => false;
 
         /// <summary>
         /// 跟踪级别是否启用
         /// </summary>
-        public bool IsTraceEnabled { get; }
+        public bool IsTraceEnabled => false;
         #endregion        
 
         /// <summary>

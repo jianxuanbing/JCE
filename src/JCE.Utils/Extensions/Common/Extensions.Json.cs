@@ -19,15 +19,18 @@
         #endregion
 
         #region ToJson(将对象转换为Json字符串)
+
         /// <summary>
         /// 将对象转换为Json字符串
         /// </summary>
         /// <param name="target">目标对象</param>
         /// <param name="isConvertToSingleQuotes">是否将双引号转换成单引号</param>
+        /// <param name="camelCase">是否驼峰式命名</param>
+        /// <param name="indented">是否缩进</param>
         /// <returns></returns>
-        public static string ToJson(this object target, bool isConvertToSingleQuotes = false)
+        public static string ToJson(this object target, bool isConvertToSingleQuotes = false, bool camelCase = false, bool indented = false)
         {
-            return JCE.Utils.Helpers.Json.ToJson(target, isConvertToSingleQuotes);
+            return JCE.Utils.Helpers.Json.ToJson(target, isConvertToSingleQuotes, camelCase, indented);
         }
         #endregion
     }
