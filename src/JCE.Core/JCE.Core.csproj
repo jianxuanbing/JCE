@@ -107,6 +107,11 @@
     <Compile Include="DependencyInjection\IocExtensions.cs" />
     <Compile Include="DependencyInjection\IScope.cs" />
     <Compile Include="DependencyInjection\Scope.cs" />
+    <Compile Include="Events\Bus\DefaultEventBus.cs" />
+    <Compile Include="Events\Bus\Factories\IEventHandlerFactory.cs" />
+    <Compile Include="Events\Bus\Handlers\IEventHandler.cs" />
+    <Compile Include="Events\Bus\IEventBus.cs" />
+    <Compile Include="Events\IEvent.cs" />
     <Compile Include="Helpers\Ioc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validations\Aspects\ValidAttribute.cs" />

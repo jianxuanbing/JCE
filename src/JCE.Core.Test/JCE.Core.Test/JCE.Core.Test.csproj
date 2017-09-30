@@ -58,7 +58,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Events\EventBusTest.cs" />
     <Compile Include="Samples\AccountManager.cs" />
+    <Compile Include="Samples\EventSample.cs" />
     <Compile Include="Samples\IAccountManager.cs" />
     <Compile Include="Samples\IUserManager.cs" />
     <Compile Include="Samples\UserManager.cs" />
