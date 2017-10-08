@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Autofac.Core;
 
-namespace JCE.Core.DependencyInjection
+namespace JCE.Core.Dependency
 {
     /// <summary>
-    /// 依赖配置
+    /// 依赖注入接口，表示该接口的实现类将自动注册到IOC容器中
     /// </summary>
-    public interface IConfig:IModule
+    public interface IDependency
     {
     }
 }

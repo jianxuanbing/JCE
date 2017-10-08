@@ -11,7 +11,7 @@ using AspectCore.Extensions.Autofac;
 using Autofac;
 using Autofac.Integration.WebApi;
 
-namespace JCE.Core.DependencyInjection
+namespace JCE.Core.Dependency
 {
     /// <summary>
     /// Autofac对象容器

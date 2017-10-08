@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 
-namespace JCE.Core.DependencyInjection
+namespace JCE.Core.Dependency
 {
     /// <summary>
     /// 容器

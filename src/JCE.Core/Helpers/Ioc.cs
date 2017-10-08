@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.UI;
 using Autofac;
-using JCE.Core.DependencyInjection;
+using JCE.Core.Dependency;
 
 namespace JCE.Core.Helpers
 {
@@ -38,7 +38,7 @@ namespace JCE.Core.Helpers
         /// </summary>
         /// <param name="configs">依赖配置</param>
         /// <returns></returns>
-        public static JCE.Core.DependencyInjection.IContainer CreateContainer(params IConfig[] configs)
+        public static JCE.Core.Dependency.IContainer CreateContainer(params IConfig[] configs)
         {
             var container=new Container();
             container.Register(null,builder=>builder.EnableAspectScoped(),configs);

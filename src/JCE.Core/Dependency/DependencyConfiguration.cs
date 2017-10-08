@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JCE.Core.Helpers;
 
-namespace JCE.Core.DependencyInjection
+namespace JCE.Core.Dependency
 {
     /// <summary>
     /// 依赖配置
