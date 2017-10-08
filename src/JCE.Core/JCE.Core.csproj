@@ -102,10 +102,12 @@
     <Compile Include="DependencyInjection\AopExtensions.cs" />
     <Compile Include="DependencyInjection\ConfigBase.cs" />
     <Compile Include="DependencyInjection\Container.cs" />
+    <Compile Include="DependencyInjection\DependencyConfiguration.cs" />
     <Compile Include="DependencyInjection\IConfig.cs" />
     <Compile Include="DependencyInjection\IContainer.cs" />
     <Compile Include="DependencyInjection\IDependency.cs" />
     <Compile Include="DependencyInjection\IocExtensions.cs" />
+    <Compile Include="DependencyInjection\IRegist.cs" />
     <Compile Include="DependencyInjection\IScope.cs" />
     <Compile Include="DependencyInjection\IScopeDependency.cs" />
     <Compile Include="DependencyInjection\ISingletonDependency.cs" />

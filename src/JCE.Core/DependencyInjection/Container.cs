@@ -29,6 +29,34 @@ namespace JCE.Core.DependencyInjection
         private AutofacWebApiDependencyResolver _webapiResolver;
 
         /// <summary>
+        /// 创建集合
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="name">服务名称</param>
+        /// <returns></returns>
+        public List<T> CreatList<T>(string name = null)
+        {
+            var result = CreatList(typeof(T), name);
+            if (result == null)
+            {
+                return new List<T>();
+            }
+            return ((IEnumerable<T>) result).ToList();
+        }
+
+        /// <summary>
+        /// 创建集合
+        /// </summary>
+        /// <param name="type">对象类型</param>
+        /// <param name="name">服务名称</param>
+        /// <returns></returns>
+        public object CreatList(Type type, string name = null)
+        {
+            Type serviceType = typeof(IEnumerable<>).MakeGenericType(type);
+            return Create(serviceType, name);
+        }
+
+        /// <summary>
         /// 创建对象
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>
@@ -90,6 +118,11 @@ namespace JCE.Core.DependencyInjection
             return new Scope(_container.BeginLifetimeScope());
         }
 
+        public void Register(params IConfig[] configs)
+        {
+            Register(null,configs);
+        }
+
         /// <summary>
         /// 注册依赖
         /// </summary>
@@ -111,7 +144,10 @@ namespace JCE.Core.DependencyInjection
             var config= GlobalConfiguration.Configuration;
             var builder = CreateBuilder(action, configs);
             RegisterAop(builder);
-            builder.RegisterAssemblyTypes(assembly);
+            if (assembly != null)
+            {
+                builder.RegisterAssemblyTypes(assembly);
+            }            
             builder.RegisterApiControllers(assembly);
             builder.RegisterWebApiFilterProvider(config);
             _container = builder.Build();
