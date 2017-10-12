@@ -29,6 +29,7 @@ using System.Text;
 using System.Threading.Tasks;
 //using System.Web.Script.Serialization;
 using Json.Net;
+using Json.Net.Serialization;
 
 namespace JCE.Utils.Extensions
 {
@@ -144,16 +145,27 @@ namespace JCE.Utils.Extensions
         /// 将对象转换为Json字符串
         /// </summary>
         /// <param name="target">目标对象</param>
-        /// <param name="isConvertSingleQuotes">是否将双引号转成单引号</param>
+        /// <param name="isConvertToSingleQuotes">是否将双引号转换成单引号</param>
+        /// <param name="camelCase">是否驼峰式命名</param>
+        /// <param name="indented">是否缩进</param>
         /// <returns></returns>
-        public static string ToJson(this object target, bool isConvertSingleQuotes = false)
+        public static string ToJson(this object target, bool isConvertToSingleQuotes = false, bool camelCase = false, bool indented = false)
         {
             if (target == null)
             {
                 return "{}";
             }
-            var result = JsonConvert.SerializeObject(target);
-            if (isConvertSingleQuotes)
+            var options = new JsonSerializerSettings();
+            if (camelCase)
+            {
+                options.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            }
+            if (indented)
+            {
+                options.Formatting = Formatting.Indented;
+            }
+            var result = JsonConvert.SerializeObject(target, options);
+            if (isConvertToSingleQuotes)
             {
                 result = result.Replace("\"", "'");
             }

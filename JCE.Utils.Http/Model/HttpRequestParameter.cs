@@ -102,8 +102,9 @@ namespace JCE.Utils.Http.Model
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="obj">对象</param>
+        /// <param name="camelCase">是否驼峰式命名</param>
         /// <returns></returns>
-        public HttpRequestParameter SetCustomBody<T>(T obj)
+        public HttpRequestParameter SetCustomBody<T>(T obj,bool camelCase=false)
         {
             if (obj is string)
             {
@@ -111,7 +112,7 @@ namespace JCE.Utils.Http.Model
             }
             else
             {
-                CustomBody = obj.ToJson();
+                CustomBody = obj.ToJson(false, camelCase);
             }
             return this;
         }
