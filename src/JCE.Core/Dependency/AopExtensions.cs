@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AspectCore.DynamicProxy;
 using Autofac;
 
-namespace JCE.Core.DependencyInjection
+namespace JCE.Core.Dependency
 {
     /// <summary>
     /// AspectCore扩展

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Builder;
 
-namespace JCE.Core.DependencyInjection
+namespace JCE.Core.Dependency
 {
     /// <summary>
     /// Autofac 扩展

@@ -6,7 +6,7 @@ using System.Threading;
 using Autofac;
 using Autofac.Core;
 using Autofac.Extras.IocManager;
-using JCE.Core.DependencyInjection;
+using JCE.Core.Dependency;
 using JCE.Core.Helpers;
 using JCE.Core.Test.Samples;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

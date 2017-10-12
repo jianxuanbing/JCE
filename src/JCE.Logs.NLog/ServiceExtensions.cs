@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
-using JCE.Core.DependencyInjection;
+using JCE.Core.Dependency;
 using JCE.Logs.Formats;
 using JCE.Utils.Logs;
 using JCE.Utils.Logs.Abstractions;

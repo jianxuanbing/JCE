@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Web;
 using Autofac;
 using Autofac.Extras.IocManager;
-using JCE.Core.DependencyInjection;
+using JCE.Core.Dependency;
 using JCE.Logs.Exceptionless;
 using JCE.Logs.Log4Net;
 using JCE.Logs.NLog;
