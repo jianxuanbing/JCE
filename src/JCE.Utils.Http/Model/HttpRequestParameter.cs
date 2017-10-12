@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using JCE.Utils.Extensions;
 using HttpMethod = JCE.Utils.Http.Enums.HttpMethod;
 
 namespace JCE.Utils.Http.Model
@@ -45,7 +47,7 @@ namespace JCE.Utils.Http.Model
         /// <summary>
         /// Form 表单参数，非文件参数列表
         /// </summary>
-        public List<FormParameter> FormParameters { get; set; }
+        public List<FormParameter> FormParameters { get; set; }       
 
         /// <summary>
         /// 自定义内容实体。
@@ -65,6 +67,53 @@ namespace JCE.Utils.Http.Model
         {
             FormParameters=new List<FormParameter>();
             FileParameters=new List<FileParameter>();
+        }
+
+
+        /// <summary>
+        /// 添加 Form 表单参数
+        /// </summary>
+        /// <param name="name">键名</param>
+        /// <param name="value">值</param>
+        /// <returns></returns>
+        public HttpRequestParameter AddParam(string name, object value)
+        {
+            FormParameters.Add(new FormParameter(name,value));
+            return this;
+        }
+
+
+        /// <summary>
+        /// 添加 文件 参数
+        /// </summary>
+        /// <param name="name">参数的名称</param>
+        /// <param name="fileStream">文件流，调用方会自动释放</param>
+        /// <param name="fileName">文件名</param>
+        /// <param name="contentType">文件类型</param>
+        /// <returns></returns>
+        public HttpRequestParameter AddFileParam(string name, Stream fileStream, string fileName, string contentType)
+        {
+            FileParameters.Add(new FileParameter(name,fileStream,fileName,contentType));
+            return this;
+        }
+
+        /// <summary>
+        /// 设置自定义内容实体
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="obj">对象</param>
+        /// <returns></returns>
+        public HttpRequestParameter SetCustomBody<T>(T obj)
+        {
+            if (obj is string)
+            {
+                CustomBody = obj as string;
+            }
+            else
+            {
+                CustomBody = obj.ToJson();
+            }
+            return this;
         }
     }
 }
